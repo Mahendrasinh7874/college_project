@@ -53,12 +53,10 @@
   /* align-items: center; */
   letter-spacing: 1px;
   padding: 15px;
-  
 }
 .navigation-menu ul a {
   color: #b8c7ce;
   text-decoration: none;
-  
 }
 .navigation-menu ul a:hover,
 :active {
@@ -73,8 +71,18 @@
   color: red;
 }
 
-
-#sidebar{
-  margin-left:250px !important;
+.outline-none {
+  border: none;
+  outline: none;
+  color: black;
 }
-
+.outline-none:focus {
+  border: none;
+  outline: none;
+}
+.fa-bars{
+  color: black;
+}
+/* #sidebar{
+  margin-left:250px !important;
+} */

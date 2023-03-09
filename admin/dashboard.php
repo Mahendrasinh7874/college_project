@@ -106,7 +106,7 @@ if (empty($_SESSION["email"])) {
 
         <ul class="navbar-nav">
           <li class="nav-item">
-           <button> <b class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fa fa-bars"></i></b></button>
+           <button class="outline-none"> <b class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fa fa-bars"></i></b></button>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
