@@ -1,6 +1,4 @@
-<?php
-
-include './common.php';
+<?php include './common.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     //connect to database
@@ -8,21 +6,81 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     //validate input
     $username = mysqli_real_escape_string($conn, $_POST['firstName']) . " " . mysqli_real_escape_string($conn, $_POST['lastName']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $gender = mysqli_real_escape_string($conn, $_POST['gender']);
-    $email = mysqli_real_escape_string($conn, $_POST['email']);
-    $password = mysqli_real_escape_string($conn, $_POST['password']);
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    // $confirmPassword = $_POST['confirmPassword'];
+    $date_of_birth = $_POST['date_of_birth'];
+    $gender = $_POST['gender'];
+    $address = $_POST['address'];
+    $mobile_no = $_POST['mobile_no'];
 
-    //hash password
-    $password = password_hash($password, PASSWORD_BCRYPT);
+    //check if email already exists
+    $check_email_query = "SELECT * FROM users WHERE email='$email'";
+    $result = mysqli_query($conn, $check_email_query);
+    if (mysqli_num_rows($result) > 0) {
+        // echo '<div class="alert alert-warning" role="alert">Email already in use</div>';
+        echo '<div class="alert alert-warning" alert-dismissible fade show" role="alert">
+        <strong>Email already in use</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>';
+        exit();
+    }
+
+    //check if mobile number already exists
+    $check_mobile_no_query = "SELECT * FROM users WHERE mobile_no='$mobile_no'";
+    $result = mysqli_query($conn, $check_mobile_no_query);
+    if (mysqli_num_rows($result) > 0) {
+        // echo '<div class="alert alert-warning" role="alert">Mobile number already in use</div>';
+        echo '<div class="alert alert-warning" alert-dismissible fade show" role="alert">
+        <strong>Mobile number already in use</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>';
+        exit();
+    }
 
     //insert user into database
-    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
-    mysqli_query($conn, $sql);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        // echo '<div mobile numberiv class="alert alert-warning" role="alert">Invalid email format</div>';
+        echo '<div class="alert alert-warning" alert-dismissible fade show" role="alert">
+        <strong>Invalid email format</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>';
+        exit();
+    }
 
-    //redirect to login page
-    header("Location: login.php");
-    exit();
+    // Validate mobile number
+    if (!preg_match("/^[0-9]{10}$/", $mobile_no)) {
+        // echo '<div class="alert alert-warning" role="alert">Invalid mobile number</div>';
+        echo '<div class="alert alert-warning" alert-dismissible fade show" role="alert">
+        <strong>Invalid mobile number</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+      </div>';
+        exit();
+    }
+
+    // Insert the data into the database
+    $sql = "INSERT INTO users (username, email, password, date_of_birth, gender, address, mobile_no) VALUES ('$username', '$email', '$password', '$date_of_birth', '$gender', '$address', '$mobile_no')";
+    if ($conn->query($sql) === TRUE) {
+        // echo '<div class="alert alert-success" role="alert">Registration successful</div>';
+        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Registration successful</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        </div>';
+        header("Location: login.php");
+        exit();
+    } else {
+        echo '<div class="alert alert-warning" role="alert">Error: ' . $sql . "<br>" . $conn->error . '</div>';
+    }
 }
 ?>
 
@@ -47,12 +105,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="form-group col-md-6">
                 <label for="exampleFormControlSelect1">Gender</label>
-                <select class="form-control" id="exampleFormControlSelect1">
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
+                <select class="form-control" name="gender" id="exampleFormControlSelect1">
+                    <option>Male</option>
+                    <option>Female</option>
                 </select>
             </div>
             <div class="form-group col-md-6">
@@ -67,11 +122,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label for="exampleFormControlTextarea1">Address</label>
                 <textarea class="form-control" name="address" placeholder="Enter Address" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
-          
-            <div class="form-group col-md-12">
+
+            <div class="form-group col-md-6">
                 <label for="password">Password</label>
                 <input required name="password" type="password" class="form-control" id="password" placeholder="Enter Password">
             </div>
+            <!-- <div class="form-group col-md-6">
+        <label for="confirmPassword">Confirm Password</label>
+        <input required type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm Password">
+    </div> -->
             <button type="submit" class="btn btn-primary btn-block mx-3">Regsiter</button>
         </form>
         <div class="text-center mt-3 ">
@@ -80,6 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 </div>
 </div>
+
 
 </body>
 
