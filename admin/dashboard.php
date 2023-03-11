@@ -83,7 +83,7 @@ if (empty($_SESSION["email"])) {
 
 <body>
   <div class="admin-container">
-    <div class="navigation-area">
+    <div class="navigation-area" id='navigation-area'>
       <nav class="navigation-navbar">
         <h2 class="logo">Project</h2>
       </nav>
@@ -106,14 +106,14 @@ if (empty($_SESSION["email"])) {
 
         <ul class="navbar-nav">
           <li class="nav-item">
-            <b class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fa fa-bars"></i></b>
+            <button  id="Toggle-btn" class="nav-link btn" data-widget="pushmenu" href="" role="button"><i class="fa fa-bars"></i></button>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <div class="dropdown mr-5" style="">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <?php
-              
+
               echo $_SESSION["admin_username"];
 
               ?> </button>
@@ -130,6 +130,17 @@ if (empty($_SESSION["email"])) {
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+  <script>
+    const button = document.getElementById('Toggle-btn');
+    const navarea = document.getElementById('navigation-area');
+    
+    button.addEventListener('click',(e) => {
+      document.querySelector('.navigation-area').classList.toggle('left')
+    })
+
+  </script>
 
 </body>
 
