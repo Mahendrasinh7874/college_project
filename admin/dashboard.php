@@ -83,7 +83,7 @@ if (empty($_SESSION["email"])) {
 
 <body>
   <div class="admin-container">
-    <div class="navigation-area" id='navigation-area'>
+    <div class="navigation-area" id="sidebar">
       <nav class="navigation-navbar">
         <h2 class="logo">Project</h2>
       </nav>
@@ -106,7 +106,7 @@ if (empty($_SESSION["email"])) {
 
         <ul class="navbar-nav">
           <li class="nav-item">
-            <button  id="Toggle-btn" class="nav-link btn" data-widget="pushmenu" href="" role="button"><i class="fa fa-bars"></i></button>
+           <button class="outline-none"> <b class="nav-link" data-widget="pushmenu" href="" role="button"><i class="fa fa-bars"></i></b></button>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
@@ -133,15 +133,12 @@ if (empty($_SESSION["email"])) {
 
 
   <script>
-    const button = document.getElementById('Toggle-btn');
-    const navarea = document.getElementById('navigation-area');
-    
-    button.addEventListener('click',(e) => {
-      document.querySelector('.navigation-area').classList.toggle('left')
-    })
-
-  </script>
-
+// $(document).ready(function(){
+// 			$("#sidebarCollapse").on('click', function(){
+// 				$("#sidebar").toggleClass('active');
+// 			});
+// 		});
+    </script>
 </body>
 
 </html>

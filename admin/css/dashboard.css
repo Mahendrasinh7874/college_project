@@ -12,9 +12,6 @@
 
 .admin-container .navigation-area {
   width: 250px;
-  margin-left: 0;
-  transition: all 0.4s ease;
-  /* padding: 20px; */
   background-color: #222d32;
 }
 .navigation-navbar {
@@ -56,12 +53,10 @@
   /* align-items: center; */
   letter-spacing: 1px;
   padding: 15px;
-  
 }
 .navigation-menu ul a {
   color: #b8c7ce;
   text-decoration: none;
-  
 }
 .navigation-menu ul a:hover,
 :active {
@@ -75,10 +70,21 @@
 .text-danger {
   color: red;
 }
-/* 
-.navigation-menu ul li:hover {
-  background-color: #e70736;
-  color: white !important;
+
+.outline-none {
+  border: none;
+  outline: none;
+  color: black;
+}
+.outline-none:focus {
+  border: none;
+  outline: none;
+}
+.fa-bars{
+  color: black;
+}
+/* #sidebar{
+  margin-left:250px !important;
 } */
 #Toggle-btn{
   box-shadow: none !important;
