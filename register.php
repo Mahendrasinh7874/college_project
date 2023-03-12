@@ -1,95 +1,22 @@
-<?php include './common.php';
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    //connect to database
-    $conn = mysqli_connect('localhost', 'root', '', 'college-project');
-
-    //validate input
-    $username = mysqli_real_escape_string($conn, $_POST['firstName']) . " " . mysqli_real_escape_string($conn, $_POST['lastName']);
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    // $confirmPassword = $_POST['confirmPassword'];
-    $date_of_birth = $_POST['date_of_birth'];
-    $gender = $_POST['gender'];
-    $address = $_POST['address'];
-    $mobile_no = $_POST['mobile_no'];
-
-    //check if email already exists
-    $check_email_query = "SELECT * FROM users WHERE email='$email'";
-    $result = mysqli_query($conn, $check_email_query);
-    if (mysqli_num_rows($result) > 0) {
-        // echo '<div class="alert alert-warning" role="alert">Email already in use</div>';
-        echo '<div class="alert alert-warning" alert-dismissible fade show" role="alert">
-        <strong>Email already in use</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </div>';
-        exit();
-    }
-
-    //check if mobile number already exists
-    $check_mobile_no_query = "SELECT * FROM users WHERE mobile_no='$mobile_no'";
-    $result = mysqli_query($conn, $check_mobile_no_query);
-    if (mysqli_num_rows($result) > 0) {
-        // echo '<div class="alert alert-warning" role="alert">Mobile number already in use</div>';
-        echo '<div class="alert alert-warning" alert-dismissible fade show" role="alert">
-        <strong>Mobile number already in use</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </div>';
-        exit();
-    }
-
-    //insert user into database
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        // echo '<div mobile numberiv class="alert alert-warning" role="alert">Invalid email format</div>';
-        echo '<div class="alert alert-warning" alert-dismissible fade show" role="alert">
-        <strong>Invalid email format</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </div>';
-        exit();
-    }
-
-    // Validate mobile number
-    if (!preg_match("/^[0-9]{10}$/", $mobile_no)) {
-        // echo '<div class="alert alert-warning" role="alert">Invalid mobile number</div>';
-        echo '<div class="alert alert-warning" alert-dismissible fade show" role="alert">
-        <strong>Invalid mobile number</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-      </div>';
-        exit();
-    }
-
-    // Insert the data into the database
-    $sql = "INSERT INTO users (username, email, password, date_of_birth, gender, address, mobile_no) VALUES ('$username', '$email', '$password', '$date_of_birth', '$gender', '$address', '$mobile_no')";
-    if ($conn->query($sql) === TRUE) {
-        // echo '<div class="alert alert-success" role="alert">Registration successful</div>';
-        echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Registration successful</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-        </div>';
-        header("Location: login.php");
-        exit();
-    } else {
-        echo '<div class="alert alert-warning" role="alert">Error: ' . $sql . "<br>" . $conn->error . '</div>';
-    }
+<?php
+if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
+    header("Location: index.php");
 }
-?>
+include './common.php';
 
+?>
+<?=
+!empty($_SESSION['message_registerd']) ? $_SESSION['message_registerd'] : '';
+
+?>
+<?php $_SESSION['message_registerd'] = '' ?>
 <div class="login-container">
     <div class="card py-3" style="width:40%">
         <div class=" text-center">
             <h2 class=" letter-spacing-1 font-weight-bold mb-4">Register</h2>
         </div>
-        <form method="post" action="register.php" class="px-5 row">
+        <form method="post" action="registerCode.php" class="px-5 row">
+
             <!-- <div class="form-row"> -->
             <div class="form-group col-md-6">
                 <label for="firstName">First Name</label>
@@ -102,6 +29,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group col-md-6">
                 <label for="email">Email</label>
                 <input required type="email" name="email" class="form-control" id="email" placeholder="Enter Email">
+                <?php if (isset($_SESSION['email_taken'])) {
+                    echo "<p class='ml-4 text-danger'>This Email Id is already Taken</p>";
+                    unset($_SESSION["email_taken"]);
+                } ?>
+                <label id="checked"></label>
+                <div class="status" id="status"></div>
             </div>
             <div class="form-group col-md-6">
                 <label for="exampleFormControlSelect1">Gender</label>
@@ -117,6 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-group col-md-6">
                 <label for="phone">Mobile Number</label>
                 <input required type="phone" name="mobile_no" class="form-control" id="phone" placeholder="Enter Mobile Number">
+                <?php if (isset($_SESSION['mobile_taken'])) {
+                    echo "<p class='ml-4 text-danger'>This Mobile Number  is already Taken</p>";
+                    unset($_SESSION["mobile_taken"]);
+                } ?>
+                <label id="checked_mobile"></label>
             </div>
             <div class="form-group col-md-12">
                 <label for="exampleFormControlTextarea1">Address</label>
@@ -131,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <label for="confirmPassword">Confirm Password</label>
         <input required type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm Password">
     </div> -->
-            <button type="submit" class="btn btn-primary btn-block mx-3">Regsiter</button>
+            <button type="submit" class="btn btn-primary  button btn-block mx-3">Regsiter</button>
         </form>
         <div class="text-center mt-3 ">
             <p>Already have an account? <a href="login.php">Login here</a></p>
@@ -140,7 +78,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </div>
 </div>
 
+<script type="text/javascript" src="./js/jquery.js"></script>
 
+<script>
+    $("#email").on('keyup', function() {
+        var search_term = $(this).val();
+
+        $.ajax({
+            url: "validation.php",
+            type: "POST",
+            data: {
+                search: search_term
+            },
+            success: function(data) {
+                $("#checked").html(data);
+            }
+        });
+    });
+    $("#phone").on('keyup', function() {
+        var search_term = $(this).val();
+        $.ajax({
+            url: "validation.php",
+            type: "POST",
+            data: {
+                search: search_term
+            },
+            success: function(data) {
+                $("#checked_mobile").html(data);
+            }
+        });
+    });
+</script>
 </body>
 
 </html>

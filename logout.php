@@ -9,13 +9,8 @@ include 'cofig.php';
 
 session_start();
 
-unset($_SESSION['student_id']);
-unset($_SESSION['f_name']);
-unset($_SESSION['l_name']);
-unset($_SESSION['course_id']);
-unset($_SESSION['semester_name']);
-
-header("location: index.php");
+session_destroy();
+header("location: login.php");
 
 ?>
 

@@ -47,68 +47,74 @@ body {
 }
 /*SImple header Ends here */
 
-
 /* footer starts here  */
 
 footer {
-    background-color: #f8f8f8;
-    padding: 20px;
-    position: absolute;
-    width: 100%;
-    bottom: 0;
-  }
-  
-  .footer-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-  
-  .footer-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  .footer-menu ul li {
-    margin-right: 20px;
-  }
-  
-  .footer-menu ul li:last-child {
-    margin-right: 0;
-  }
-  
-  .footer-menu ul li a {
-    text-decoration: none;
-    color: #333;
-  }
-  
-  .footer-email form {
-    display: flex;
-    align-items: center;
-  }
-  
-  .footer-email input[type="email"] {
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    width: 200px;
-    margin-right: 10px;
-  }
-  
-  .footer-email button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
-  }
-  
-  .footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-  }
+  background-color: #f8f8f8;
+  padding: 20px;
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.footer-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.footer-menu ul li {
+  margin-right: 20px;
+}
+
+.footer-menu ul li:last-child {
+  margin-right: 0;
+}
+
+.footer-menu ul li a {
+  text-decoration: none;
+  color: #333;
+}
+
+.footer-email form {
+  display: flex;
+  align-items: center;
+}
+
+.footer-email input[type="email"] {
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  width: 200px;
+  margin-right: 10px;
+}
+
+.footer-email button {
+  background-color: #333;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+}
+.username{
+  color: white !important;
+}
+.username:hover,
+.username:active {
+  /* background-color: transparent !important; */
+}
 /* footer Endshere  */
