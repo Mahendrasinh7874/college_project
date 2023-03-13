@@ -7,7 +7,8 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 800px;
+  height: auto;
+  padding: 50px 0;
 }
 .login-container input,
 input:focus {
@@ -36,21 +37,18 @@ input:focus {
   text-decoration: none !important;
 }
 
-.login-container .btn {
-  background-color: rgba(255, 154, 62, 1);
+.login-container .button {
+  background-color: rgba(255, 154, 62, 1); 
   border: none;
 }
-.login-container .btn:hover,
-.btn:focus {
-  background-color: rgba(255, 154, 62, 1) !important;
+.login-container .button:hover,
+.button:focus {
+  background-color: rgba(255, 154, 62, 1);
   box-shadow: none !important;
 }
 
 @media (max-width: 961px) {
   .login-container .card {
     width: 100%;
-  }
-  .login-container {
-    height: 641px;
   }
 }

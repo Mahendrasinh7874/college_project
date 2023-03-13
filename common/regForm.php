@@ -1,22 +1,23 @@
-<?php
-if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
-    header("Location: index.php");
-}
-include './common.php';
 
-?>
-<?=
-!empty($_SESSION['message_registerd']) ? $_SESSION['message_registerd'] : '';
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-?>
-<?php $_SESSION['message_registerd'] = '' ?>
-<div class="login-container">
-    <div class="card py-3" style="width:40%">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    
+<div class="card py-3" style="width:40%">
         <div class=" text-center">
             <h2 class=" letter-spacing-1 font-weight-bold mb-4">Register</h2>
         </div>
-        <form method="post" action="registerCode.php" class="px-5 row">
-
+        <form method="post" action="register.php" class="px-5 row">
             <!-- <div class="form-row"> -->
             <div class="form-group col-md-6">
                 <label for="firstName">First Name</label>
@@ -29,12 +30,6 @@ include './common.php';
             <div class="form-group col-md-6">
                 <label for="email">Email</label>
                 <input required type="email" name="email" class="form-control" id="email" placeholder="Enter Email">
-                <?php if (isset($_SESSION['email_taken'])) {
-                    echo "<p class='ml-4 text-danger'>This Email Id is already Taken</p>";
-                    unset($_SESSION["email_taken"]);
-                } ?>
-                <label id="checked"></label>
-                <div class="status" id="status"></div>
             </div>
             <div class="form-group col-md-6">
                 <label for="exampleFormControlSelect1">Gender</label>
@@ -50,65 +45,34 @@ include './common.php';
             <div class="form-group col-md-6">
                 <label for="phone">Mobile Number</label>
                 <input required type="phone" name="mobile_no" class="form-control" id="phone" placeholder="Enter Mobile Number">
-                <?php if (isset($_SESSION['mobile_taken'])) {
-                    echo "<p class='ml-4 text-danger'>This Mobile Number  is already Taken</p>";
-                    unset($_SESSION["mobile_taken"]);
-                } ?>
-                <label id="checked_mobile"></label>
             </div>
             <div class="form-group col-md-12">
                 <label for="exampleFormControlTextarea1">Address</label>
                 <textarea class="form-control" name="address" placeholder="Enter Address" id="exampleFormControlTextarea1" rows="3"></textarea>
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-12">
                 <label for="password">Password</label>
                 <input required name="password" type="password" class="form-control" id="password" placeholder="Enter Password">
             </div>
-            <!-- <div class="form-group col-md-6">
-        <label for="confirmPassword">Confirm Password</label>
-        <input required type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm Password">
-    </div> -->
-            <button type="submit" class="btn btn-primary  button btn-block mx-3">Regsiter</button>
+            <button type="submit" class="btn btn-primary btn-block mx-3">Regsiter</button>
         </form>
         <div class="text-center mt-3 ">
             <p>Already have an account? <a href="login.php">Login here</a></p>
         </div>
     </div>
-</div>
-</div>
 
-<script type="text/javascript" src="./js/jquery.js"></script>
+    <!-- Optional JavaScript; choose one of the two! -->
 
-<script>
-    $("#email").on('keyup', function() {
-        var search_term = $(this).val();
+    <!-- Option 1: jQuery and Bootstrap Bundle (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 
-        $.ajax({
-            url: "validation.php",
-            type: "POST",
-            data: {
-                search: search_term
-            },
-            success: function(data) {
-                $("#checked").html(data);
-            }
-        });
-    });
-    $("#phone").on('keyup', function() {
-        var search_term = $(this).val();
-        $.ajax({
-            url: "validation.php",
-            type: "POST",
-            data: {
-                search: search_term
-            },
-            success: function(data) {
-                $("#checked_mobile").html(data);
-            }
-        });
-    });
-</script>
-</body>
-
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.min.js" integrity="sha384-+sLIOodYLS7CIrQpBjl+C7nPvqq+FbNUBDunl/OZv93DB7Ln/533i8e/mZXLi/P+" crossorigin="anonymous"></script>
+    -->
+  </body>
 </html>

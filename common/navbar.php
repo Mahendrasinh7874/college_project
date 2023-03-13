@@ -187,9 +187,8 @@
             </li>
           </ul>
           <form class="form-inline my-2 my-lg-0">
-            <button type="button" class="btn btn-light mx-2">Wishlist</button>
-
-            <button type="button" class="btn btn-light">Cart</button>
+           <a > <i style="font-size:22px; "  class="text-white  mx-2 fa-sharp fa-regular fa-heart"></i></a>
+         <a>  <i  style="font-size:22px; " class="text-white  mx-4  fa-solid fa-cart-shopping"></i></a>
           </form>
         </div>
       </div>

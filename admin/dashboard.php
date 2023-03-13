@@ -113,7 +113,7 @@ if (empty($_SESSION["email"])) {
           <div class="dropdown mr-5" style="">
             <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <?php
-              
+
               echo $_SESSION["admin_username"];
 
               ?> </button>
