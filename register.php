@@ -20,11 +20,11 @@ include './common.php';
             <!-- <div class="form-row"> -->
             <div class="form-group col-md-6">
                 <label for="firstName">First Name</label>
-                <input required type="text" name="firstName" class="form-control" id="firstName" placeholder="Enter First Name">
+                <input required type="text" name="first_name" class="form-control" id="firstName" placeholder="Enter First Name">
             </div>
             <div class="form-group col-md-6">
                 <label for="lastName">Last Name</label>
-                <input required type="text" class="form-control" name="lastName" id="lastName" placeholder="Enter Last Name">
+                <input required type="text" class="form-control" name="last_name" id="lastName" placeholder="Enter Last Name">
             </div>
             <div class="form-group col-md-6">
                 <label for="email">Email</label>

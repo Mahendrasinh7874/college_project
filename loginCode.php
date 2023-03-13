@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         while ($row = mysqli_fetch_assoc($result)) {
             $_SESSION['loggedin'] = true;
             $_SESSION['u_id'] = $row['u_id'];
-            $_SESSION['username'] = $row['username'];
+            $_SESSION['username'] = $row['first_name'] . " " .$row['last_name'] ;
             $_SESSION['email'] = $row['email'];
         }
         header('Location:index.php');

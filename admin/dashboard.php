@@ -1,7 +1,7 @@
 <?php
 session_start();
 if (empty($_SESSION["email"])) {
-  echo $_SESSION["email"];
+  // echo $_SESSION["email"];
   header("Location: index.php");
 }
 ?>

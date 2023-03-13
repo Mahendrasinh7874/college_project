@@ -1,8 +1,8 @@
 <?php
 
-// session_start();
+session_start();
 if (empty($_SESSION["email"])) {
-    echo $_SESSION["email"];
+    // echo $_SESSION["email"];
     header("Location: index.php");
 }
 ?>
@@ -16,7 +16,7 @@ if (empty($_SESSION["email"])) {
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Admin | Dashboard</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
@@ -43,9 +43,7 @@ if (empty($_SESSION["email"])) {
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center">
-            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
-        </div>
+       
 
         <!-- Navbar -->
         <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -86,6 +84,9 @@ if (empty($_SESSION["email"])) {
         <?php include 'left.php'; ?>
         <aside class="control-sidebar control-sidebar-dark">
             <!-- Control sidebar content goes here -->
+            <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="dist/img/AdminLTELogo.png" alt="AdminLTELogo" height="60" width="60" />
+        </div>
         </aside>
         <!-- /.control-sidebar -->
     </div>
