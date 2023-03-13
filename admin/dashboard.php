@@ -90,12 +90,12 @@ if (empty($_SESSION["email"])) {
       <p class="menu-text">Menu</p>
       <div class="navigation-menu">
         <ul>
-          <li><a href="#"></a><i class="fa fa-dashboard"></i>Dashboard</li>
+          <li><a href="/admin/dashboard.php"></a><i class="fa fa-dashboard"></i>Dashboard</li>
+          <li> <a href="user_index.php"><i class="fa fa-user"> </i>Users</li>
           <li> <a href=""><i class="fa fa-dropbox"></i>Products </a></li>
           <li> <a href="#category"><i class="fa fa-database"></i>Category</a>
           </li>
           <li> <a href="#"><i class="fa fa-credit-card" aria-hidden="true"></i> Payment</a></li>
-          <li> <a href="#"><i class="fa fa-database"> </i>Order</li>
           <li> <a href="#"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i> Cart</a></li>
         </ul>
       </div>
@@ -125,6 +125,8 @@ if (empty($_SESSION["email"])) {
         </ul>
       </nav>
     </div>
+
+    
 
   </div>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
