@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
   echo $_SESSION["email"];
-  header("Location: dashboard.php");
+  header("Location: admin_panel.php");
   exit();
 }
 ?>

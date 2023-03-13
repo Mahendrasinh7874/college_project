@@ -8,7 +8,7 @@ if (isset($_POST['password']) && !empty($_POST['password'])) {
 } else {
     session_start();
     $_SESSION["admin_log"] = 'admin_log';
-    header("/college_project/admin/dashboard.php");
+    header("/college_project/admin/admin_panel.php");
 }
 
 //$conn = mysqli_connect("localhost", "root", "", "cms");
@@ -26,7 +26,7 @@ if (mysqli_num_rows($result) > 0) {
         $_SESSION["email"] = $row['email'];
         $_SESSION["admin_username"] = 'Mahendra Zala';
     }
-    header("Location: dashboard.php");
+    header("Location: admin_panel.php");
 } else {
     session_start();
     $_SESSION["admin_log"] = 'admin_log';
