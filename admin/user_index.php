@@ -1,7 +1,5 @@
-<?php
-include 'dashboard.php';
-
+<?php 
+include 'header.php';
 ?>
 
-
-<h2 style="color:red;">user_index.php</h2>
+usersfd
