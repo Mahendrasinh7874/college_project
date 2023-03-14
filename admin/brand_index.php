@@ -9,7 +9,7 @@ include 'jquery.php';
         <div class="col-md-8">
             <a href="add_brand.php
             ">
-                <input type="submit" value="Add Category" class="btn btn-info">
+                <input type="submit" value="Add Brands" class="btn btn-info">
             </a>
         </div>
         <div class="col-md-4">
@@ -17,9 +17,11 @@ include 'jquery.php';
         </div>
     </div>
     <?php
-    $sql = "SELECT * FROM brands";
-    $result = mysqli_query($conn, $sql);
     $count = 0;
+
+    $sql = "select * from brands
+    LEFT JOIN category ON brands.cate_id = category.cate_id ";
+    $result = mysqli_query($conn, $sql);
 
 
     if (mysqli_num_rows($result) > 0) {
@@ -42,10 +44,10 @@ include 'jquery.php';
             echo ' <tr>';
             echo "<td>$count</td>";
             echo "<td>" . $row['brand_title'] . "</td>";
-            echo "<td>" . $row['category_title'] . "</td>";
+            echo "<td>" . $row['category_name'] . "</td>";
             echo '<td>
-        <a  href="update_category.php?brand_id=' . $row['brand_id'] . '" type="button" class="btn btn-success mx-1">Update</a>
-        <a type="button" href="delete_category.php?brand_id=' . $row['brand_id'] . '" onclick="return confirmDelete();" class="btn btn-danger mx-1">Delete</a>  </td>';
+        <a  href="update_brand.php?brand_id=' . $row['brand_id'] . '" type="button" class="btn btn-success mx-1">Update</a>
+        <a type="button" href="delete_brand.php?brand_id=' . $row['brand_id'] . '" onclick="return confirmDelete();" class="btn btn-danger mx-1">Delete</a>  </td>';
             echo "</tr>";
         }
         echo '</tbody>';

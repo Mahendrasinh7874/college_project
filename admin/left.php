@@ -41,7 +41,7 @@
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="category_index.php" class="nav-link  ">
+                    <a href="brand_index.php" class="nav-link  ">
                         <i class="nav-icon fab fa-apple"></i>
                         <p>Brand</p>
                     </a>
