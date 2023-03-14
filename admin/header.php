@@ -1,7 +1,7 @@
 <?php
 
 session_start();
-if (empty($_SESSION["email"])) {
+if (!isset($_SESSION["email"])) {
     // echo $_SESSION["email"];
     header("Location: index.php");
 }
@@ -57,7 +57,7 @@ if (empty($_SESSION["email"])) {
             <!-- Right navbar links -->
             <ul class="navbar-nav ml-auto">
                 <div class="dropdown mr-5" style="">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php
 
                         echo $_SESSION["admin_username"];

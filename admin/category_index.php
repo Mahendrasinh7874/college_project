@@ -1,23 +1,23 @@
 <?php
 include 'header.php';
 include 'config.php';
+include 'jquery.php';
 ?>
 
 <div class=" mr-3 mt-3" style="width: 82%; height: 500px; margin: auto">
     <div class="row ml-2 mt-2 mr-2">
         <div class="col-md-8">
-            <a href="add_user.php
+            <a href="add_category.php
             ">
-                <input type="submit" value="Add User" class="btn btn-info">
+                <input type="submit" value="Add Category" class="btn btn-info">
             </a>
         </div>
         <div class="col-md-4">
-
             <input id="search" style="height: 40px; " placeholder="Search..." class="form-control rounded" type="search">
         </div>
     </div>
     <?php
-    $sql = "SELECT * FROM users";
+    $sql = "SELECT * FROM category";
     $result = mysqli_query($conn, $sql);
     $count = 0;
 
@@ -28,12 +28,9 @@ include 'config.php';
         echo ' <thead>
     <tr>
         <th scope="col">#</th>
-        <th scope="col">First Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">Email</th>
-        <th scope="col">Mobile No</th>
-        <th scope="col">Gender</th>
-        <th scope="col">Operations</th> 
+        <th scope="col">Category Name</th>
+        <th scope="col">Operations</th>
+        
     </tr>
 </thead>';
         echo '<tbody>';
@@ -41,14 +38,10 @@ include 'config.php';
             $count++;
             echo ' <tr>';
             echo "<td>$count</td>";
-            echo "<td>" . $row['first_name'] . "</td>";
-            echo "<td>" . $row['last_name'] . "</td>";
-            echo "<td>" . $row['email'] . "</td>";
-            echo "<td>" . $row['mobile_no'] . "</td>";
-            echo "<td>" . $row['gender'] . "</td>";
-            echo '<td><a href="user_view.php?u_id=' . $row['u_id'] . '"  type="button" class="btn btn-primary mx-1">View</a>
-        <a  href="update_user.php?u_id=' . $row['u_id'] . '" type="button" class="btn btn-success mx-1">Update</a>
-        <a type="button" href="delete_user.php?u_id=' . $row['u_id'] . '" onclick="return confirmDelete();" class="btn btn-danger mx-1">Delete</a>  </td>';
+            echo "<td>" . $row['category_name'] . "</td>";
+            echo '<td>
+        <a  href="update_category.php?cate_id=' . $row['cate_id'] . '" type="button" class="btn btn-success mx-1">Update</a>
+        <a type="button" href="delete_category.php?cate_id=' . $row['cate_id'] . '" onclick="return confirmDelete();" class="btn btn-danger mx-1">Delete</a>  </td>';
             echo "</tr>";
         }
         echo '</tbody>';
@@ -70,11 +63,13 @@ include 'config.php';
     </table>
 
 </div>
+</div>
+
 
 <script>
     const confirmDelete = () => {
         console.log("delete");
-        if (confirm("Are you sure you want to delete this user?")) {
+        if (confirm("Are you sure you want to delete this Catrgory?")) {
             return true;
         } else {
             return false;

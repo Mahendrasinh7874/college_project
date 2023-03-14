@@ -1,7 +1,4 @@
-<?php ?>
-
-
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
     <div class="mb-4" style=" border-bottom: 1px solid #4b545c !important;">
 
@@ -29,6 +26,24 @@
                     <a href="user.php" class="nav-link  ">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Users</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="products_index.php" class="nav-link  ">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>Products</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="category_index.php" class="nav-link  ">
+                        <i class="nav-icon fas fa-tag"></i>
+                        <p>Category</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
+                    <a href="category_index.php" class="nav-link  ">
+                        <i class="nav-icon fab fa-apple"></i>
+                        <p>Brand</p>
                     </a>
                 </li>
             </ul>
