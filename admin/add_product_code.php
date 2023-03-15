@@ -1,6 +1,8 @@
 <?php
 
 // include 'config.php';
+// session_start();
+
 
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -44,11 +46,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $sql = "INSERT INTO product(product_category_id,product_brand_id,product_title,price,product_description,image,qty) 
             values ('$product_category_id','$product_brand_id','$product_title','$price','$product_description','$image_name','$qty')";
 
+            
+$conn =  mysqli_connect("localhost", "root", "", "college-project")
+or die(mysqli_connect_error());
+
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
     if ($result) {
         // header("location:http://localhost/e-commerce/admin/product_index.php");
-        header('Location: product_index.php');
+        header('Location: products_index.php');
     } else {
         echo '<h1 class="text-center"> 404 Not Found </h1>';
     }
