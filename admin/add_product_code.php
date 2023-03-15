@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_FILES['image'])) {
         $error = array();
         $image = $_FILES['image'];
-        print_r($image);
+        // print_r($image);
         $image_name = $image['name'];
         $image_type = $image['type'];
         $image_tmp_name = $image['tmp_name'];

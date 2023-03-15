@@ -19,7 +19,7 @@ include 'jquery.php';
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="post" action="add_product_code.php" class="">
+                <form method="post" action="add_product_code.php" enctype="multipart/form-data" class="">
                     <div class="card-body row">
                         <div class="form-group col-md-6">
                             <label for="product_category">Product Category</label>
