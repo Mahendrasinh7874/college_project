@@ -2,6 +2,8 @@
 include 'header.php';
 include 'config.php';
 include 'jquery.php';
+
+
 ?>
 
 
@@ -17,23 +19,37 @@ include 'jquery.php';
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form method="post" action="" class="">
+                <form method="post" action="add_product_code.php" class="">
                     <div class="card-body row">
                         <div class="form-group col-md-6">
                             <label for="product_category">Product Category</label>
-                            <select class="form-control" name="product_category" placeholder="Select Product Category" id="product_category">
+                            <select class="form-control" name="cate_id" placeholder="Select Product Category" id="product_category">
                                 <!-- <option selected>Select Gender</option> -->
-                                <option id="search" value="" disabled selected hidden>Choose Category</option>
+                                <!-- <option id="search" value="" disabled selected hidden>Choose Category</option>
                                 <option>Mobile</option>
-                                <option>Laptop</option>
+                                <option>Laptop</option> -->
+                                <option id="search" value="" disabled selected hidden>Choose Category</option>
+                                <?=
+                                $conn = mysqli_connect("localhost", "root", "", "college-project") or die("connection failed");
+
+                                $sql = "select * from category";
+
+                                $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+                                if (mysqli_num_rows($result) > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+                                        $output = "<option id='search' value='{$row["cate_id"]}'>{$row["category_name"]}</option>
+                    ";
+                                        echo $output;
+                                    }
+                                }
+                                ?>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
                             <label for="product_brand">Product Brand</label>
-                            <select class="form-control" name="product_brand" placeholder="Select Product Brand" id="product_brand">
-                            <option id="search" value="" disabled selected hidden>Choose Brand</option>
-                                <option>Male</option>
-                                <option>Female</option>
+                            <select class="form-control" name="brand" placeholder="Select Product Brand" id="product_brand">
+                                <option id="search" value="" disabled selected hidden>Choose Brand</option>
                             </select>
                         </div>
                         <div class="form-group col-md-6">
@@ -58,8 +74,8 @@ include 'jquery.php';
                         </div>
 
                         <div class="form-group col-md-6">
-                            <label for="password">Product Image</label>
-                            <input type="file" name="product_image" class="form-control-file" onchange="readURL(this);">
+                            <label for="product_image">Product Image</label>
+                            <input type="file" name="image" id="product_image" class="form-control-file" onchange="readURL(this);">
                             <img id="pic" class="mt-3" src="" />
                         </div>
                         <div class="col-6 my-2"> <button type="submit" class="btn btn-info">Submit</button></div>
@@ -74,3 +90,46 @@ include 'jquery.php';
         </form>
     </div>
 </div>
+
+<!-- <script type="text/javascript" src="./js/jquery.js"></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $("select[name='cate_id']").change(function() {
+        var stateID = $(this).val();
+
+        if (stateID) {
+            $.ajax({
+                url: "search.php",
+                dataType: 'Json',
+                data: {
+                    'brand': stateID
+                },
+                success: function(data) {
+                    $('select[name="brand"]').empty();
+                    $.each(data, function(key, value) {
+                        $('select[name="brand"]').append('<option value="' + key + '">' + value + '</option>');
+                    });
+                }
+            });
+        } else {
+            $('select[name="brand"]').empty();
+        }
+    });
+</script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#pic')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(150);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
