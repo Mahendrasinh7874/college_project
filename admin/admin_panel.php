@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,8 +43,9 @@
       <div class="content-header">
         <div class="container-fluid">
           <div class="row mb-2">
-            <div class="col-sm-6 text-center">
-              <h1 class="m-0">Dashboard</h1>
+            <div class=" col-12 text-center">
+              <h1 class="m-0">Welcome to Dashboard
+              </h1>
             </div>
             <!-- /.col -->
             <!-- /.col -->

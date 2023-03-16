@@ -3,6 +3,21 @@ include 'header.php';
 include 'config.php';
 ?>
 
+<style>
+    .modal {
+        left: 24%;
+        top: 10%;
+        width: 50%;
+        position: absolute;
+        margin: auto;
+    }
+
+    .close {
+        /* position: relative;
+        right: 50%; */
+    }
+</style>
+
 <div class=" mr-3 mt-3" style="width: 82%; height: 500px; margin: auto">
     <div class="row ml-2 mt-2 mr-2">
         <div class="col-md-8">
@@ -48,7 +63,8 @@ include 'config.php';
             echo "<td>" . $row['category_name'] . "</td>";
             echo "<td>" . $row['brand_title'] . "</td>";
             echo "<td>" . $row['price'] . "</td>";
-            echo "<td><img width='100' height='100' src=uploads/$row[image] class='rounded-circle' alt='$row[product_title]'></td>";
+            echo "<td>    <a href='uploads/$row[image]' onclick='previewImage(event)'><img width='100' height='100' src='uploads/$row[image]' class='' alt='$row[product_title]'></a></td>";
+
             echo '<td><a href="product_view.php?product_id=' . $row['product_id'] . '"  type="button" class="btn btn-primary mx-1">View</a>
         <a  href="update_product.php?product_id=' . $row['product_id'] . '" type="button" class="btn btn-success mx-1">Update</a>
         <a type="button" href="delete_product.php?product_id=' . $row['product_id'] . '" onclick="return confirmDelete();" class="btn btn-danger mx-1">Delete</a>  </td>';
@@ -72,6 +88,10 @@ include 'config.php';
     </tbody>
     </table>
 
+    <div id="preview-modal" class="modal w-50 m-auto" style="display: none">
+        <button onclick="closePreview()" class="close btn"><i class="fa fa-window-close"></i></button>
+        <img id="preview-image" src="" alt="">
+    </div>
 </div>
 
 <script>
@@ -82,6 +102,21 @@ include 'config.php';
         } else {
             return false;
         }
+    }
+</script>
+<script>
+    function previewImage(event) {
+        event.preventDefault();
+        const imagePath = event.currentTarget.getAttribute('href');
+        const previewImageEl = document.getElementById('preview-image');
+        previewImageEl.setAttribute('src', imagePath);
+        const previewModalEl = document.getElementById('preview-modal');
+        previewModalEl.style.display = 'block';
+    }
+
+    function closePreview() {
+        const previewModalEl = document.getElementById('preview-modal');
+        previewModalEl.style.display = 'none';
     }
 </script>
 

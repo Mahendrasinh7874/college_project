@@ -31,10 +31,10 @@
         session_start();
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) :  ?>
           <!-- <a href="login.php" class="login-text"><?= $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></a> -->
-          <div class="dropdown">
-            <button class="btn username btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+          <div class="dropdown " style="cursor:pointer;">
+            <a class=" username dropdown-toggle"  data-toggle="dropdown" aria-expanded="false">
             <?= $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
-            </button>
+            </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">My Account</a>
               <a class="dropdown-item" href="#">Change Password</a>

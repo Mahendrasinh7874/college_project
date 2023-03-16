@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         //$image_ext = strtolower(end(explode('.', $image_name)));
         $ext = pathinfo($image_name, PATHINFO_EXTENSION);
         $extensions = array("jpeg", "jpg", "png");
-        
+
         if (in_array($ext, $extensions) === false) {
             $error[] = "This file is not allowed, Please select jpg or png file";
         }
@@ -42,13 +42,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_description = $_POST['product_description'];
     $qty = $_POST['qty'];
 
-    
+
     $sql = "INSERT INTO product(product_category_id,product_brand_id,product_title,price,product_description,image,qty) 
             values ('$product_category_id','$product_brand_id','$product_title','$price','$product_description','$image_name','$qty')";
 
-            
-$conn =  mysqli_connect("localhost", "root", "", "college-project")
-or die(mysqli_connect_error());
+
+    $conn =  mysqli_connect("localhost", "root", "", "college-project")
+        or die(mysqli_connect_error());
 
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 

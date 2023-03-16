@@ -30,7 +30,7 @@
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="products_index.php" class="nav-link  ">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>Products</p>
                     </a>
                 </li>
