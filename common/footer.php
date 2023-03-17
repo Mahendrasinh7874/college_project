@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <footer class="bg-light py-1">
+    <footer class="bg-light py-1" style="position: static;">
         <div class="container">
 
             <div class="row mt-3">

@@ -23,7 +23,7 @@
     /* main header starts here */
 
     .main-header {
-      background-color: rgba(15, 35, 60, 1) !important;
+      /* background-color: rgba(15, 35, 60, 1) !important; */
       height: 70px !important;
     }
 
@@ -32,7 +32,7 @@
     }
 
     .navbar-nav li a {
-      color: white !important;
+      color: black !important;
       margin: 0;
     }
 
@@ -118,7 +118,7 @@
 
     .footer-email button {
       background-color: #333;
-      color: #fff;
+      color: #000;
       border: none;
       border-radius: 5px;
       padding: 10px;
@@ -135,9 +135,11 @@
 </head>
 
 <body>
-  <nav class="navbar main-header navbar-expand-lg navbar-light bg-dark">
+  <nav class="navbar main-header navbar-expand-lg ">
     <div class="container">
-      <a class="navbar-brand text-white" href="../../college_project/">Techno World</a>
+      <a class="navbar-brand logo" href="../../college_project/" style=" font-size: 25px !important;
+  color: black !important;
+  font-weight: 700 !important;">Techno World</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -169,8 +171,8 @@
           </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-          <a> <i style="font-size:22px; " class="text-white  mx-2 fa-sharp fa-regular fa-heart"></i></a>
-          <a> <i style="font-size:22px; " class="text-white  mx-4  fa-solid fa-cart-shopping"></i></a>
+          <a> <i style="font-size:22px; " class="  mx-2 fa-sharp fa-regular fa-heart"></i></a>
+          <a> <i style="font-size:22px; " class="  mx-4  fa-solid fa-cart-shopping"></i></a>
         </form>
       </div>
     </div>

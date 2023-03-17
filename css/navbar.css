@@ -7,7 +7,7 @@ body {
 /* main header starts here */
 
 .main-header {
-  background-color: rgba(15, 35, 60, 1) !important;
+  background-color: #f4f4f4 !important;
   height: 70px !important;
 }
 
@@ -16,7 +16,7 @@ body {
 }
 
 .navbar-nav li a {
-  color: white !important;
+  color: black !important;
   margin: 0;
 }
 
@@ -25,9 +25,6 @@ body {
 }
 .dropdown-menu .dropdown-item {
   color: black !important;
-}
-.navbar-brand {
-  font-size: 23px !important;
 }
 
 /* main header Ends here */
@@ -110,7 +107,7 @@ footer {
   text-align: center;
   margin-top: 20px;
 }
-.username{
+.username {
   color: white !important;
 }
 .username:hover,
@@ -118,3 +115,39 @@ footer {
   /* background-color: transparent !important; */
 }
 /* footer Endshere  */
+
+/* TEMPLATE STYLES */
+
+main {
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+
+.widget-wrapper {
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+  margin-bottom: 2rem;
+}
+
+.extra-margins {
+  margin-top: 1rem;
+  margin-bottom: 2.5rem;
+}
+
+.divider-new {
+  margin-top: 0;
+}
+
+.navbar {
+  background-color: #414a5c;
+}
+
+footer.page-footer {
+  background-color: #414a5c;
+  margin-top: 2rem;
+}
+
+
+.list-group{
+  background-color: red !important;
+}

@@ -106,7 +106,7 @@ exit();
                             </div>
 
                             <div class="form-group col-md-6">
-                                <label for="product_image">Product Image</label>
+                            <label for="product_image">Product Image* | 301 × 148 px </label>
                                 <input type="file" name="image" id="product_image" class="form-control-file" value="<?php echo $data['image'] ?>" onchange=" readURL(this);">
                                 <!-- <img id="pic" class="mt-3" src="" /> -->
                                 <img id="pic" height="100" width="150" class="mt-3" src="uploads/<?php echo $data['image'] ?>" />

@@ -30,10 +30,10 @@
         <?php
         session_start();
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) :  ?>
-          <!-- <a href="login.php" class="login-text"><?= $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?></a> -->
+          <!-- <a href="login.php" class="login-text"><?= $_SESSION['username'] ?></a> -->
           <div class="dropdown " style="cursor:pointer;">
-            <a class=" username dropdown-toggle"  data-toggle="dropdown" aria-expanded="false">
-            <?= $_SESSION['first_name'] . " " . $_SESSION['last_name'] ?>
+            <a class=" username dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+              <?= $_SESSION['username'] ?>
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">My Account</a>
