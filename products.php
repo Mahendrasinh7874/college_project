@@ -55,15 +55,19 @@ include './common.php';
       </div>
       <!-- end of item -->
       <!-- item -->
-      <div class="trend-item">
-        <img src="css/images/best-selling-2.png" alt="best product" />
+      <div class="trend-item" style="position: relative">
+        <img
+          src="css/images/best-selling-2.png"
+          alt="best product"
+          class="hoverable"
+        />
+
         <span
           class="wistlist-image"
           data-toggle="tooltip"
           data-placement="top"
           title="Add to Wishlist"
         >
-          <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
           <i class="fa-regular fa-heart fa-2x"></i>
         </span>
         <div class="trend-item-content">
@@ -84,8 +88,12 @@ include './common.php';
       </div>
       <!-- end of item -->
       <!-- item -->
-      <div class="trend-item">
-        <img src="css/images/best-selling-3.png" alt="best product" />
+      <div class="trend-item" style="position: relative">
+        <img
+          src="css/images/best-selling-3.png"
+          class="hoverable"
+          alt="best product"
+        />
         <span
           class="wistlist-image"
           data-toggle="tooltip"
