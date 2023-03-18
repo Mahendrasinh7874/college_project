@@ -16,8 +16,8 @@
 </head>
 
 <body>
-  <nav class="navbar simple-header navbar-expand-lg navbar-light bg-light">
-    <div class="container row m-auto">
+  <!-- <nav class="navbar simple-header navbar-expand-lg navbar-light bg-light"> -->
+  <!-- <div class="container row m-auto">
       <div class="col-6 pl-0 first-part d-flex">
         <p class="ml-0">Free Delivery</p>
         <p>|</p>
@@ -30,10 +30,9 @@
         <?php
         session_start();
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) :  ?>
-          <!-- <a href="login.php" class="login-text"><?= $_SESSION['username'] ?></a> -->
-          <div class="dropdown " style="cursor:pointer;">
+ <?= $_SESSION['username'] ?></a><div class="dropdown " style="cursor:pointer;">
             <a class=" username dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-              <?= $_SESSION['username'] ?>
+            <?= $_SESSION['username'] ?>
             </a>
             <div class="dropdown-menu">
               <a class="dropdown-item" href="#">My Account</a>
@@ -45,8 +44,8 @@
           <a href="login.php" class="login-text">Login<i class="mx-2 fa-solid fa-user"></i> </a>
         <?php endif; ?>
       </div>
-    </div>
-  </nav>
+    </div> -->
+  <!-- </nav> -->
 
   <!-- Optional JavaScript; choose one of the two! -->
 

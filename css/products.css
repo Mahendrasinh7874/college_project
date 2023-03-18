@@ -127,6 +127,7 @@ img {
   margin: 40px 0;
   padding: 30px 24px;
   text-align: center;
+  padding-bottom: 10px !important;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -253,9 +254,6 @@ img {
 }
 .newsletter .title {
   text-align: center;
-}
-.form-group {
-  margin: 30px 0;
 }
 .form-control,
 .subscribe-btn {
@@ -476,7 +474,9 @@ img {
   filter: brightness(0);
   cursor: pointer;
   top: 13px;
-  right: 14px;
+  right: 5px;
 }
 .tooltip-arrow,
-.red-tooltip + .tooltip > .tooltip-inner {background-color: #f00 !important;}
+.red-tooltip + .tooltip > .tooltip-inner {
+  background-color: #f00 !important;
+}
