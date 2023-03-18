@@ -229,7 +229,8 @@ ON product.product_category_id = category.cate_id';
 
                                     if (mysqli_num_rows($result) > 0) {
                                         while ($row = mysqli_fetch_assoc($result)) { ?>
-                                            <div class="col-md-4 mb-4">
+                                          <a href="product_detail.php">
+                                          <div class="col-md-4 mb-4">
                                                 <div class="trend-item" style="position: relative">
                                                     <img style="width:150px;height:150px;" src="<?= !empty($row['image']) ? './admin/uploads/' . $row['image'] : '' ?>" alt="best product" class="hoverable  m-auto" />
 
@@ -254,6 +255,7 @@ ON product.product_category_id = category.cate_id';
                                                     </div>
                                                 </div>
                                             </div>
+                                          </a>
 
                                     <?php }
                                     } ?>
