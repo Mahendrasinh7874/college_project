@@ -10,7 +10,7 @@ include './common.php';
   <div class="container">
     <div class="row justify-content-between align-items-center">
       <div class="title">
-        <h4>All Products</h4>
+        <h4 style="font-weight:bold ;">All Products</h4>
       </div>
       <select>
         <option value="">Default Shorting</option>

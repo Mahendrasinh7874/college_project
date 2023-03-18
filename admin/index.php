@@ -46,8 +46,8 @@ if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
 
         if (isset($_SESSION['admin_log'])) {
           echo "<h4 class='text-danger'>Please Enter Valid Username and Password.";
-          session_unset();
-          session_destroy();
+          // session_unset();
+          // session_destroy();
         }
         ?>
 

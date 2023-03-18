@@ -1,7 +1,9 @@
 <?php
 include './common.php';
 include 'admin/config.php';
+
 ?>
+
 
 
 <main>
@@ -35,7 +37,7 @@ include 'admin/config.php';
                 <div class="carousel-inner" role="listbox">
                     <!--First slide-->
                     <div class="carousel-item active">
-                        <img src="http://mdbootstrap.com/img//Photos/Slides/img%20(107).jpg" alt="First slide">
+                        <img src="./css/images/pexels-noah-erickson-404280.jpg" height="600" alt="First slide">
                         <div class="carousel-caption">
                             <h4>New collection</h4>
                             <br>
@@ -44,7 +46,7 @@ include 'admin/config.php';
                     <!--/First slide-->
                     <!--Second slide-->
                     <div class="carousel-item">
-                        <img src="http://mdbootstrap.com/img//Photos/Slides/img%20(109).jpg" alt="Second slide">
+                        <img src="./css/images/pexels-pixabay-159643.jpg" height="600" alt="Second slide">
                         <div class="carousel-caption">
                             <h4>Get discount!</h4>
                             <br>
@@ -53,7 +55,7 @@ include 'admin/config.php';
                     <!--/Second slide-->
                     <!--Third slide-->
                     <div class="carousel-item">
-                        <img src="http://mdbootstrap.com/img//Photos/Slides/img%20(36).jpg" alt="Third slide">
+                        <img src="./css/images/pexels-olia-danilevich-4974912.jpg" height="600" alt="Third slide">
                         <div class="carousel-caption">
                             <h4>Only now for $10</h4>
                             <br>
@@ -86,6 +88,7 @@ include 'admin/config.php';
                         <div class="card mb-4">
                             <div class="card-header">Categories</div>
                             <div class="list-group list-group-flush">
+                                <a href="#" class="list-group-item list-group-item-action for-active active">All</a>
 
                                 <?php
                                 $sql =  'SELECT * FROM category';
@@ -217,7 +220,11 @@ include 'admin/config.php';
                                 <div class="row">
 
                                     <?php
-                                    $sql =  'SELECT * FROM product';
+                                    // $sql =  'SELECT * FROM product';
+                                    $sql =    'SELECT product.*, category.category_name 
+FROM product 
+JOIN category 
+ON product.product_category_id = category.cate_id';
                                     $result = mysqli_query($conn, $sql);
 
                                     if (mysqli_num_rows($result) > 0) {
@@ -226,11 +233,12 @@ include 'admin/config.php';
                                                 <div class="trend-item" style="position: relative">
                                                     <img style="width:150px;height:150px;" src="<?= !empty($row['image']) ? './admin/uploads/' . $row['image'] : '' ?>" alt="best product" class="hoverable  m-auto" />
 
-                                                    <span class="wistlist-image" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
+                                                    <a data-toggle="tooltip" data-placement="top" title="Add to Wishlist" href="add_wishlist.php?product_id=<?php echo $row['product_id']; ?>" class="wistlist-image" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
                                                         <i class="fa-regular fa-heart " style="font-size:20px;"></i>
-                                                    </span>
+                                                    </a>
                                                     <div class="trend-item-content">
                                                         <h4><?= !empty($row['product_title']) ? $row['product_title'] : '' ?></h4>
+                                                        <!-- <h5><?= !empty($row['category_name']) ? $row['category_name'] : '' ?></h5> -->
                                                         <h4><?= !empty($row['price']) ? '₹ ' . $row['price'] : '' ?></h4>
                                                         <div class="stars">
                                                             <span><i class="fas fa-star"></i></span>
@@ -328,3 +336,83 @@ include 'admin/config.php';
         });
     });
 </script>
+
+<script>
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
+<?php
+
+if (isset($_SESSION['not_login'])) {
+    echo '<script>
+        Toastify({
+          text: "Please Register or Login to Add This Product!!",
+          duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #b00020, #ff8b8e)",
+
+        },
+        onClick: function() {} // Callback after click
+        }).showToast();
+      </script>';
+}
+unset($_SESSION['not_login']);
+
+?>
+
+<?php
+
+if (isset($_SESSION['already_wishlist'])) {
+    echo '<script>
+        Toastify({
+            text: "This product is already in your wishlist!",
+            duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #f8d700, #f5a623)",
+
+        },
+        onClick: function() {} // Callback after click
+        }).showToast();
+      </script>';
+}
+unset($_SESSION['already_wishlist']);
+
+?>
+
+<?php
+
+if (isset($_SESSION['success_wishlist'])) {
+    echo '<script>
+        Toastify({
+            text: "Product has been added to your wishlist!",
+            duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+
+        },
+        onClick: function() {} // Callback after click
+        }).showToast();
+      </script>';
+}
+unset($_SESSION['success_wishlist']);
+
+?>

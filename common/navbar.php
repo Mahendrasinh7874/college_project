@@ -11,6 +11,7 @@
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <link rel="stylesheet" href="../css/navbar.css" />
       <link rel="stylesheet" href="../css/login.css" />
+
       <title>Techno World</title>
       <style>
         @import url("https://fonts.googleapis.com/css2?family=Lexend:wght@300&family=Nunito:ital,wght@0,300;0,400;1,200&family=Rubik:wght@300&family=Source+Sans+Pro&display=swap");
@@ -219,7 +220,7 @@
                   <!-- <a href="login.php" class="login-text"><?= $_SESSION['username'] ?></a> -->
                   <div class="dropdown " style="cursor:pointer;">
                     <a style="text-transform: uppercase;" class=" username dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <?= $_SESSION['username'] ?>
+                      <?= !empty($_SESSION['username']) ? $_SESSION['username'] : 'test' ?>
                     </a>
                     <div class="dropdown-menu">
                       <a class="dropdown-item" href="#">My Account</a>
@@ -262,6 +263,7 @@
         }
       </script>
 
+    
     </body>
 
     </html>
