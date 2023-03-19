@@ -64,7 +64,7 @@ include 'config.php';
             echo "<td>" . $row['price'] . "</td>";
             echo "<td>    <a href='uploads/$row[image]' onclick='previewImage(event)'><img width='100' height='100' src='uploads/$row[image]' class='' alt='$row[product_title]'></a></td>";
 
-            echo '<td><a href="product_view.php?product_id=' . $row['product_id'] . '"  type="button" class="btn btn-primary mx-1">View</a>
+            echo '<td><a href="a.php?product_id=' . $row['product_id'] . '"  type="button" class="btn btn-primary mx-1">View</a>
         <a  href="update_product.php?product_id=' . $row['product_id'] . '" type="button" class="btn btn-success mx-1">Update</a>
         <a type="button" href="delete_product.php?product_id=' . $row['product_id'] . '" onclick="return confirmDelete();" class="btn btn-danger mx-1">Delete</a>  </td>';
             echo "</tr>";

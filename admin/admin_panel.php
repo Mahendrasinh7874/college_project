@@ -1,3 +1,14 @@
+<?php
+
+
+// session_start();
+// if (!isset($_SESSION["admin_log"])) {
+//   header("Location: index.php");
+// }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 

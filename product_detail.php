@@ -1,4 +1,15 @@
-<?php include 'common.php'; ?>
+<?php include 'common.php';
+
+include 'admin/config.php';
+
+$product_id = $_GET['product_id'];
+$sql = "select * from product where product_id='{$product_id}'";
+
+
+$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+$data = mysqli_fetch_assoc($result);
+
+?>
 
 
 <div class="container my-5">
@@ -6,27 +17,25 @@
         <div class="col-md-6 _boxzoom">
 
             <div class="picZoomer ">
-                <img class="my_img" src="https://s.fotorama.io/1.jpg" alt="">
+                <img class="w-100"  src='./admin/uploads/<?php echo $data['image'] ?>' alt='<?php echo $data['product_title'] ?>' alt="">
+                <!-- <img class="my_img" src="https://s.fotorama.io/1.jpg" alt=""> -->
+
 
             </div>
         </div>
         <div class="col-md-6">
             <div class="_product-detail-content">
-                <p class="_p-name"> Milton Bottle </p>
+                <p class="_p-name"><?= $data['product_title'] ?></p>
                 <div class="_p-price-box">
                     <div class="p-list">
                         <span> M.R.P. : <i class="fa fa-inr"></i> <del> 1399 </del> </span>
-                        <span class="price"> Rs. 699 </span>
+                        <span class="price"> <i class="fa fa-inr"></i> <?= $data['price'] ?> </span>
                     </div>
                     <div class="_p-add-cart">
-                        <div class="_p-qty">
-                            <span>Add Quantity</span>
-                            <div class="value-button decrease_" id="" value="Decrease Value">-</div>
-                            <input type="number" name="qty" id="number" value="1" />
-                            <div class="value-button increase_" id="" value="Increase Value">+</div>
-                        </div>
+
                     </div>
                     <div class="_p-features">
+                        <!-- <span> <?= $data['product_description'] ?> -->
                         <span> Description About this product:- </span>
                         Solid color polyester/linen full blackout thick sunscreen floor curtain
                         Type: General Pleat
@@ -52,12 +61,12 @@
                         <ul class="spe_ul"></ul>
                         <div class="_p-qty-and-cart">
                             <div class="_p-add-cart">
-                                <button class="btn-theme btn buy-btn" tabindex="0">
+                                <!-- <button class="btn-theme btn buy-btn" tabindex="0">
                                     <i class="fa fa-shopping-cart"></i> Buy Now
-                                </button>
-                                <button class="btn-theme btn btn-success" tabindex="0">
+                                </button> -->
+                                <!-- <a href="add_to_cart.php?product_id=<?php echo $data['product_id']; ?>" class="btn-theme btn btn-success" tabindex="0">
                                     <i class="fa fa-shopping-cart"></i> Add to Cart
-                                </button>
+                                </a> -->
                                 <input type="hidden" name="pid" value="18" />
                                 <input type="hidden" name="price" value="850" />
                                 <input type="hidden" name="url" value="" />
@@ -71,7 +80,7 @@
 </div>
 
 
-
+<?php include './common/footer.php'; ?>
 <script>
     document.addEventListener("DOMContentLoaded", function() {
         var decreaseButtons = document.querySelectorAll(".decrease_");

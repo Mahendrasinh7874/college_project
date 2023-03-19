@@ -3,17 +3,22 @@ include './admin/config.php';
 
 session_start();
 
+$sql = "SELECT * FROM users";
 
+$result1 = mysqli_query($conn, $sql);
+
+$row = mysqli_fetch_assoc($result1);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   //connect to database
   $conn = mysqli_connect('localhost', 'root', '', 'college-project');
+  // $u_id = mysqli_insert_id($conn);
 
   //validate input
   // $username = mysqli_real_escape_string($conn, $_POST['firstName']) . " " . mysqli_real_escape_string($conn, $_POST['lastName']);
 
-  $first_name = $_POST['first_name '];
-  $last_name = $_POST['last_name '];
+  $first_name = $_POST['first_name'];
+  $last_name = $_POST['last_name'];
   $email = $_POST['email'];
   $password = $_POST['password'];
   // $confirmPassword = $_POST['confirmPassword'];
@@ -21,6 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $gender = $_POST['gender'];
   $address = $_POST['address'];
   $mobile_no = $_POST['mobile_no'];
+
+  // print_r($_POST);
 
   //check if email already exists
   $check_email_query = "SELECT * FROM users WHERE email='$email'";
@@ -93,10 +100,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>';
 
     $_SESSION['loggedin'] = true;
-    // $_SESSION['username'] = $_POST['firstName'] . " " . $_POST['lastName'];
-    $_SESSION['first_name'] = $_POST['first_name'];
-    $_SESSION['last_name'] = $_POST['last_name'];
+    $_SESSION['username'] = $_POST['firstName'] . " " . $_POST['lastName'];
     $_SESSION['email'] = $_POST['email'];
+    $_SESSION['u_id'] = $row['u_id'];
     $_SESSION['username'] = $_POST['first_name'] . " " . $_POST['last_name'];
     header("Location: index.php");
     exit();

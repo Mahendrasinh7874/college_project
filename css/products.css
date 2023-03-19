@@ -125,7 +125,10 @@ img {
 .trend-item {
   background: #f4f4f4;
   margin: 40px 0;
+  border-radius: 7px;
   padding: 30px 24px;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
+    rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   text-align: center;
   padding-bottom: 10px !important;
   display: flex;
@@ -137,7 +140,7 @@ img {
   -webkit-box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
   -moz-box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
   box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
-  transform: scale(1.5) !important;
+  transform: scale(1.1) !important;
   cursor: pointer;
 }
 .trend-item:nth-child(3) img {
@@ -463,10 +466,6 @@ img {
   background-color: #dc9831 !important;
   color: white !important;
 }
-
-.trend-item .trend-item-content {
-  filter: brightness(50%);
-}
 /* Increase the brightness to 100% when the image is hovered over */
 .trend-item:hover .trend-item-content {
   filter: brightness(100%);
@@ -482,8 +481,4 @@ img {
 .tooltip-arrow,
 .red-tooltip + .tooltip > .tooltip-inner {
   background-color: #f00 !important;
-}
-
-.trend-grid:hover + .trend-item {
-  transform: scaleY(1.5) !important;
 }

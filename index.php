@@ -22,6 +22,7 @@ include 'admin/config.php';
     </style>
     <!--Main layout-->
 
+
     <div class="row wow fadeIn p-0 m-0" data-wow-delay="0.4s">
         <div class="col-lg-12 p-0">
             <!--Carousel Wrapper-->
@@ -57,7 +58,7 @@ include 'admin/config.php';
                     <div class="carousel-item">
                         <img src="./css/images/pexels-olia-danilevich-4974912.jpg" height="600" alt="Third slide">
                         <div class="carousel-caption">
-                            <h4>Only now for $10</h4>
+                            <h4>Buy now </h4>
                             <br>
                         </div>
                     </div>
@@ -88,7 +89,7 @@ include 'admin/config.php';
                         <div class="card mb-4">
                             <div class="card-header">Categories</div>
                             <div class="list-group list-group-flush">
-                                <a href="#" class="list-group-item list-group-item-action for-active active">All</a>
+                                <a href="../college_project" class="list-group-item list-group-item-action for-active active">All</a>
 
                                 <?php
                                 $sql =  'SELECT * FROM category';
@@ -97,7 +98,7 @@ include 'admin/config.php';
                                 if (mysqli_num_rows($result) > 0) {
                                     while ($row = mysqli_fetch_assoc($result)) { ?>
 
-                                        <a href="#" class="list-group-item list-group-item-action for-active"><?= $row['category_name'] ?></a>
+                                        <button onclick="loadCategoryData('<?php echo $row['category_name']; ?>')" class=" list-group-item list-group-item-action for-active"><?= $row['category_name'] ?></button>
                                         <!-- <a href="#" class="list-group-item list-group-item-action for-active active">Laptops &amp; Notebooks (5)</a>
                                         <a href="#" class="list-group-item list-group-item-action for-active">&nbsp;&nbsp;&nbsp;- Macs (0)</a>
                                         <a href="#" class="list-group-item list-group-item-action for-active">&nbsp;&nbsp;&nbsp;- Windows (0)</a>
@@ -106,7 +107,7 @@ include 'admin/config.php';
                                 } ?>
                             </div>
                         </div>
-                        <div class="card">
+                        <!-- <div class="card">
                             <div class="card-header">Filter</div>
                             <div class="card-body p-1">
                                 <div class="card border-0 b-3">
@@ -176,6 +177,8 @@ include 'admin/config.php';
                                 <button type="button" class="btn btn-block btn-primary">Filter</button>
                             </div>
                         </div>
+                     -->
+
                     </div>
                     <div class="col-md-9">
                         <div class="card">
@@ -200,7 +203,7 @@ include 'admin/config.php';
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <!-- <div class="col-md-3">
                                         <div class="input-group">
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">Show:</span>
@@ -213,56 +216,23 @@ include 'admin/config.php';
                                                 <option value="">100</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="card-body">
-                                <div class="row">
 
-                                    <?php
-                                    // $sql =  'SELECT * FROM product';
-                                    $sql =    'SELECT product.*, category.category_name 
-FROM product 
-JOIN category 
-ON product.product_category_id = category.cate_id';
-                                    $result = mysqli_query($conn, $sql);
-
-                                    if (mysqli_num_rows($result) > 0) {
-                                        while ($row = mysqli_fetch_assoc($result)) { ?>
-                                            <a href="product_detail.php">
-                                                <div class="col-md-4 mb-4">
-                                                    <div class="trend-item" style="position: relative">
-                                                        <img style="width:150px;height:150px;" src="<?= !empty($row['image']) ? './admin/uploads/' . $row['image'] : '' ?>" alt="best product" class="hoverable  m-auto" />
-
-                                                        <a data-toggle="tooltip" data-placement="top" title="Add to Wishlist" href="add_wishlist.php?product_id=<?php echo $row['product_id']; ?>" class="wistlist-image" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
-                                                            <i class="fa-regular fa-heart " style="font-size:20px;"></i>
-                                                        </a>
-                                                        <div class="trend-item-content">
-                                                            <h4><?= !empty($row['product_title']) ? $row['product_title'] : '' ?></h4>
-                                                            <!-- <h5><?= !empty($row['category_name']) ? $row['category_name'] : '' ?></h5> -->
-                                                            <h4><?= !empty($row['price']) ? '₹ ' . $row['price'] : '' ?></h4>
-                                                            <div class="stars">
-                                                                <span><i class="fas fa-star"></i></span>
-                                                                <span><i class="fas fa-star"></i></span>
-                                                                <span><i class="fas fa-star"></i></span>
-                                                                <span><i class="fas fa-star"></i></span>
-                                                                <span><i class="far fa-star"></i></span>
-                                                            </div>
-                                                            <a href="add_to_cart.php?product_id=<?php echo $row['product_id']; ?>" class="chevron-icon btn custom-btn btn-block">
-                                                                <!-- <i class="fas fa-shopping-cart"></i>  -->
-                                                                Add to Cart
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </a>
-
-                                    <?php }
-                                    } ?>
+                                <div class="row" id="table-data">
                                 </div>
+
+                                <?php
+                                if (isset($_SESSION['not-found'])) {
+                                    echo '<h2>Not Found</h2>';
+                                }
+                                ?>
+
                             </div>
                         </div>
-                        <div class="card-footer p-3">
+                        <!-- <div class="card-footer p-3">
                             <div class="row">
                                 <div class="col-md-6">
                                     <ul class="pagination m-0">
@@ -282,6 +252,8 @@ ON product.product_category_id = category.cate_id';
                                 </div>
                             </div>
                         </div>
+                     -->
+                    
                     </div>
                 </div>
             </div>
@@ -368,6 +340,30 @@ if (isset($_SESSION['not_login'])) {
 unset($_SESSION['not_login']);
 
 ?>
+<?php
+
+if (isset($_SESSION['not-loggedin'])) {
+    echo '<script>
+        Toastify({
+          text: "Please Register or Login to  This Product!!",
+          duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #b00020, #ff8b8e)",
+
+        },
+        onClick: function() {} // Callback after click
+        }).showToast();
+      </script>';
+}
+unset($_SESSION['not-loggedin']);
+
+?>
 
 <?php
 
@@ -389,8 +385,8 @@ if (isset($_SESSION['already_wishlist'])) {
         onClick: function() {} // Callback after click
         }).showToast();
       </script>';
+    unset($_SESSION['already_wishlist']);
 }
-unset($_SESSION['already_wishlist']);
 
 ?>
 
@@ -463,3 +459,63 @@ if (isset($_SESSION['success_cart'])) {
 unset($_SESSION['success_cart']);
 
 ?>
+
+
+<script src='./js/jquery.js'></script>
+<script type="text/javascript">
+    $(Document).ready(function() {
+        function loadTable() {
+            $.ajax({
+                url: "product_view.php",
+                type: "GET",
+                success: function(data) {
+                    $("#table-data").html(data);
+                }
+            });
+        }
+        loadTable();
+
+
+        $("#search").on("keyup", function() {
+            var search_term = $(this).val();
+
+            $.ajax({
+                url: "product_search.php",
+                type: "POST",
+                data: {
+                    search: search_term
+                },
+                success: function(data) {
+                    $("#table-data").html(data);
+                }
+            });
+
+        });
+    });
+</script>
+
+<script>
+    function loadCategoryData(category) {
+        console.log(category, 'jsjd')
+        // var search_term = $(this).val();
+        // console.log(search_  term);
+        // alert('called')
+        $.ajax({
+            url: "product_view.php",
+            type: "POST",
+            data: {
+                category: category
+            },
+            success: function(data) {
+                if (data.trim() !== '') { // check if data is not empty
+                    $("#table-data").html(data);
+                } else {
+                    $("#table-data").html('<h2 style="text-align:center;">No data found.</h2>');
+                }
+            },
+            error: function() {
+                $("#table-data").html('<p>Error loading data.</p>');
+            }
+        });
+    }
+</script>

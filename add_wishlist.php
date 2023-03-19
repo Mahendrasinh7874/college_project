@@ -16,6 +16,7 @@ if (!empty($_SESSION['u_id'])) {
         $sql = "INSERT INTO wishlist (u_id,product_id) values ('$u_id','$product_id')";
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
         $_SESSION['success_wishlist'] = 'success';
+        $_SESSION['wishlist_product'] = 'wish';
 
         header("location:http://localhost/college_project/");
     }
