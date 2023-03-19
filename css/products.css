@@ -137,6 +137,8 @@ img {
   -webkit-box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
   -moz-box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
   box-shadow: 0px 9px 10px -10px rgba(208, 208, 208, 1);
+  transform: scale(1.5) !important;
+  cursor: pointer;
 }
 .trend-item:nth-child(3) img {
   width: 50%;
@@ -346,10 +348,11 @@ img {
   .trend-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-gap: 32px;
+    grid-gap: 0;
   }
   .trend-item {
     margin: 0;
+    margin-right: 10px !important;
   }
   .featured-item {
     display: grid;
@@ -461,11 +464,11 @@ img {
   color: white !important;
 }
 
-.trend-item .hoverable {
+.trend-item .trend-item-content {
   filter: brightness(50%);
 }
 /* Increase the brightness to 100% when the image is hovered over */
-.trend-item:hover .hoverable {
+.trend-item:hover .trend-item-content {
   filter: brightness(100%);
 }
 .wistlist-image {
@@ -479,4 +482,8 @@ img {
 .tooltip-arrow,
 .red-tooltip + .tooltip > .tooltip-inner {
   background-color: #f00 !important;
+}
+
+.trend-grid:hover + .trend-item {
+  transform: scaleY(1.5) !important;
 }

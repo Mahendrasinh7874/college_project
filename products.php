@@ -6,7 +6,7 @@ include 'admin/config.php';
 include './common.php';
 ?>
 
-<section class="trend my-5">
+<section class="trend py-3">
   <div class="container">
     <div class="row justify-content-between align-items-center">
       <div class="title">
@@ -21,35 +21,37 @@ include './common.php';
       </select>
     </div>
 
-    <div class="trend-grid row">
+    <div class="trend-grid row" style="grid-gap:0;">
       <?php
       $sql =  'SELECT * FROM product';
       $result = mysqli_query($conn, $sql);
 
       if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_assoc($result)) { ?>
-          <div class="trend-item col-md-3" style="position: relative">
-            <img style="width:150px;height:150px;" src="<?= !empty($row['image']) ? './admin/uploads/' . $row['image'] : '' ?>" alt="best product" class="hoverable  m-auto" />
-            <span class="wistlist-image" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
-              <!-- <i class="fa fa-heart" aria-hidden="true"></i> -->
-              <i class="fa-regular fa-heart fa-1x" style="font-size:25px !important;"></i>
-            </span>
-            <div class="trend-item-content">
-              <h4><?= !empty($row['product_title']) ? $row['product_title'] : '' ?></h4>
-              <h4><?= !empty($row['price']) ? '₹ ' . $row['price'] : '' ?></h4>
-              <div class="stars">
-                <span><i class="fas fa-star"></i></span>
-                <span><i class="fas fa-star"></i></span>
-                <span><i class="fas fa-star"></i></span>
-                <span><i class="fas fa-star"></i></span>
-                <span><i class="far fa-star"></i></span>
+          <a href="product_detail.php">
+
+            <div class="trend-item col-md-3 mr-3" style="position: relative ">
+              <img style="width:150px;height:150px;" src="<?= !empty($row['image']) ? './admin/uploads/' . $row['image'] : '' ?>" alt="best product" class="hoverable  m-auto" />
+              <a data-toggle="tooltip" data-placement="top" title="Add to Wishlist" href="add_wishlist.php?product_id=<?php echo $row['product_id']; ?>" class="wistlist-image" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
+                <i class="fa-regular fa-heart fa-2x" style="font-size:20px;"></i>
+              </a>
+              <div class="trend-item-content">
+                <h4><?= !empty($row['product_title']) ? $row['product_title'] : '' ?></h4>
+                <h4><?= !empty($row['price']) ? '₹ ' . $row['price'] : '' ?></h4>
+                <div class="stars">
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="fas fa-star"></i></span>
+                  <span><i class="far fa-star"></i></span>
+                </div>
+                <button class="chevron-icon btn custom-btn btn-block">
+                  <!-- <i class="fas fa-shopping-cart"></i>  -->
+                  Add to Cart
+                </button>
               </div>
-              <button class="chevron-icon btn custom-btn btn-block">
-                <!-- <i class="fas fa-shopping-cart"></i>  -->
-                Add to Cart
-              </button>
             </div>
-          </div>
+          </a>
       <?php }
       } ?>
     </div>

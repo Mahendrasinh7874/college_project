@@ -11,7 +11,7 @@ include './common.php';
 ?>
 <?php $_SESSION['message_registerd'] = '' ?>
 <div class="login-container">
-    <div class="card py-3" style="width:40%">
+    <div class="card py-3" style="width:53%">
         <div class=" text-center">
             <h2 class=" letter-spacing-1 font-weight-bold mb-4">Register</h2>
         </div>
@@ -77,6 +77,7 @@ include './common.php';
     </div>
 </div>
 </div>
+<?php include './common/footer.php'; ?>
 
 <script type="text/javascript" src="./js/jquery.js"></script>
 

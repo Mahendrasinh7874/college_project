@@ -191,7 +191,7 @@
                 <a style="text-transform:uppercase;" class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
               </li> -->
               <li class="nav-item">
-                <a style="text-transform:uppercase;" class="nav-link mx-2" href="#">Home</a>
+                <a style="text-transform:uppercase;" class="nav-link mx-2" href="../../college_project/">Home</a>
               </li>
               <li class="nav-item">
                 <a style="text-transform:uppercase;" class="nav-link mx-2" href="products.php">Products</a>
@@ -263,7 +263,7 @@
         }
       </script>
 
-    
+
     </body>
 
     </html>
