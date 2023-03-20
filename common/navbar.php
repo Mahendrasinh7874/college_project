@@ -19,6 +19,13 @@ $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
 $num_rows = mysqli_num_rows($result);
 $wishlist_num_rows = mysqli_num_rows($result1);
 
+
+$check1 = "SELECT SUM(qty) AS TotalItemsOrdered FROM cart where u_id='$u_id'";
+$check_result2 = mysqli_query($conn, $check1) or die(mysqli_error($conn));
+foreach ($check_result2 as $row1) {
+  //print_r($row1);
+  $cart_qty = $row1['TotalItemsOrdered'] - 1;
+}
 // echo (!empty($_SESSION['u_id']));
 
 ?>
@@ -272,7 +279,7 @@ $wishlist_num_rows = mysqli_num_rows($result1);
           }
 
           if (!empty($_SESSION['u_id'])) {
-            echo '  <a href="cart_view.php" style="text-transform:uppercase; cursor:pointer;" class="p1 fa-stack  has-badge" data-count="' . $num_rows . '">
+            echo '  <a href="cart_view.php" style="text-transform:uppercase; cursor:pointer;" class="p1 fa-stack  has-badge" id="cart-count" data-count="' . $cart_qty . '">
 <i style="font-size: 20px;color:black;" class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b"></i>
 </a>';
           } else {
@@ -357,6 +364,12 @@ $wishlist_num_rows = mysqli_num_rows($result1);
       });
 
     });
+
+    const changeCountValue = (qty) => {
+      $("#cart-count").attr('data-count', qty);
+
+
+    }
   </script>
 </body>
 

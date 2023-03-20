@@ -253,7 +253,7 @@ include 'admin/config.php';
                             </div>
                         </div>
                      -->
-                    
+
                     </div>
                 </div>
             </div>
@@ -312,9 +312,7 @@ include 'admin/config.php';
 </script>
 
 <script>
-    $(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
+
 </script>
 <?php
 
@@ -465,13 +463,7 @@ unset($_SESSION['success_cart']);
 <script type="text/javascript">
     $(Document).ready(function() {
         function loadTable() {
-            $.ajax({
-                url: "product_view.php",
-                type: "GET",
-                success: function(data) {
-                    $("#table-data").html(data);
-                }
-            });
+            getProducts();
         }
         loadTable();
 
@@ -492,6 +484,34 @@ unset($_SESSION['success_cart']);
 
         });
     });
+    const getProducts = () => {
+
+        $.ajax({
+            url: "product_view.php",
+            type: "GET",
+            success: function(data) {
+                $("#table-data").html(data);
+            }
+        });
+    }
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function addCart(value, isminus) {
+        $.ajax({
+            url: "add_to_cart.php",
+            type: "GET",
+            data: {
+                product_id: value,
+                isminus: isminus
+            },
+            success: function(data) {
+                getProducts();
+                changeCountValue(data);
+            }
+        });
+    }
 </script>
 
 <script>
