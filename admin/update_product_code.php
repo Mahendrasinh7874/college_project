@@ -1,7 +1,6 @@
 <?php
 
 include 'config.php';
-print_r($_POST);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($_FILES['image']['name'])) {

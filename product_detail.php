@@ -16,8 +16,8 @@ $data = mysqli_fetch_assoc($result);
     <div class="row row-sm">
         <div class="col-md-6 _boxzoom">
 
-            <div class="picZoomer ">
-                <img class="w-100"  src='./admin/uploads/<?php echo $data['image'] ?>' alt='<?php echo $data['product_title'] ?>' alt="">
+            <div class="picZoomer  ">
+                <img class="w-100" style="height:75%;" src='./admin/uploads/<?php echo $data['image'] ?>' alt='<?php echo $data['product_title'] ?>' alt="">
                 <!-- <img class="my_img" src="https://s.fotorama.io/1.jpg" alt=""> -->
 
 
@@ -28,15 +28,14 @@ $data = mysqli_fetch_assoc($result);
                 <p class="_p-name"><?= $data['product_title'] ?></p>
                 <div class="_p-price-box">
                     <div class="p-list">
-                        <span> M.R.P. : <i class="fa fa-inr"></i> <del> 1399 </del> </span>
-                        <span class="price"> <i class="fa fa-inr"></i> <?= $data['price'] ?> </span>
+                        <span class="price"> M.R.P. : <i class="fa fa-inr"></i> <?= $data['price'] ?> </span>
                     </div>
                     <div class="_p-add-cart">
 
                     </div>
                     <div class="_p-features">
-                        <!-- <span> <?= $data['product_description'] ?> -->
-                        <span> Description About this product:- </span>
+                        <span> <?= $data['product_description'] ? $data['product_description'] : '' ?>
+                            <!-- <span> Description About this product:- </span>
                         Solid color polyester/linen full blackout thick sunscreen floor curtain
                         Type: General Pleat
                         Applicable Window Type: Flat Window
@@ -55,18 +54,18 @@ $data = mysqli_fetch_assoc($result);
                         Place of Origin: India
                         Name: Curtain
                         Usage: Window Decoration
-                        Keywords: Ready Made Blackout Curtain
+                        Keywords: Ready Made Blackout Curtain -->
                     </div>
                     <form action="" method="post" accept-charset="utf-8">
                         <ul class="spe_ul"></ul>
                         <div class="_p-qty-and-cart">
                             <div class="_p-add-cart">
-                                <!-- <button class="btn-theme btn buy-btn" tabindex="0">
+                                <button class="btn-theme btn buy-btn" tabindex="0">
                                     <i class="fa fa-shopping-cart"></i> Buy Now
-                                </button> -->
-                                <!-- <a href="add_to_cart.php?product_id=<?php echo $data['product_id']; ?>" class="btn-theme btn btn-success" tabindex="0">
+                                </button>
+                                <a href="add_to_cart.php?product_id=<?php echo $data['product_id']; ?>" class="btn-theme btn btn-success" tabindex="0">
                                     <i class="fa fa-shopping-cart"></i> Add to Cart
-                                </a> -->
+                                </a>
                                 <input type="hidden" name="pid" value="18" />
                                 <input type="hidden" name="price" value="850" />
                                 <input type="hidden" name="url" value="" />

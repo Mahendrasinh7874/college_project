@@ -70,7 +70,7 @@ include 'jquery.php';
                         </div>
                         <div class="form-group col-md-6">
                             <label for="product_description">Product Description</label>
-                            <textarea class="form-control" name="product_description" placeholder="Enter Description" id="product_description" rows="3"></textarea>
+                            <textarea class="form-control" name="product_description" placeholder="Enter Description" id="product_description" rows="5"></textarea>
                         </div>
 
                         <div class="form-group col-md-6">

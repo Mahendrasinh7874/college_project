@@ -25,7 +25,7 @@ exit();
         <div class="col-md-8 m-auto">
             <?php
             $data = mysqli_fetch_assoc($result);
-            print_r($data['image']);
+            // print_r($data['image']);
             if (mysqli_num_rows($result) > 0) {
 
             ?>
@@ -102,7 +102,7 @@ exit();
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="product_description">Product Description</label>
-                                <textarea class="form-control" name="update_product_description" placeholder="Enter Description" id="product_description" rows="4"><?php echo $data["product_description"] ?></textarea>
+                                <textarea class="form-control" name="update_product_description" placeholder="Enter Description" id="product_description" rows="5"><?php echo $data["product_description"] ?></textarea>
                             </div>
 
                             <div class="form-group col-md-6">

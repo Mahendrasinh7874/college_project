@@ -21,7 +21,7 @@ include './common.php';
       </select>
     </div>
 
-    <div class="trend-grid row" style="grid-gap:0;">
+    <div class="trend-grid row d-flex justify-content-center" style="grid-gap:0;">
       <?php
       $sql =  'SELECT * FROM product';
       $result = mysqli_query($conn, $sql);
@@ -30,7 +30,7 @@ include './common.php';
         while ($row = mysqli_fetch_assoc($result)) { ?>
           <!-- <a href="product_detail.php"> -->
 
-          <div class="trend-item col-md-3 mr-3" style="position: relative ">
+          <div class="trend-item col-md-3 mr-3 mb-3" style="position: relative ">
             <img style="width:150px;height:150px;" src="<?= !empty($row['image']) ? './admin/uploads/' . $row['image'] : '' ?>" alt="best product" class="hoverable  m-auto" />
             <a data-toggle="tooltip" data-placement="top" title="Add to Wishlist" href="add_wishlist.php?product_id=<?php echo $row['product_id']; ?>" class="wistlist-image" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">
               <i class="fa-regular fa-heart fa-2x" style="font-size:20px;"></i>
