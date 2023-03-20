@@ -95,7 +95,8 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
 
     /* Body/Header stuff */
     body {
-        padding: 0px 30px 30px 20px;
+        padding: 0 !important;
+        margin: 0 !important;
         font-family: var(--font-default);
         font-weight: 100;
     }
@@ -343,6 +344,8 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
 
     </div>
 </main>
+<?php include './common/footer.php'; ?>
+
 
 
 <script src="./js/jquery.js"></script>

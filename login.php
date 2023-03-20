@@ -1,6 +1,11 @@
 <?php
 include './common.php';
 ?>
+<style>
+.btn-primary:focus{
+    background-color: rgba(255, 154, 62, 1) !important;
+}
+</style>
 <div class="login-container px-1 px-lg-0">
     <div class="container ">
         <div class="card">

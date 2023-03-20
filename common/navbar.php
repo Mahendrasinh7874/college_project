@@ -252,7 +252,7 @@ $wishlist_num_rows = mysqli_num_rows($result1);
         </ul>
         <div class="m-auto">
           <div class="input-group ">
-            <input type="text" class="form-control" style="border-right:none !important;width:400px;height:45px;" placeholder="Search here..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <input type="search" id="search" class="form-control" style="border-right:none !important;width:400px;height:45px;" placeholder="Search here..." aria-label="Recipient's username" aria-describedby="basic-addon2">
             <div class="input-group-append ">
               <button type="button " style="background-color:white;" class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></button>
             </div>
@@ -293,7 +293,7 @@ $wishlist_num_rows = mysqli_num_rows($result1);
                 </a>
                 <div class="dropdown-menu">
                   <a class="dropdown-item" href="#">My Account</a>
-                  <a class="dropdown-item" href="#">Change Password</a>
+                  <!-- <a class="dropdown-item" href="#">Change Password</a> -->
                   <a class="dropdown-item" href="logout.php">Log Out</a>
                 </div>
               </div>
@@ -341,7 +341,23 @@ $wishlist_num_rows = mysqli_num_rows($result1);
       badge.style.display = 'none';
     }
   </script>
+  <script>
+    $("#search").on("keyup", function() {
+      var search_term = $(this).val();
 
+      $.ajax({
+        url: "search.php",
+        type: "POST",
+        data: {
+          search: search_term
+        },
+        success: function(data) {
+          $("#table-data").html(data);
+        }
+      });
+
+    });
+  </script>
 </body>
 
 </html>

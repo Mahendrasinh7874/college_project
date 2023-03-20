@@ -2,7 +2,7 @@
     <!-- Brand Logo -->
     <div class="mb-4" style=" border-bottom: 1px solid #4b545c !important;">
 
-        <a href="#" class="brand-link  my-2" style="border-bottom:none !important;">
+        <a href="../../college_project/" class="brand-link  my-2" style="border-bottom:none !important;">
             <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8" />
             <span class="brand-text font-weight-light">Techno World</span>
         </a>
