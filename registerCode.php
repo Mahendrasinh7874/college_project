@@ -88,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     exit();
   }
 
+
   // Insert the data into the database
   $sql = "INSERT INTO users (first_name,last_name, email, password, date_of_birth, gender, address, mobile_no) VALUES ('$first_name','$last_name', '$email', '$password', '$date_of_birth', '$gender', '$address', '$mobile_no')";
   if ($conn->query($sql) === TRUE) {
@@ -100,10 +101,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>';
 
     $_SESSION['loggedin'] = true;
-    $_SESSION['username'] = $_POST['firstName'] . " " . $_POST['lastName'];
-    $_SESSION['email'] = $_POST['email'];
-    $_SESSION['u_id'] = $row['u_id'];
-    $_SESSION['username'] = $_POST['first_name'] . " " . $_POST['last_name'];
+
+    $registed_sql = "Select * from users where email='$email'";
+    $result = mysqli_query($conn, $registed_sql);
+
+    if (mysqli_num_rows($result) > 0) {
+      while ($row = mysqli_fetch_assoc($result)) {
+        $_SESSION['email'] = $_POST['email'];
+        $_SESSION['u_id'] = $row['u_id'];
+        $_SESSION['username'] = $_POST['first_name'] . " " . $_POST['last_name'];
+      }
+    }
+
     header("Location: index.php");
     exit();
   } else {

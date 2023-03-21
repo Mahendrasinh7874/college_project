@@ -2,11 +2,22 @@
 
 include './common.php';
 include './admin/config.php';
-// ession_start();
 if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
 
     header("location:http://localhost/college_project/");
 }
+$u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
+
+
+$sql = "SELECT * FROM wishlist 
+LEFT JOIN product ON wishlist.product_id = product.product_id 
+LEFT JOIN category ON product.product_category_id = category.cate_id 
+LEFT JOIN brands ON product.product_brand_id = brands.brand_id 
+WHERE wishlist.u_id = $u_id;
+-- WHERE wishlist.u_id = $u_id";
+
+$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
 ?>
 
 <style>
@@ -36,6 +47,10 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
     .product-quantity {
         float: left;
         width: 10%;
+    }
+
+    .product {
+        display: flex !important;
     }
 
     a {
@@ -78,6 +93,11 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
     }
 
     /* Apply clearfix in a few places */
+    .shopping-cart {
+        display: flex !important;
+        flex-direction: column;
+    }
+
     .shopping-cart,
     .column-labels,
     .product,
@@ -90,7 +110,7 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
     .product .product-price:before,
     .product .product-line-price:before,
     .totals-value:before {
-        content: '$';
+        content: '₹';
     }
 
     /* Body/Header stuff */
@@ -144,6 +164,8 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
     .product .product-details .product-title {
         margin-right: 20px;
         font-family: var(--font-bold);
+        font-weight: 600;
+        font-size: 23px;
     }
 
     .product .product-details .product-description {
@@ -159,14 +181,16 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
         border: 0;
         padding: 4px 8px;
         background-color: #c66;
-        color: #fff;
         font-family: var(--font-bold);
+        color: white !important;
         font-size: 12px;
+        cursor: pointer;
         border-radius: 3px;
     }
 
     .product .remove-product:hover {
         background-color: #a44;
+        color: white !important;
     }
 
     /* Totals section */
@@ -199,6 +223,8 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
         color: #fff;
         font-size: 20px;
         border-radius: 3px;
+        width: 200px;
+        margin-left: auto;
     }
 
     .checkout:hover {
@@ -316,30 +342,47 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
             <!-- <label class="product-line-price">Price</label> -->
         </div>
 
-        <div class="product">
-            <div class="product-image">
-                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
-            </div>
-            <div class="product-details">
-                <div class="product-title">Dingo Dog Bones</div>
-                <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
-            </div>
-            <div class="product-price" style="padding:0 100px;">12.99</div>
-            <!-- <div class="product-quantity">
-                <input type="number" value="2" min="1">
-            </div> -->
-            <div class="product-removal">
-                <button class="remove-product">
-                    Remove
-                </button>
-            </div>
-            <!-- <div class="product-line-price">25.98</div> -->
-        </div>
+        <?php
+        if (mysqli_num_rows($result) > 0) {
+            $totalPrice = 0;
+            foreach ($result as $row) {
+                $totalPrice += $row['price'];
+        ?>
+                '<div class="product">
+                    <div class="product-image">
+                        <img src="./admin/uploads/<?= $row['image'] ?>">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-title"><?= $row['product_title'] ?></div>
+                        <p class="product-description"><?= $row['product_description'] ?></p>
+                    </div>
+                    <div class="product-price" style="padding:0 100px;"><?= $row['price'] ?></div>
+                    <!-- <div class="product-quantity">
+                    <input type="number" value="2" min="1">
+                </div> -->
+                    <div class="product-removal">
+                        <a href="delete_wishlist.php?wishlist_id=<?= $row['wishlist_id']; ?>" class="remove-product">
+                            Remove
+                        </a>
+                    </div>
+                    <!-- <div class="product-line-price">25.98</div> -->
+                </div>';
+
+        <?php
+            }
+
+            echo '<p class="text-right">Total Amount : ₹ ' .  $totalPrice . ' </p>';
+            echo '<button class="checkout">Proceed to Cart</button>';
+        } else {
+            echo '<h2>No Data Found</h2>';
+        }
+        ?>
 
 
 
 
-        <button class="checkout">Proceed to Cart</button>
+
+
 
 
     </div>
@@ -349,5 +392,3 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
 
 
 <script src="./js/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>

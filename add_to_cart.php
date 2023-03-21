@@ -24,7 +24,7 @@ if (!empty($_SESSION['u_id'])) {
         $check_result2 = mysqli_query($conn, $check1) or die(mysqli_error($conn));
         foreach ($check_result2 as $row1) {
             //print_r($row1);
-            $qty = $row1['TotalItemsOrdered'] - 1;
+            $qty = $row1['TotalItemsOrdered'];
         }
         echo $qty;
         //header("location:http://localhost/college_project/");
@@ -39,6 +39,6 @@ if (!empty($_SESSION['u_id'])) {
     }
 } else {
     $_SESSION['not_login'] = 'not_login';
-    echo false;
-    //header("location:http://localhost/college_project/");
+    // echo 'false';
+    header("location:http://localhost/college_project/");
 }

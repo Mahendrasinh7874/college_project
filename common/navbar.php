@@ -6,8 +6,9 @@ $hostname = "http://localhost/college-project/";
 $conn =  mysqli_connect("localhost", "root", "", "college-project")
   or die(mysqli_connect_error());
 
+
 $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
-// echo ($u_id);
+echo ($u_id);
 
 
 $sql = "SELECT * FROM cart where u_id = $u_id";
@@ -24,7 +25,8 @@ $check1 = "SELECT SUM(qty) AS TotalItemsOrdered FROM cart where u_id='$u_id'";
 $check_result2 = mysqli_query($conn, $check1) or die(mysqli_error($conn));
 foreach ($check_result2 as $row1) {
   //print_r($row1);
-  $cart_qty = $row1['TotalItemsOrdered'] - 1;
+  $cart_qty = $row1['TotalItemsOrdered'];
+  $main_qty = $cart_qty ? $cart_qty : '0';
 }
 // echo (!empty($_SESSION['u_id']));
 
@@ -279,7 +281,7 @@ foreach ($check_result2 as $row1) {
           }
 
           if (!empty($_SESSION['u_id'])) {
-            echo '  <a href="cart_view.php" style="text-transform:uppercase; cursor:pointer;" class="p1 fa-stack  has-badge" id="cart-count" data-count="' . $cart_qty . '">
+            echo '  <a href="cart_view.php" style="text-transform:uppercase; cursor:pointer;" class="p1 fa-stack  has-badge" id="cart-count" data-count="' . $main_qty . '">
 <i style="font-size: 20px;color:black;" class="p3 fa fa-shopping-cart fa-stack-1x xfa-inverse" data-count="4b"></i>
 </a>';
           } else {

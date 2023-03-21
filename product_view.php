@@ -37,26 +37,30 @@ if ($result) {
         // add to cart list
         $sql1 = "SELECT * FROM cart where u_id = $u_id and product_id = $product_id";
         $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+        $pqty = 0;
         foreach ($result1 as $row1) {
             $pqty = $row1['qty'];
         }
+        $main = $pqty == 0 ? 'disabled' : '';
         $isExistCart = mysqli_num_rows($result1);
 
-        $addToCart = $isExistCart > 0 ? '
-            <div class="input-group mb-3 w-75 m-auto">
-            <div class="input-group-prepend">
-              <button class="input-group-text" onclick="addCart(' . $product_id . ',' . true . ')">-</button>
-            </div>
-            <input value=' . $pqty . ' type="number"  class=" text-center form-control" aria-label="Amount (to the nearest dollar)">
-            <div class="input-g roup-append">
-              <button class="input-group-text" onclick="addCart(' . $product_id . ',' . false . ')">+</button>
-            </div>
-          </div>'
+        $test = $pqty == 0 ? '' : '';
 
-            : '<a href="add_to_cart.php?product_id=' . $row['product_id'] . '" class="chevron-icon btn custom-btn btn-block">
-<!-- <i class="fas fa-shopping-cart"></i>  -->
-Add to Cart
-</a>';
+        $addToCart = $isExistCart > 0 ? '
+                <div class="input-group mb-3 w-75 m-auto">
+                <div class="input-group-prepend">
+                <button class="input-group-text minus-btn" onclick="addCart(' . $product_id . ',' . true . ')" ' . $main  . '>-</button>
+                </div>
+                <input   value=' . $pqty . ' type="number" id=""  class=" text-center form-control get-value" aria-label="Amount (to the nearest dollar)"  min="0">
+                <div class="input-g roup-append">
+                <button class="input-group-text minus-btn" onclick="addCart(' . $product_id . ',' . false . ')">+</button>
+                </div>
+            </div>'
+
+            :  '<button onclick="addCart(' . $product_id . ',' . false . ')" class="chevron-icon btn custom-btn btn-block">
+            <!-- <i class="fas fa-shopping-cart"></i>  -->
+            Add to Cart
+            </button>';
         $output .=  '
         <a href="product_detail.php?product_id=' . $row['product_id'] . '"">
         <div class="col-md-4 mb-4">
@@ -74,7 +78,7 @@ Add to Cart
             </div>
         </div>
     </div>
-</a>
+</button>
 ';
     }
 } else {
@@ -82,3 +86,6 @@ Add to Cart
 }
 //mysqli_close($conn);
 echo $output;
+
+
+?>

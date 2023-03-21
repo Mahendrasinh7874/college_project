@@ -338,7 +338,7 @@ if (isset($_SESSION['not_login'])) {
 unset($_SESSION['not_login']);
 
 ?>
-<?php
+<!-- <?php
 
 if (isset($_SESSION['not-loggedin'])) {
     echo '<script>
@@ -361,7 +361,7 @@ if (isset($_SESSION['not-loggedin'])) {
 }
 unset($_SESSION['not-loggedin']);
 
-?>
+?> -->
 
 <?php
 
@@ -435,27 +435,28 @@ if (isset($_SESSION['exits_cart'])) {
 unset($_SESSION['exits_cart']);
 
 
-if (isset($_SESSION['success_cart'])) {
-    echo '<script>
-        Toastify({
-            text: "Product has been added to your Cart!",
-            duration: 3000,
-          destination: "https://github.com/apvarun/toastify-js",
-          newWindow: true,
-          close: true,
-          gravity: "top", // `top` or `bottom`
-          position: "right", // `left`, `center` or `right`
-          stopOnFocus: true, // Prevents dismissing of toast on hover
-          style: {
-            background: "linear-gradient(to right, #00b09b, #96c93d)",
+// if (isset($_SESSION['success_cart'])) {
+//     echo '<script>
+//         Toastify({
+//             text: "Product has been added to your Cart!",
+//             duration: 3000,
+//           destination: "https://github.com/apvarun/toastify-js",
+//           newWindow: true,
+//           close: true,
+//           gravity: "top", // `top` or `bottom`
+//           position: "right", // `left`, `center` or `right`
+//           stopOnFocus: true, // Prevents dismissing of toast on hover
+//           style: {
+//             background: "linear-gradient(to right, #00b09b, #96c93d)",
 
-        },
-        onClick: function() {} // Callback after click
-        }).showToast();
-      </script>';
-}
-unset($_SESSION['success_cart']);
+//         },
+//         onClick: function() {} // Callback after click
+//         }).showToast();
+//       </script>';
+// }
+// unset($_SESSION['success_cart']);
 
+// 
 ?>
 
 
