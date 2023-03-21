@@ -27,7 +27,7 @@ if (!empty($_SESSION['u_id'])) {
             $qty = $row1['TotalItemsOrdered'];
         }
         echo $qty;
-        //header("location:http://localhost/college_project/");
+        // header("location:http://localhost/college_project/");
     } else {
         $sql = "INSERT INTO cart (u_id,product_id,qty) values ('$u_id','$product_id',1)";
 

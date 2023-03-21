@@ -1,7 +1,25 @@
 <?php
 
 include './common.php';
+include './admin/config.php';
+if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
+
+    header("location:http://localhost/college_project/");
+}
+$u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
+
+
+$sql = "SELECT * FROM cart 
+LEFT JOIN product ON cart.product_id = product.product_id 
+LEFT JOIN category ON product.product_category_id = category.cate_id 
+LEFT JOIN brands ON product.product_brand_id = brands.brand_id 
+WHERE cart.u_id = $u_id;
+-- WHERE wishlist.u_id = $u_id";
+
+$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
 ?>
+
 <style>
     :root {
         --color-border: #eee;
@@ -11,6 +29,11 @@ include './common.php';
     }
 
     /* Global "table" column settings */
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        display: none;
+    }
+
     .product-image {
         float: left;
         width: 20%;
@@ -34,6 +57,12 @@ include './common.php';
     .product-removal {
         float: left;
         width: 9%;
+    }
+
+    .shopping-cart {
+        display: flex !important;
+        flex-direction: column !important;
+
     }
 
     .product-line-price {
@@ -74,7 +103,7 @@ include './common.php';
     .product .product-price:before,
     .product .product-line-price:before,
     .totals-value:before {
-        content: '$';
+        content: '₹';
     }
 
     /* Body/Header stuff */
@@ -304,43 +333,160 @@ include './common.php';
             <label class="product-image">Image</label>
             <label class="product-details">Product</label>
             <label class="product-price">Price</label>
-            <!-- <label class="product-quantity">Quantity</label> -->
+            <label class="product-quantity">Quantity</label>
             <label class="product-removal">Remove</label>
             <label class="product-line-price">Total</label>
         </div>
 
-        <div class="product">
-            <div class="product-image">
-                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
-            </div>
-            <div class="product-details">
-                <div class="product-title">Dingo Dog Bones</div>
-                <p class="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
-            </div>
-            <div class="product-price">12.99</div>
-            <!-- <div class="product-quantity">
+        <?php
+        if (mysqli_num_rows($result) > 0) {
+            $totalPrice = 0;
+            foreach ($result as $row) {
+                $product_id = $row['product_id'];
+                // $totalPrice += $row['price'];
+
+
+                $sql1 = "SELECT * FROM cart where u_id = $u_id and product_id = $product_id";
+                $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+                print_r($sql1);
+                $pqty = 0;
+                $sub_total = 0;
+                foreach ($result1 as $row1) {
+
+                    $pqty = $row1['qty'];
+                }
+                $main = $pqty == 0 ? 'disabled' : '';
+                // $sub_total = $row['price'] *
+        ?>
+
+                <div class="product d-flex">
+                    <div class="product-image">
+                        <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
+                    </div>
+                    <div class="product-details">
+                        <div class="product-title"><?= $row['product_title'] ?></div>
+                        <p class="product-description"><?= $row['product_description'] ?></p>
+                    </div>
+                    <div class="product-price"><?= $row['price'] ?></div>
+                    <!-- <div class="product-quantity">
                 <input type="number" value="2" min="1">
             </div> -->
-            <div class="product-removal">
-                <button class="remove-product">
-                    Remove
-                </button>
-            </div>
-            <div class="product-line-price">25.98</div>
-        </div>
+                    <div class="input-group mb-3 " style="width: 117px;margin-right: 23px;">
+                        <div class="input-group-prepend">
+                            <!-- <button class="input-group-text minus-btn" onclick="addCart(' . $product_id . ',' . true . ')" ' . $main  . '>-</button> -->
+                            <button class="input-group-text minus-btn" onclick="addCart(<?php echo $product_id ?>, true)" <?= $main ?> style="height: 38px;border-radius: 4px;">-</button>
+                        </div>
+                        <input value=<?= $pqty ?> type="number" id="" class=" text-center form-control get-value" aria-label="Amount (to the nearest dollar)" min="0">
+                        <div class="input-g roup-append">
+                            <button class="input-group-text minus-btn" onclick="addCart(<?php echo $product_id ?>, false)">+</button>
+
+                        </div>
+                    </div>
+                    <div class="product-removal">
+                        <a href="delete_cart.php?cart_id=<?= $row['cart_id']; ?>" class="remove-product">
+
+                            Remove
+                        </a>
+                    </div>
+                    <div class="product-line-price" style="height:38px !important;">25.98</div>
+                </div>
+
+        <?php
+            }
+
+            echo '<p class="text-right">Total Amount : ₹ ' .  $totalPrice . ' </p>';
+            echo '<div class="d-flex justify-content-between">';
+            echo  '<button class="shopping">Continue Shopping</button>';
+            echo  '<button class="checkout">Checkout</button>';
+            echo '</div>';
+        } else {
+            echo '<h2>No Data Found</h2>';
+        }
+        ?>
 
 
 
-
-        <button class="shopping">Continue Shopping</button>
-        <button class="checkout">Checkout</button>
 
 
     </div>
 </main>
 <?php include './common/footer.php'; ?>
+<script src='./js/jquery.js'></script>
+<script type="text/javascript">
+    $(Document).ready(function() {
+        function loadTable() {
+            getProducts();
+        }
+        loadTable();
 
 
-<script src="./js/jquery.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        $("#search").on("keyup", function() {
+            var search_term = $(this).val();
+
+            $.ajax({
+                url: "product_search.php",
+                type: "POST",
+                data: {
+                    search: search_term
+                },
+                success: function(data) {
+                    $("#table-data").html(data);
+                }
+            });
+
+        });
+    });
+    const getProducts = () => {
+
+        $.ajax({
+            url: "product_view.php",
+            type: "GET",
+            success: function(data) {
+                $("#table-data").html(data);
+            }
+        });
+    }
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function addCart(value, isminus) {
+        $.ajax({
+            url: "add_to_cart.php",
+            type: "GET",
+            data: {
+                product_id: value,
+                isminus: isminus
+            },
+            success: function(data) {
+                getProducts();
+                changeCountValue(data);
+            }
+        });
+    }
+</script>
+
+<script>
+    function loadCategoryData(category) {
+        // var search_term = $(this).val();
+        // console.log(search_  term);
+        // alert('called')
+        $.ajax({
+            url: "product_view.php",
+            type: "POST",
+            data: {
+                category: category
+            },
+            success: function(data) {
+                if (data.trim() !== '') { // check if data is not empty
+                    $("#table-data").html(data);
+                } else {
+                    $("#table-data").html('<h2 style="text-align:center;">No data found.</h2>');
+                }
+            },
+            error: function() {
+                $("#table-data").html('<p>Error loading data.</p>');
+            }
+        });
+    }
+</script>

@@ -8,7 +8,6 @@ $conn =  mysqli_connect("localhost", "root", "", "college-project")
 
 
 $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
-echo ($u_id);
 
 
 $sql = "SELECT * FROM cart where u_id = $u_id";

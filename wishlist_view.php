@@ -330,53 +330,58 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 </div>
 <main class="container  py-3">
     <!-- <h4>Shopping Cart</h4> -->
+    <form action="proceed_to_cart.php" method="POST">
 
-    <div class="shopping-cart">
 
-        <div class="column-labels">
-            <label class="product-image">Image</label>
-            <label class="product-details">Product</label>
-            <label class="product-price" style="padding:0 100px;">Price</label>
-            <!-- <label class="product-quantity">Quantity</label> -->
-            <label class="product-removal">Remove</label>
-            <!-- <label class="product-line-price">Price</label> -->
-        </div>
+        <div class="shopping-cart">
 
-        <?php
-        if (mysqli_num_rows($result) > 0) {
-            $totalPrice = 0;
-            foreach ($result as $row) {
-                $totalPrice += $row['price'];
-        ?>
-                '<div class="product">
-                    <div class="product-image">
-                        <img src="./admin/uploads/<?= $row['image'] ?>">
-                    </div>
-                    <div class="product-details">
-                        <div class="product-title"><?= $row['product_title'] ?></div>
-                        <p class="product-description"><?= $row['product_description'] ?></p>
-                    </div>
-                    <div class="product-price" style="padding:0 100px;"><?= $row['price'] ?></div>
-                    <!-- <div class="product-quantity">
-                    <input type="number" value="2" min="1">
-                </div> -->
-                    <div class="product-removal">
-                        <a href="delete_wishlist.php?wishlist_id=<?= $row['wishlist_id']; ?>" class="remove-product">
-                            Remove
-                        </a>
-                    </div>
-                    <!-- <div class="product-line-price">25.98</div> -->
-                </div>';
+            <div class="column-labels">
+                <label class="product-image">Image</label>
+                <label class="product-details">Product</label>
+                <label class="product-price" style="padding:0 100px;">Price</label>
+                <!-- <label class="product-quantity">Quantity</label> -->
+                <label class="product-removal">Remove</label>
+                <!-- <label class="product-line-price">Price</label> -->
+            </div>
 
-        <?php
+            <?php
+            if (mysqli_num_rows($result) > 0) {
+                $totalPrice = 0;
+                foreach ($result as $row) {
+                    $totalPrice += $row['price'];
+            ?>
+
+                    '<div class="product">
+                        <div class="product-image">
+                            <img src="./admin/uploads/<?= $row['image'] ?>">
+                        </div>
+                        <div class="product-details">
+                            <div class="product-title"><?= $row['product_title'] ?></div>
+                            <p class="product-description"><?= $row['product_description'] ?></p>
+                        </div>
+                        <div class="product-price" style="padding:0 100px;"><?= $row['price'] ?></div>
+
+                        <!-- <div class="product-quantity">
+                            <input type="number" value="2" min="1">
+                        </div> -->
+                        <div class="product-removal">
+                            <a href="delete_wishlist.php?wishlist_id=<?= $row['wishlist_id']; ?>" class="remove-product">
+                                Remove
+                            </a>
+                        </div>
+                        <!-- <div class="product-line-price">25.98</div> -->
+                    </div>';
+                    <input type='hidden' name='product[<?php echo $product_id ?>]' value='<?php echo $product_id ?>'>
+
+            <?php
+                }
+
+                echo '<p class="text-right">Total Amount : ₹ ' .  $totalPrice . ' </p>';
+                echo '<input class="checkout" type="submit" name="submit" value="Proceed to cart" />';
+            } else {
+                echo '<h2>No Product Added in Wishlist</h2>';
             }
-
-            echo '<p class="text-right">Total Amount : ₹ ' .  $totalPrice . ' </p>';
-            echo '<button class="checkout">Proceed to Cart</button>';
-        } else {
-            echo '<h2>No Data Found</h2>';
-        }
-        ?>
+            ?>
 
 
 
@@ -385,7 +390,8 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
 
 
-    </div>
+        </div>
+    </form>
 </main>
 <?php include './common/footer.php'; ?>
 

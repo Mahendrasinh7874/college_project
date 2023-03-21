@@ -340,8 +340,8 @@ unset($_SESSION['not_login']);
 ?>
 <!-- <?php
 
-if (isset($_SESSION['not-loggedin'])) {
-    echo '<script>
+        if (isset($_SESSION['not-loggedin'])) {
+            echo '<script>
         Toastify({
           text: "Please Register or Login to  This Product!!",
           duration: 3000,
@@ -358,10 +358,10 @@ if (isset($_SESSION['not-loggedin'])) {
         onClick: function() {} // Callback after click
         }).showToast();
       </script>';
-}
-unset($_SESSION['not-loggedin']);
+        }
+        unset($_SESSION['not-loggedin']);
 
-?> -->
+        ?> -->
 
 <?php
 
