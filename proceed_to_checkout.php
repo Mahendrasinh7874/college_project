@@ -561,7 +561,7 @@ include './common.php';
 ?>
 
 <div class="row m-0 my-5">
-    <form method="get container">
+    <form method="post" action="order_pay.php" class="">
         <div class="col-7 m-auto">
             <h3 class="topborder"><span>Contact information</span></h3>
 
@@ -573,7 +573,7 @@ include './common.php';
 
                 <div class="col-6">
                     <label for="lname">Last Name</label>
-                    <input type="text" placeholder="Last Name"" name=" lname" id="lname" required />
+                    <input type="text" placeholder="Last Name" name="lname" id="lname" required />
                 </div>
                 <div class="col-12 mb-3">
                     <label for="country">Country</label>
@@ -594,7 +594,7 @@ include './common.php';
 
                 <div class="col-6">
                     <label for="postcode">Postcode</label>
-                    <input type="text" name="postcode" id="postcode" placeholder="Postcode / Zip" required />
+                    <input type="text" name="pincode" id="postcode" placeholder="Postcode / Zip" required />
                 </div>
                 <div class="col-6 padright">
                     <label for="email">Email Address</label>
