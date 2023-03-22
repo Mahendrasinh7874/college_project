@@ -10,7 +10,7 @@ $conn =  mysqli_connect("localhost", "root", "", "college-project")
 $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
 
 
-$sql = "SELECT * FROM cart where u_id = $u_id";
+$sql = "SELECT * FROM cart where u_id = $u_id and qty != 0";
 $sql1 = "SELECT * FROM wishlist where u_id = $u_id";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));

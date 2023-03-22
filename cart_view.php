@@ -411,3 +411,28 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
         });
     }
 </script>
+
+
+<?php
+
+if (isset($_SESSION["alreadywish"])) {
+    echo '<script>
+        Toastify({
+            text: "This product is already in your Cart!",
+            duration: 3000,
+            destination: "https://github.com/apvarun/toastify-js",
+            newWindow: true,
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "linear-gradient(to right, #f8d700, #f5a623)",
+
+            },
+            onClick: function() {} // Callback after click
+        }).showToast();
+</script>';
+}
+unset($_SESSION['alreadywish']);
+?>

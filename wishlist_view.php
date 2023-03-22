@@ -17,7 +17,6 @@ WHERE wishlist.u_id = $u_id;
 -- WHERE wishlist.u_id = $u_id";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
 ?>
 
 <style>
@@ -330,20 +329,20 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 </div>
 <main class="container  py-3">
     <!-- <h4>Shopping Cart</h4> -->
-    <form action="proceed_to_cart.php" method="POST">
 
 
-        <div class="shopping-cart">
+    <div class="shopping-cart">
 
-            <div class="column-labels">
-                <label class="product-image">Image</label>
-                <label class="product-details">Product</label>
-                <label class="product-price" style="padding:0 100px;">Price</label>
-                <!-- <label class="product-quantity">Quantity</label> -->
-                <label class="product-removal">Remove</label>
-                <!-- <label class="product-line-price">Price</label> -->
-            </div>
+        <div class="column-labels">
+            <label class="product-image">Image</label>
+            <label class="product-details">Product</label>
+            <label class="product-price" style="padding:0 100px;">Price</label>
+            <!-- <label class="product-quantity">Quantity</label> -->
+            <label class="product-removal">Remove</label>
+            <!-- <label class="product-line-price">Price</label> -->
+        </div>
 
+        <form action="proceed_to_cart.php" method="POST">
             <?php
             if (mysqli_num_rows($result) > 0) {
                 $totalPrice = 0;
@@ -370,9 +369,9 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                             </a>
                         </div>
                         <!-- <div class="product-line-price">25.98</div> -->
-                    </div>';
-                    <input type='hidden' name='product[<?php echo $product_id ?>]' value='<?php echo $product_id ?>'>
+                    </div>
 
+                    <input type='hidden' name='product[<?= $row['product_id'] ?>]' value=<?= $row['product_id'] ?>>
             <?php
                 }
 
@@ -382,6 +381,7 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                 echo '<h2>No Product Added in Wishlist</h2>';
             }
             ?>
+        </form>
 
 
 
@@ -390,8 +390,7 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
 
 
-        </div>
-    </form>
+    </div>
 </main>
 <?php include './common/footer.php'; ?>
 

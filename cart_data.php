@@ -10,6 +10,13 @@
         cursor: pointer;
         border-radius: 3px;
     }
+    .checkout{
+        cursor: pointer;
+        text-decoration: none !important;
+    }
+    .checkout:hover{
+        color: white;
+    }
 
     .remove-product:hover {
         text-decoration: none !important;
@@ -41,7 +48,7 @@ $sql = "SELECT * FROM cart
 LEFT JOIN product ON cart.product_id = product.product_id 
 LEFT JOIN category ON product.product_category_id = category.cate_id 
 LEFT JOIN brands ON product.product_brand_id = brands.brand_id 
-WHERE cart.u_id = $u_id";
+WHERE cart.u_id = $u_id and cart.qty != 0";
 
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
@@ -50,11 +57,10 @@ $output = '';
 if (mysqli_num_rows($result) > 0) {
     $totalPrice = 0;
     foreach ($result as $row) {
-
-
         $product_id = $row['product_id'];
 
-        $sql1 = "SELECT * FROM cart where u_id = $u_id and product_id = $product_id";
+
+        $sql1 = "SELECT * FROM cart where u_id = $u_id and product_id = $product_id and qty != 0";
         $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
         $pqty = 0;
 
@@ -64,7 +70,7 @@ if (mysqli_num_rows($result) > 0) {
         $main = $pqty == 0 ? 'disabled' : '';
         $total = $pqty * $row['price'];
         $totalPrice += $row['price']  * $pqty;
-
+        //print_r($result1);
         $output .= "
 
                 <div class='product d-flex'>
@@ -101,12 +107,6 @@ if (mysqli_num_rows($result) > 0) {
 
         
              </div>
-      
-
-
-
-
-
 </div>";
     }
     mysqli_close($conn);
@@ -114,7 +114,9 @@ if (mysqli_num_rows($result) > 0) {
     echo "   <p class='text-right'>Total Amount : ₹ $totalPrice  </p>
         <div class='d-flex justify-content-between'>
         <button class='shopping'>Continue Shopping</button>
-        <button class='checkout'>Checkout</button>";
+        <a href='proceed_to_checkout.php' class='checkout'>Checkout</a>";
 } else {
     echo "<div class='text-center'><img src='./css/images/no-product-found.jpg' height='400'  width='400'> </div>";
 }
+
+?>

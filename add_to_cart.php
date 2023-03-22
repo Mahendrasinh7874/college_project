@@ -6,7 +6,7 @@ if (!empty($_SESSION['u_id'])) {
     $product_id = $_GET['product_id'];
     $u_id = $_SESSION['u_id'];
 
-    $check = "select * from cart where u_id='$u_id' and  product_id='$product_id'";
+    $check = "select * from cart where u_id='$u_id' and  product_id='$product_id' and qty != 0";
 
     $check_result = mysqli_query($conn, $check) or die(mysqli_error($conn));
 
@@ -17,17 +17,21 @@ if (!empty($_SESSION['u_id'])) {
     if (mysqli_num_rows($check_result) > 0) {
         // $_SESSION['exits_cart'] = 'exits';
 
-        $sql1 =  "UPDATE cart SET qty = '$qty' WHERE u_id='$u_id' and  product_id='$product_id'";
-        $check_result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+        $sql2 = "SELECT * from cart WHERE u_id=$u_id and product_id=$product_id";
+        $check_result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
 
-        $check1 = "SELECT SUM(qty) AS TotalItemsOrdered FROM cart where u_id='$u_id'";
-        $check_result2 = mysqli_query($conn, $check1) or die(mysqli_error($conn));
-        foreach ($check_result2 as $row1) {
-            //print_r($row1);
-            $qty = $row1['TotalItemsOrdered'];
+        if (mysqli_num_rows($check_result2) > 0) {
+            $sql1 =  "UPDATE cart SET qty = '$qty' WHERE u_id='$u_id' and  product_id='$product_id'";
+            $check_result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+
+            $check1 = "SELECT SUM(qty) AS TotalItemsOrdered FROM cart where u_id='$u_id'";
+            $check_result2 = mysqli_query($conn, $check1) or die(mysqli_error($conn));
+            foreach ($check_result2 as $row1) {
+                //print_r($row1);
+                $qty = $row1['TotalItemsOrdered'];
+            }
+            echo $qty;
         }
-        echo $qty;
-        // header("location:http://localhost/college_project/");
     } else {
         $sql = "INSERT INTO cart (u_id,product_id,qty) values ('$u_id','$product_id',1)";
 

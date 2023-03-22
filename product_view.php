@@ -35,7 +35,7 @@ if ($result) {
 
         $isWishlist = mysqli_num_rows($check_result) > 0 ? 'fa-solid fa-heart' : 'fa-regular fa-heart';
         // add to cart list
-        $sql1 = "SELECT * FROM cart where u_id = $u_id and product_id = $product_id";
+        $sql1 = "SELECT * FROM cart where u_id = $u_id and product_id = $product_id and qty != 0";
         $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
         $pqty = 0;
         foreach ($result1 as $row1) {
