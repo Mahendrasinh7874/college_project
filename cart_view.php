@@ -6,18 +6,6 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
 
     header("location:http://localhost/college_project/");
 }
-$u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
-
-
-$sql = "SELECT * FROM cart 
-LEFT JOIN product ON cart.product_id = product.product_id 
-LEFT JOIN category ON product.product_category_id = category.cate_id 
-LEFT JOIN brands ON product.product_brand_id = brands.brand_id 
-WHERE cart.u_id = $u_id;
--- WHERE wishlist.u_id = $u_id";
-
-$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
 ?>
 
 <style>
@@ -325,90 +313,27 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
     <h3>Shopping Cart</h3>
 </div>
 <main class="container  py-3">
-    <!-- <h4>Shopping Cart</h4> -->
 
-    <div class="shopping-cart">
 
-        <div class="column-labels">
-            <label class="product-image">Image</label>
-            <label class="product-details">Product</label>
-            <label class="product-price">Price</label>
-            <label class="product-quantity">Quantity</label>
-            <label class="product-removal">Remove</label>
-            <label class="product-line-price">Total</label>
+
+    <div class='shopping-cart'>
+
+        <div class='column-labels'>
+            <label class='product-image'>Image</label>
+            <label class='product-details'>Product</label>
+            <label class='product-price'>Price</label>
+            <label class='product-quantity'>Quantity</label>
+            <label class='product-removal pl-5'>Remove</label>
+            <label class='product-line-price'>Total</label>
         </div>
-
-        <?php
-        if (mysqli_num_rows($result) > 0) {
-            $totalPrice = 0;
-            foreach ($result as $row) {
-                $product_id = $row['product_id'];
-                // $totalPrice += $row['price'];
-
-
-                $sql1 = "SELECT * FROM cart where u_id = $u_id and product_id = $product_id";
-                $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
-                print_r($sql1);
-                $pqty = 0;
-                $sub_total = 0;
-                foreach ($result1 as $row1) {
-
-                    $pqty = $row1['qty'];
-                }
-                $main = $pqty == 0 ? 'disabled' : '';
-                // $sub_total = $row['price'] *
-        ?>
-
-                <div class="product d-flex">
-                    <div class="product-image">
-                        <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg">
-                    </div>
-                    <div class="product-details">
-                        <div class="product-title"><?= $row['product_title'] ?></div>
-                        <p class="product-description"><?= $row['product_description'] ?></p>
-                    </div>
-                    <div class="product-price"><?= $row['price'] ?></div>
-                    <!-- <div class="product-quantity">
-                <input type="number" value="2" min="1">
-            </div> -->
-                    <div class="input-group mb-3 " style="width: 117px;margin-right: 23px;">
-                        <div class="input-group-prepend">
-                            <!-- <button class="input-group-text minus-btn" onclick="addCart(' . $product_id . ',' . true . ')" ' . $main  . '>-</button> -->
-                            <button class="input-group-text minus-btn" onclick="addCart(<?php echo $product_id ?>, true)" <?= $main ?> style="height: 38px;border-radius: 4px;">-</button>
-                        </div>
-                        <input value=<?= $pqty ?> type="number" id="" class=" text-center form-control get-value" aria-label="Amount (to the nearest dollar)" min="0">
-                        <div class="input-g roup-append">
-                            <button class="input-group-text minus-btn" onclick="addCart(<?php echo $product_id ?>, false)">+</button>
-
-                        </div>
-                    </div>
-                    <div class="product-removal">
-                        <a href="delete_cart.php?cart_id=<?= $row['cart_id']; ?>" class="remove-product">
-
-                            Remove
-                        </a>
-                    </div>
-                    <div class="product-line-price" style="height:38px !important;">25.98</div>
-                </div>
-
-        <?php
-            }
-
-            echo '<p class="text-right">Total Amount : ₹ ' .  $totalPrice . ' </p>';
-            echo '<div class="d-flex justify-content-between">';
-            echo  '<button class="shopping">Continue Shopping</button>';
-            echo  '<button class="checkout">Checkout</button>';
-            echo '</div>';
-        } else {
-            echo '<h2>No Data Found</h2>';
-        }
-        ?>
-
-
-
+        <div id="cart-data">
+        </div>
 
 
     </div>
+
+
+
 </main>
 <?php include './common/footer.php'; ?>
 <script src='./js/jquery.js'></script>
@@ -461,31 +386,27 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
             success: function(data) {
                 getProducts();
                 changeCountValue(data);
+                getCartData();
             }
         });
     }
 </script>
 
 <script>
-    function loadCategoryData(category) {
-        // var search_term = $(this).val();
-        // console.log(search_  term);
-        // alert('called')
+    $(Document).ready(function() {
+        function loadTable() {
+            getCartData();
+        }
+        loadTable();
+
+    });
+    const getCartData = () => {
+
         $.ajax({
-            url: "product_view.php",
-            type: "POST",
-            data: {
-                category: category
-            },
+            url: "cart_data.php",
+            type: "GET",
             success: function(data) {
-                if (data.trim() !== '') { // check if data is not empty
-                    $("#table-data").html(data);
-                } else {
-                    $("#table-data").html('<h2 style="text-align:center;">No data found.</h2>');
-                }
-            },
-            error: function() {
-                $("#table-data").html('<p>Error loading data.</p>');
+                $("#cart-data").html(data);
             }
         });
     }

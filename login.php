@@ -33,7 +33,7 @@ include './common.php';
                 <p><a href="#">Forgot your password? </a></p>
             </div>
             <div class="text-center mt-3 ">
-
+p
                 <div class="card-footer">
 
                     <p>Don't have an account? <a href="register.php">Register here</a></p>

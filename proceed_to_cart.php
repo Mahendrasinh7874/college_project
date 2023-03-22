@@ -17,4 +17,4 @@ if (isset($_POST['submit'])) {
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 }
 
-// header('location:http://localhost/college_project/cart_view.php');
+header('location:http://localhost/college_project/cart_view.php');

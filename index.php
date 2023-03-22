@@ -99,10 +99,7 @@ include 'admin/config.php';
                                     while ($row = mysqli_fetch_assoc($result)) { ?>
 
                                         <button onclick="loadCategoryData('<?php echo $row['category_name']; ?>')" class=" list-group-item list-group-item-action for-active"><?= $row['category_name'] ?></button>
-                                        <!-- <a href="#" class="list-group-item list-group-item-action for-active active">Laptops &amp; Notebooks (5)</a>
-                                        <a href="#" class="list-group-item list-group-item-action for-active">&nbsp;&nbsp;&nbsp;- Macs (0)</a>
-                                        <a href="#" class="list-group-item list-group-item-action for-active">&nbsp;&nbsp;&nbsp;- Windows (0)</a>
-                                        <a href="#" class="list-group-item list-group-item-action for-active">Tablets (2)</a> -->
+
                                 <?php }
                                 } ?>
                             </div>
