@@ -252,7 +252,7 @@ foreach ($check_result2 as $row1) {
             <a style="text-transform:uppercase;" class="nav-link mx-2" href="../../college_project/">Home</a>
           </li>
           <li class="nav-item">
-            <a style="text-transform:uppercase;" class="nav-link mx-2" href="products.php">Products</a>
+            <a style="text-transform:uppercase;" class="nav-link mx-2" href="../../college_project/">About Us</a>
           </li>
           <!-- <li class="nav-item">
                 <a style="text-transform:uppercase;" class="nav-link" href="#"> Contact Us</a>

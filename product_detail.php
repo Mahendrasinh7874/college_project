@@ -6,9 +6,16 @@ $product_id = $_GET['product_id'];
 $sql = "select * from product where product_id='{$product_id}'";
 
 
+
+
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $data = mysqli_fetch_assoc($result);
 
+
+$sql2 = "SELECT * from cart WHERE u_id=$u_id and product_id=$product_id and qty != 0";
+$check_result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
+
+$row = mysqli_fetch_assoc($check_result2);
 ?>
 
 
@@ -35,26 +42,6 @@ $data = mysqli_fetch_assoc($result);
                     </div>
                     <div class="_p-features">
                         <span> <?= $data['product_description'] ? $data['product_description'] : '' ?>
-                            <!-- <span> Description About this product:- </span>
-                        Solid color polyester/linen full blackout thick sunscreen floor curtain
-                        Type: General Pleat
-                        Applicable Window Type: Flat Window
-                        Format: Rope
-                        Opening and Closing Method: Left and Right Biparting Open
-                        Processing Accessories Cost: Included
-                        Installation Type: Built-in
-                        Function: High Shading(70%-90%)
-                        Material: Polyester / Cotton
-                        Style: Classic
-                        Pattern: Embroidered
-                        Location: Window
-                        Technics: Woven
-                        Use: Home, Hotel, Hospital, Cafe, Office
-                        Feature: Blackout, Insulated, Flame Retardant
-                        Place of Origin: India
-                        Name: Curtain
-                        Usage: Window Decoration
-                        Keywords: Ready Made Blackout Curtain -->
                     </div>
                     <form action="" method="post" accept-charset="utf-8">
                         <ul class="spe_ul"></ul>
@@ -63,9 +50,21 @@ $data = mysqli_fetch_assoc($result);
                                 <button class="btn-theme btn buy-btn" tabindex="0">
                                     <i class="fa fa-shopping-cart"></i> Buy Now
                                 </button>
-                                <a href="add_to_cart.php?product_id=<?php echo $data['product_id']; ?>" class="btn-theme btn btn-success" tabindex="0">
+
+                                <?php
+                                if ($row > 0) {
+                                    echo  ' <a href="cart_view.php" class="btn-theme btn btn-success" tabindex="0">
+                                    <i class="fa fa-shopping-cart"></i> Go to Cart
+                                    </a>';
+                                } else {
+
+                                    echo   ' <button type="button" onclick="addCart(' . $product_id . ')  "  class="btn-theme btn btn-success" >
                                     <i class="fa fa-shopping-cart"></i> Add to Cart
-                                </a>
+                                    </button>';
+                                }
+
+                                ?>
+
                                 <input type="hidden" name="pid" value="18" />
                                 <input type="hidden" name="price" value="850" />
                                 <input type="hidden" name="url" value="" />
@@ -113,4 +112,63 @@ $data = mysqli_fetch_assoc($result);
             _this.nextElementSibling.value = value;
         }
     });
+</script>
+
+
+
+<script src='./js/jquery.js'></script>
+<script type="text/javascript">
+    $(Document).ready(function() {
+        function loadTable() {
+            getProducts();
+        }
+        loadTable();
+
+
+        $("#search").on("keyup", function() {
+            var search_term = $(this).val();
+
+            $.ajax({
+                url: "product_search.php",
+                type: "POST",
+                data: {
+                    search: search_term
+                },
+                success: function(data) {
+                    $("#table-data").html(data);
+                }
+            });
+
+        });
+    });
+    const getProducts = () => {
+
+        $.ajax({
+            url: "product_view.php",
+            type: "GET",
+            success: function(data) {
+                $("#table-data").html(data);
+            }
+        });
+    }
+    $(function() {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
+    function addCart(value, isminus) {
+        $.ajax({
+            url: "add_to_cart.php",
+            type: "GET",
+            data: {
+                product_id: value,
+                isminus: isminus
+            },
+            success: function(data) {
+                getProducts();
+                changeCountValue(data);
+                window.location.href = 'cart_view.php';
+
+            }
+        });
+    }
 </script>

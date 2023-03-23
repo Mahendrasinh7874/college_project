@@ -14,14 +14,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
 
 
-       // print_r($result1);
+        // print_r($result1);
         if (mysqli_num_rows($result1) > 0) {
-            // header('location:http://localhost/college_project/cart_view.php');
+            header('location:http://localhost/college_project/cart_view.php');
 
-            // $_SESSION['alreadywish'] = 'wish';
+            $_SESSION['alreadywish'] = 'wish';
         } else {
-            $sql = "INSERT INTO cart (u_id,product_id) values ('$u_id','$insert_product_id')";
-
+            $sql = "INSERT INTO cart (u_id,product_id,qty) values ('$u_id','$insert_product_id',1)";
             $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
         }
     }
@@ -30,4 +29,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 }
 
-// header('location:http://localhost/college_project/cart_view.php');
+header('location:http://localhost/college_project/cart_view.php');

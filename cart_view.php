@@ -307,7 +307,47 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
             width: 40%;
         }
     }
+
+
+    #loader {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        /* background-color: red; */
+    }
+
+    .loader-icon {
+        display: inline-block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 6px solid #000;
+        border-color: #000 transparent #000 transparent;
+        animation: loader 1.2s linear infinite;
+    }
+
+    @keyframes loader {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
 </style>
+<div id="loader">
+    <div class="loader-icon"></div>
+</div>
 <div class="container my-5 py-3 ">
 
     <h3>Shopping Cart</h3>
@@ -435,4 +475,51 @@ if (isset($_SESSION["alreadywish"])) {
 </script>';
 }
 unset($_SESSION['alreadywish']);
+
+
+
+if (isset($_SESSION['success_cart'])) {
+    echo '<script>
+        Toastify({
+            text: "Product has been added to your Cart!",
+            duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
+
+        },
+        onClick: function() {} // Callback after click
+        }).showToast();
+      </script>';
+}
+unset($_SESSION['success_cart']);
+
 ?>
+
+<script>
+    jQuery(window).on('load', function() {
+
+        $('#loader').fadeOut('slow', function() {
+            $(this).remove();
+        });
+
+    });
+    // window.addEventListener("load", function() {
+    //     // alert('loaded');
+
+    //     // console.log('first');
+
+    //     var loader = document.getElementById("loader");
+    //     console.log(loader);
+    //     loader.style.display = "block";
+    //     setTimeout(() => {
+    //         loader.style.display = "none";
+
+    //     }, 1000);
+    // });
+</script>

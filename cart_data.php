@@ -10,11 +10,31 @@
         cursor: pointer;
         border-radius: 3px;
     }
-    .checkout{
+
+    img {
+        display: inline-flex;
+    }
+.text-center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+    .shopping {
+        color: white !important;
+        cursor: pointer;
+    }
+
+    .shopping:hover {
+        text-decoration: none;
+    }
+
+    .checkout {
         cursor: pointer;
         text-decoration: none !important;
     }
-    .checkout:hover{
+
+    .checkout:hover {
         color: white;
     }
 
@@ -113,10 +133,14 @@ if (mysqli_num_rows($result) > 0) {
     echo $output;
     echo "   <p class='text-right'>Total Amount : ₹ $totalPrice  </p>
         <div class='d-flex justify-content-between'>
-        <button class='shopping'>Continue Shopping</button>
+        <a  class='cursor-pointer shopping' href='index.php'>Continue Shopping</a>
         <a href='proceed_to_checkout.php' class='checkout'>Checkout</a>";
 } else {
-    echo "<div class='text-center'><img src='./css/images/no-product-found.jpg' height='400'  width='400'> </div>";
+    echo "<div class='text-center'><img src='./css/images/Group 488.png' style='width:150px; height:150px';margin:auto; display:inline-block !important;> 
+    <br />
+    <h3>You Cart is empty</h3>
+    <a  href='../../college_project' class=' text-white btn btn-danger'>Start Shopping</a>
+    </div>";
 }
 
 ?>

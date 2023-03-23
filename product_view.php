@@ -25,7 +25,8 @@ if (isset($_POST['category'])) {
 //echo $sql;
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $output = "";
-if ($result) {
+if ($result && $result->num_rows > 0) {
+
     foreach ($result as $row) {
         $product_id = $row['product_id'];
         // wishlist 
@@ -82,9 +83,11 @@ if ($result) {
 ';
     }
 } else {
+
     $_SESSION['not_found'] = 'not_found';
+    echo "<div class='text-center'><img src='./css/images/download.png' height='400'  width='400'> </div>";
 }
-//mysqli_close($conn);
+mysqli_close($conn);
 echo $output;
 
 

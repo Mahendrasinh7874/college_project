@@ -27,7 +27,6 @@ if (!empty($_SESSION['u_id'])) {
             $check1 = "SELECT SUM(qty) AS TotalItemsOrdered FROM cart where u_id='$u_id'";
             $check_result2 = mysqli_query($conn, $check1) or die(mysqli_error($conn));
             foreach ($check_result2 as $row1) {
-                //print_r($row1);
                 $qty = $row1['TotalItemsOrdered'];
             }
             echo $qty;
@@ -37,7 +36,7 @@ if (!empty($_SESSION['u_id'])) {
 
         $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-        $_SESSION['success_cart'] = 'success';
+        // $_SESSION['success_cart'] = 'success';
         echo true;
         //header("location:http://localhost/college_project/");
     }

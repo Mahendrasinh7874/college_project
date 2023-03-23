@@ -1,3 +1,17 @@
+<style>
+    img {
+        display: inline-flex;
+
+
+    }
+    .text-center {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+
 <?php
 
 include './common.php';
@@ -348,6 +362,7 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                 $totalPrice = 0;
                 foreach ($result as $row) {
                     $totalPrice += $row['price'];
+
             ?>
 
                     '<div class="product">
@@ -359,10 +374,6 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                             <p class="product-description"><?= $row['product_description'] ?></p>
                         </div>
                         <div class="product-price" style="padding:0 100px;"><?= $row['price'] ?></div>
-
-                        <!-- <div class="product-quantity">
-                            <input type="number" value="2" min="1">
-                        </div> -->
                         <div class="product-removal">
                             <a href="delete_wishlist.php?wishlist_id=<?= $row['wishlist_id']; ?>" class="remove-product">
                                 Remove
@@ -378,7 +389,11 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
                 echo '<p class="text-right">Total Amount : ₹ ' .  $totalPrice . ' </p>';
                 echo '<input class="checkout" type="submit" name="submit" value="Proceed to cart" />';
             } else {
-                echo '<h2>No Product Added in Wishlist</h2>';
+                echo "<div class='text-center'><img src='./css/images/Group 585.png' style='width:150px; height:150px';margin:auto; display:inline-block !important;> 
+                <br />
+                <h3>You Wishlist is empty</h3>
+                <a  href='../../college_project' class=' text-white btn btn-danger'>Start Shopping</a>
+                </div>";
             }
             ?>
         </form>

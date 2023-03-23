@@ -19,11 +19,50 @@ include 'admin/config.php';
             background-color: #dc9831 !important;
             border: none !important;
         }
+
+        #loader {
+            position: fixed;
+            z-index: 999;
+            top: 0;
+
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            /* background-color: red; */
+        }
+
+        .loader-icon {
+            display: inline-block;
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 6px solid #000;
+            border-color: #000 transparent #000 transparent;
+            animation: loader 1.2s linear infinite;
+        }
+
+        @keyframes loader {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
     </style>
     <!--Main layout-->
 
 
     <div class="row wow fadeIn p-0 m-0" data-wow-delay="0.4s">
+        <div id="loader">
+            <div class="loader-icon"></div>
+        </div>
         <div class="col-lg-12 p-0">
             <!--Carousel Wrapper-->
             <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
@@ -38,7 +77,7 @@ include 'admin/config.php';
                 <div class="carousel-inner" role="listbox">
                     <!--First slide-->
                     <div class="carousel-item active">
-                        <img src="./css/images/pexels-noah-erickson-404280.jpg" height="600" alt="First slide">
+                        <img src="./css/images/7901636.jpg" height="600" alt="First slide">
                         <div class="carousel-caption">
                             <h4>New collection</h4>
                             <br>
@@ -47,7 +86,7 @@ include 'admin/config.php';
                     <!--/First slide-->
                     <!--Second slide-->
                     <div class="carousel-item">
-                        <img src="./css/images/pexels-pixabay-159643.jpg" height="600" alt="Second slide">
+                        <img src="./css/images/7995902.jpg" height="600" alt="Second slide">
                         <div class="carousel-caption">
                             <h4>Get discount!</h4>
                             <br>
@@ -104,77 +143,7 @@ include 'admin/config.php';
                                 } ?>
                             </div>
                         </div>
-                        <!-- <div class="card">
-                            <div class="card-header">Filter</div>
-                            <div class="card-body p-1">
-                                <div class="card border-0 b-3">
-                                    <div class="card-header p-2 bg-white" data-toggle="collapse" data-target="#collapseExample1" aria-expanded="false">
-                                        <p class="m-0 h6">Brand</p>
-                                    </div>
-                                    <div class="card-body p-0 collapse show" id="collapseExample1">
-                                        <ul class="list-group list-group-flush" style="height:200px;overflow:auto;">
-                                            <li class="list-group-item p-2 d-flex justify-content-between align-items-center">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                    <label class="custom-control-label" for="customCheck1">Google</label>
-                                                </div>
-                                                <span class="badge badge-secondary badge-pill">14</span>
-                                            </li>
-                                            <li class="list-group-item p-2 d-flex justify-content-between align-items-center">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                                    <label class="custom-control-label" for="customCheck2">Microsoft</label>
-                                                </div>
-                                                <span class="badge badge-secondary badge-pill">14</span>
-                                            </li>
-                                            <li class="list-group-item p-2 d-flex justify-content-between align-items-center">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                                    <label class="custom-control-label" for="customCheck3">Apple</label>
-                                                </div>
-                                                <span class="badge badge-secondary badge-pill">14</span>
-                                            </li>
-                                            <li class="list-group-item p-2 d-flex justify-content-between align-items-center">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                                    <label class="custom-control-label" for="customCheck4">Samsung</label>
-                                                </div>
-                                                <span class="badge badge-secondary badge-pill">14</span>
-                                            </li>
-                                            <li class="list-group-item p-2 d-flex justify-content-between align-items-center">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                                    <label class="custom-control-label" for="customCheck5">Amazon</label>
-                                                </div>
-                                                <span class="badge badge-secondary badge-pill">14</span>
-                                            </li>
-                                            <li class="list-group-item p-2 d-flex justify-content-between align-items-center">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                                    <label class="custom-control-label" for="customCheck6">Asus</label>
 
-                                                </div>
-                                                <span class="badge badge-secondary badge-pill">14</span>
-                                            </li>
-
-                                            <li class="list-group-item p-2 d-flex justify-content-between align-items-center">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                                    <label class="custom-control-label" for="customCheck7">Sony</label>
-                                                </div>
-                                                <span class="badge badge-secondary badge-pill">14</span>
-                                            </li>
-
-                                        </ul>
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="card-footer">
-                                <button type="button" class="btn btn-block btn-primary">Filter</button>
-                            </div>
-                        </div>
-                     -->
 
                     </div>
                     <div class="col-md-9">
@@ -200,56 +169,22 @@ include 'admin/config.php';
                                             </select>
                                         </div>
                                     </div>
-                                    <!-- <div class="col-md-3">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Show:</span>
-                                            </div>
-                                            <select class="form-control" id="" name="">
-                                                <option value="">15</option>
-                                                <option value="">25</option>
-                                                <option value="">50</option>
-                                                <option value="">75</option>
-                                                <option value="">100</option>
-                                            </select>
-                                        </div>
-                                    </div> -->
+
                                 </div>
                             </div>
                             <div class="card-body">
 
                                 <div class="row" id="table-data">
+
                                 </div>
 
-                                <?php
-                                if (isset($_SESSION['not-found'])) {
-                                    echo '<h2>Not Found</h2>';
-                                }
-                                ?>
+
+
+
 
                             </div>
                         </div>
-                        <!-- <div class="card-footer p-3">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <ul class="pagination m-0">
-                                        <li class="page-item disabled">
-                                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-                                        </li>
-                                        <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                        <li class="page-item">
-                                            <a class="page-link" href="#">Next</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <p class="text-right mb-0 mt-1">Showing 1 to 12 of 12 (1 Pages)</p>
-                                </div>
-                            </div>
-                        </div>
-                     -->
+
 
                     </div>
                 </div>
@@ -432,29 +367,30 @@ if (isset($_SESSION['exits_cart'])) {
 unset($_SESSION['exits_cart']);
 
 
-// if (isset($_SESSION['success_cart'])) {
-//     echo '<script>
-//         Toastify({
-//             text: "Product has been added to your Cart!",
-//             duration: 3000,
-//           destination: "https://github.com/apvarun/toastify-js",
-//           newWindow: true,
-//           close: true,
-//           gravity: "top", // `top` or `bottom`
-//           position: "right", // `left`, `center` or `right`
-//           stopOnFocus: true, // Prevents dismissing of toast on hover
-//           style: {
-//             background: "linear-gradient(to right, #00b09b, #96c93d)",
+if (isset($_SESSION['success_cart'])) {
+    echo '<script>
+        Toastify({
+            text: "Product has been added to your Cart!",
+            duration: 3000,
+          destination: "https://github.com/apvarun/toastify-js",
+          newWindow: true,
+          close: true,
+          gravity: "top", // `top` or `bottom`
+          position: "right", // `left`, `center` or `right`
+          stopOnFocus: true, // Prevents dismissing of toast on hover
+          style: {
+            background: "linear-gradient(to right, #00b09b, #96c93d)",
 
-//         },
-//         onClick: function() {} // Callback after click
-//         }).showToast();
-//       </script>';
-// }
-// unset($_SESSION['success_cart']);
+        },
+        onClick: function() {} // Callback after click
+        }).showToast();
+      </script>';
+}
+unset($_SESSION['success_cart']);
 
 // 
 ?>
+
 
 
 <script src='./js/jquery.js'></script>
@@ -536,4 +472,27 @@ unset($_SESSION['exits_cart']);
             }
         });
     }
+</script>
+
+<script>
+    jQuery(window).on('load', function() {
+
+        $('#loader').fadeOut('slow', function() {
+            $(this).remove();
+        });
+
+    });
+    // window.addEventListener("load", function() {
+    //     // alert('loaded');
+
+    //     // console.log('first');
+
+    //     var loader = document.getElementById("loader");
+    //     console.log(loader);
+    //     loader.style.display = "block";
+    //     setTimeout(() => {
+    //         loader.style.display = "none";
+
+    //     }, 1000);
+    // });
 </script>

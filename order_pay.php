@@ -1,3 +1,41 @@
+<style>
+    #loader {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        /* background-color: red; */
+    }
+
+    .loader-icon {
+        display: inline-block;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 6px solid #000;
+        border-color: #000 transparent #000 transparent;
+        animation: loader 1.2s linear infinite;
+    }
+
+    @keyframes loader {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
+
 <?php
 include './admin/config.php';
 session_start();
@@ -86,4 +124,31 @@ echo $_SESSION['order_id'];
     $(document).ready(function() {
         $('.razorpay-payment-button').click();
     });
+</script>
+<div id="loader">
+    <div class="loader-icon"></div>
+</div>
+
+
+<script>
+    jQuery(window).on('load', function() {
+
+        $('#loader').fadeOut('slow', function() {
+            $(this).remove();
+        });
+
+    });
+    // window.addEventListener("load", function() {
+    //     // alert('loaded');
+
+    //     // console.log('first');
+
+    //     var loader = document.getElementById("loader");
+    //     console.log(loader);
+    //     loader.style.display = "block";
+    //     setTimeout(() => {
+    //         loader.style.display = "none";
+
+    //     }, 1000);
+    // });
 </script>

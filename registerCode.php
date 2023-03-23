@@ -21,11 +21,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $last_name = $_POST['last_name'];
   $email = $_POST['email'];
   $password = $_POST['password'];
-  // $confirmPassword = $_POST['confirmPassword'];
   $date_of_birth = $_POST['date_of_birth'];
   $gender = $_POST['gender'];
   $address = $_POST['address'];
   $mobile_no = $_POST['mobile_no'];
+
+
+
 
   // print_r($_POST);
 
@@ -110,6 +112,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['email'] = $_POST['email'];
         $_SESSION['u_id'] = $row['u_id'];
         $_SESSION['username'] = $_POST['first_name'] . " " . $_POST['last_name'];
+        $_SESSION['firstname'] = $_POST['first_name'];
+        $_SESSION['lastname'] = $_POST['last_name'];
+        $_SESSION['mobile'] =$_POST['mobile_no'];
       }
     }
 

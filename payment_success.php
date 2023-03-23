@@ -1,4 +1,40 @@
 <style>
+    #loader {
+        position: fixed;
+        z-index: 999;
+        top: 0;
+
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.7);
+        /* background-color: red; */
+    }
+
+    .loader-icon {
+        display: inline-block;
+        position: absolute;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 6px solid #000;
+        border-color: #000 transparent #000 transparent;
+        animation: loader 1.2s linear infinite;
+    }
+
+    @keyframes loader {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
     .success-animation {
         margin-top: 40px;
         margin-bottom: 14px
@@ -96,7 +132,13 @@ $amount = 0;
 if (mysqli_num_rows($result1) > 0) {
     $totalPrice = 0;
     foreach ($result1 as $row1) {
+
+
+
         $product_id = $row1['product_id'];
+        $_SESSION['product_id'] =  $product_id;
+        $pro_id =  $_SESSION['product_id'];
+
 
         $sql2 = "SELECT * FROM cart where u_id = $u_id and product_id = $product_id and qty != 0";
         $result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
@@ -104,15 +146,41 @@ if (mysqli_num_rows($result1) > 0) {
 
         foreach ($result2 as $row2) {
             $pqty = $row2['qty'];
+            $_SESSION['qty'] = $row2['qty'];
+            // print_r($qty);
         }
 
+        $qty = $_SESSION['qty'];
         $totalPrice += $row1['price']  * $pqty;
     }
     $amount = $totalPrice;
 }
-$sql = "INSERT INTO orders (first_name,last_name,email,phone,country,state,city,pincode,amount) values ('$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount')";
+$sql = "INSERT INTO orders (u_id,first_name,last_name,email,phone,country,state,city,pincode,amount) values ('$u_id','$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount')";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+
+$getOrder = "SELECT order_id FROM orders  WHERE u_id = $u_id  order by u_id DESC ";
+$result3 = mysqli_query($conn, $getOrder) or die(mysqli_error($conn));
+// $order_id = '';
+
+foreach ($result3 as $row3) {
+    $order_id = $row3['order_id'];
+}
+
+$insertOrder = "INSERT INTO order_payment_mapping (u_id,order_id,product_id,qty) values ('$u_id','$order_id','$pro_id','$qty')";
+$inserResult = mysqli_query($conn, $insertOrder) or die(mysqli_error($conn));
+unset($_SESSION['qty']);
+
+
+if ($inserResult) {
+
+    $deleteCartData = "DELETE FROM cart WHERE u_id = $u_id";
+    $delete = mysqli_query($conn, $deleteCartData) or die(mysqli_error($conn));
+}
+
+
+
 ?>
 
 
@@ -130,3 +198,38 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
         </div>
     </div>
 </div>
+
+<div id="loader">
+    <div class="loader-icon"></div>
+</div>
+
+<script>
+    setTimeout(function() {
+        window.location.href = "index.php";
+    }, 2000);
+</script>
+
+
+
+<script>
+    jQuery(window).on('load', function() {
+
+        $('#loader').fadeOut('slow', function() {
+            $(this).remove();
+        });
+
+    });
+    // window.addEventListener("load", function() {
+    //     // alert('loaded');
+
+    //     // console.log('first');
+
+    //     var loader = document.getElementById("loader");
+    //     console.log(loader);
+    //     loader.style.display = "block";
+    //     setTimeout(() => {
+    //         loader.style.display = "none";
+
+    //     }, 1000);
+    // });
+</script>

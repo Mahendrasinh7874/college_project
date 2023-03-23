@@ -19,6 +19,14 @@ if (empty($_SESSION['u_id'])) {
         list-style: none;
     }
 
+    a {
+        color: black !important;
+    }
+
+    a:hover {
+        text-decoration: none !important;
+    }
+
     blockquote,
     q {
         quotes: none;
@@ -568,19 +576,19 @@ include './common.php';
             <div class="row">
                 <div class="col-6">
                     <label for="fname">First Name</label>
-                    <input type="text" placeholder="First Name" name="fname" id="fname" required />
+                    <input type="text" placeholder="First Name" value=<?= $_SESSION['firstname'] ?> name="fname" id="fname" required />
                 </div>
 
                 <div class="col-6">
                     <label for="lname">Last Name</label>
-                    <input type="text" placeholder="Last Name" name="lname" id="lname" required />
+                    <input type="text" placeholder="Last Name" value=<?= $_SESSION['lastname'] ?> name="lname" id="lname" required />
                 </div>
                 <div class="col-12 mb-3">
                     <label for="country">Country</label>
                     <select name="country" id="country" required>
                         <option value="">Please select a country</option>
-                        <option value="Canada">Canada</option>
-                        <option value="Not Canada">Not Canada</option>
+                        <option value="Canada">India</option>
+                        <option value="Not Canada">Others</option>
                     </select>
                 </div>
                 <div class="col-6">
@@ -598,15 +606,19 @@ include './common.php';
                 </div>
                 <div class="col-6 padright">
                     <label for="email">Email Address</label>
-                    <input type="text" placeholder="Email Address 
+                    <input type="email" value=<?= $_SESSION['email'] ?> placeholder="Email Address 
 " name="email" id="email" required />
                 </div>
                 <div class="col-6">
                     <label for="tel">Phone</label>
-                    <input type="text" placeholder="Phone" name="tel" id="tel" required />
+                    <input type="text" value=<?= $_SESSION['mobile'] ?> placeholder="Phone" name="tel" id="tel" required />
                 </div>
             </div>
             <input type="submit" name="submit" value="Place Order" class="redbutton" />
         </div>
     </form>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>   
