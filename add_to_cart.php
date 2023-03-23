@@ -21,7 +21,7 @@ if (!empty($_SESSION['u_id'])) {
         $check_result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
 
         if (mysqli_num_rows($check_result2) > 0) {
-            $sql1 =  "UPDATE cart SET qty = '$qty' WHERE u_id='$u_id' and  product_id='$product_id'";
+            $sql1 =  "UPDATE cart SET qty = '$qty' WHERE u_id='$u_id' and  product_id='$product_id' and qty > 0";
             $check_result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
 
             $check1 = "SELECT SUM(qty) AS TotalItemsOrdered FROM cart where u_id='$u_id'";

@@ -85,7 +85,7 @@ if ($result && $result->num_rows > 0) {
 } else {
 
     $_SESSION['not_found'] = 'not_found';
-    echo "<div class='text-center'><img src='./css/images/download.png' height='400'  width='400'> </div>";
+    echo "<div class='text-center'><h2 class='text-center'>No Product Found</h2> </div>";
 }
 mysqli_close($conn);
 echo $output;

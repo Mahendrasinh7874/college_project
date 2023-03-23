@@ -300,7 +300,8 @@ foreach ($check_result2 as $row1) {
                   <?= !empty($_SESSION['username']) ? $_SESSION['username'] : 'test' ?>
                 </a>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#">My Account</a>
+                  <a class="dropdown-item" href="myaccount.php">My Account</a>
+                  <a class="dropdown-item" href="#">Orders</a>
                   <!-- <a class="dropdown-item" href="#">Change Password</a> -->
                   <a class="dropdown-item" href="logout.php">Log Out</a>
                 </div>

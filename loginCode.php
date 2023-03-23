@@ -15,7 +15,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['u_id'] = $row['u_id'];
             $_SESSION['username'] = $row['first_name'] . " " . $row['last_name'];
             $_SESSION['email'] = $row['email'];
-            //echo $_SESSION['email'];
+            $_SESSION['firstname'] = $row['first_name'];
+            $_SESSION['lastname'] = $row['last_name'];
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['date'] = $row['date_of_birth'];
+            $_SESSION['address'] = $row['address'];
+            $_SESSION['mobile'] = $row['mobile_no'];
         }
         header('Location:index.php');
     } else {

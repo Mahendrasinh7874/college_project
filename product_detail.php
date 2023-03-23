@@ -1,6 +1,8 @@
 <?php include 'common.php';
 
 include 'admin/config.php';
+$u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
+
 
 $product_id = $_GET['product_id'];
 $sql = "select * from product where product_id='{$product_id}'";
@@ -47,20 +49,37 @@ $row = mysqli_fetch_assoc($check_result2);
                         <ul class="spe_ul"></ul>
                         <div class="_p-qty-and-cart">
                             <div class="_p-add-cart">
+
+                            <?php
+                            
+                            ?>
+
+
+
                                 <button class="btn-theme btn buy-btn" tabindex="0">
                                     <i class="fa fa-shopping-cart"></i> Buy Now
                                 </button>
 
                                 <?php
+
+                                // $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
+
+                                // print_r($row);
                                 if ($row > 0) {
                                     echo  ' <a href="cart_view.php" class="btn-theme btn btn-success" tabindex="0">
                                     <i class="fa fa-shopping-cart"></i> Go to Cart
                                     </a>';
                                 } else {
+                                    if (!empty($_SESSION['u_id'])) {
 
-                                    echo   ' <button type="button" onclick="addCart(' . $product_id . ')  "  class="btn-theme btn btn-success" >
+                                        echo   ' <button type="button" onclick="addCart(' . $product_id . ')  "  class="btn-theme btn btn-success" >
                                     <i class="fa fa-shopping-cart"></i> Add to Cart
                                     </button>';
+                                    } else {
+                                        echo   ' <a href="login.php"  "  class="btn-theme btn btn-success" >
+                                        <i class="fa fa-shopping-cart"></i> Add to Cart
+                                        </a>';
+                                    }
                                 }
 
                                 ?>
