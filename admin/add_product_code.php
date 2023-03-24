@@ -1,6 +1,6 @@
 <?php
 
-// include 'config.php';
+include 'config.php';
 // session_start();
 
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $product_brand_id = $_POST['brand'];
     $product_title = $_POST['product_title'];
     $price = $_POST['price'];
-    $product_description = $_POST['product_description'];
+    $product_description = mysqli_real_escape_string($conn, $_POST['product_description']);
     $qty = $_POST['qty'];
 
 
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
     if ($result) {
-        // header("location:http://localhost/e-commerce/admin/product_index.php");
+        // header("location:http://localhost/college_project/admin/product_index.php");
         header('Location: products_index.php');
     } else {
         echo '<h1 class="text-center"> 404 Not Found </h1>';

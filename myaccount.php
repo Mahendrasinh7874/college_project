@@ -5,6 +5,9 @@ include './common.php';
 if (empty($_SESSION['u_id'])) {
     header("location:http://localhost/college_project/login.php");
 }
+
+
+
 ?>
 <style>
     input[type="text"],
@@ -54,9 +57,11 @@ if (empty($_SESSION['u_id'])) {
     }
 
     input:disabled,
-    textarea:disabled {
+    textarea:disabled,
+    select:disabled {
+
         background: #e9ecef;
-        border-radius: 10px;
+        border-radius: 5px;
     }
 
 
@@ -87,13 +92,18 @@ if (empty($_SESSION['u_id'])) {
     .coupon input[type="submit"] {
         margin: 0 0 0 20px;
     }
+
+    .account-img {
+        width: 200px;
+        height: 200px;
+    }
 </style>
 
 <div class="container">
-    <div class="card p-5">
+    <div class="card py-3 px-5 my-4">
         <div class="row">
-            <div class="col-lg-12 border-bottom ">
-                <img width="100" style="width:150px;height:150px; border-radius:50%;" class="ml-5" src="./css/images/7901636.jpg" />
+            <div class="col-lg-12 border-bottom my-4 ">
+
                 <h2 class="ml-3 " style="text-transform:capitalize;">
                     <?= $_SESSION['username'] ?>
                 </h2>
@@ -101,7 +111,7 @@ if (empty($_SESSION['u_id'])) {
             </div>
 
 
-            <form class="row mt-5">
+            <form action="" method="POST" enctype="multipart/form-data" class="row mt-5">
 
                 <div class="col-6">
                     <label for="fname">First Name</label>
@@ -122,6 +132,22 @@ if (empty($_SESSION['u_id'])) {
                     <input disabled type="text" value=<?= $_SESSION['mobile'] ?> placeholder="Phone" name="tel" id="tel" required />
                 </div>
                 <div class="col-6">
+                    <label for="gender">Gender</label>
+                    <!-- <input disabled type="gender" value=<?= $_SESSION['gender'] ?> placeholder="Gender" name="gender" id="gender" required /> -->
+
+                    <!-- <select class="form-control" name="gender" placeholder="Select Gender" id="exampleFormControlSelect1">
+                         <option selected>Select Gender</option> -->
+                    <!-- <option>Male</option>
+                    <option>Female</option>
+                    </select>  -->
+
+                    <select value="<?php echo $_SESSION["gender"] ?>" class="form-control" disabled name="gender" placeholder="Select Gender" id="exampleFormControlSelect1">
+                        <!-- <option selected>Select Gender</option> -->
+                        <option value="Male" <?php if ($_SESSION['gender'] == "Male") echo "selected" ?>>Male</option>
+                        <option value="Female" <?php if ($_SESSION['gender'] == "Female") echo "selected" ?>>Female</option>
+                    </select>
+                </div>
+                <div class="col-6">
                     <label for="date">Date Of Birth</label>
                     <input disabled type="date" value=<?= $_SESSION['date'] ?> placeholder="date of birth" name="date" id="date" required />
                 </div>
@@ -129,12 +155,10 @@ if (empty($_SESSION['u_id'])) {
                     <label for="address">Address</label>
                     <textarea disabled required placeholder="Enter Address"><?= $_SESSION['address'] ?></textarea>
                 </div>
-                <div class="col-6 mb-5">
-                    <input  type="file" name="file" id="file" placeholder="Choose Profile Picture" />
-                </div>
+
 
                 <div class="col-12 mb-3">
-                    <input  type="submit" name="submit" value="Submit" class="redbutton" />
+                    <!-- <input type="submit" name="submit" value="Submit" class="redbutton" /> -->
                 </div>
             </form>
         </div>
@@ -146,3 +170,21 @@ if (empty($_SESSION['u_id'])) {
 <script src=" https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#pic')
+                    .attr('src', e.target.result)
+                    .width(150)
+                    .height(150);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>

@@ -109,12 +109,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (mysqli_num_rows($result) > 0) {
       while ($row = mysqli_fetch_assoc($result)) {
-        $_SESSION['email'] = $_POST['email'];
         $_SESSION['u_id'] = $row['u_id'];
         $_SESSION['username'] = $_POST['first_name'] . " " . $_POST['last_name'];
-        $_SESSION['firstname'] = $_POST['first_name'];
-        $_SESSION['lastname'] = $_POST['last_name'];
-        $_SESSION['mobile'] =$_POST['mobile_no'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['firstname'] = $row['first_name'];
+        $_SESSION['lastname'] = $row['last_name'];
+        $_SESSION['email'] = $row['email'];
+        $_SESSION['date'] = $row['date_of_birth'];
+        $_SESSION['address'] = $row['address'];
+        $_SESSION['mobile'] = $row['mobile_no'];
+        $_SESSION['gender'] = $row['gender'];
       }
     }
 

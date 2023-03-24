@@ -21,6 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['date'] = $row['date_of_birth'];
             $_SESSION['address'] = $row['address'];
             $_SESSION['mobile'] = $row['mobile_no'];
+            $_SESSION['gender'] = $row['gender'];
         }
         header('Location:index.php');
     } else {

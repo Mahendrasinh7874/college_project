@@ -107,7 +107,7 @@ if (mysqli_num_rows($result) > 0) {
                         <div class='input-group-prepend'>
     <button class='input-group-text minus-btn minu' onclick='addCart($product_id,true)' <?= $main ?>-</button>
     </div>
-    <input value='$pqty' type='number' id='' class=' text-center form-control get-value' aria-label='Amount (to the nearest dollar)' min='0'>
+    <input value='$pqty' type='number' id='' disabled class=' text-center form-control get-value' aria-label='Amount (to the nearest dollar)' min='0'>
     <div class='input-g roup-append'>
         <button class='input-group-text minus-btn' onclick='addCart($product_id)'>+</button>
 

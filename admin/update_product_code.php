@@ -40,8 +40,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     $update_product_title = $_POST['update_product_title'];
     $update_qty = $_POST['update_qty'];
-    $update_product_description = $_POST['update_product_description'];
+
     // $update_image = $_POST['update_image'];
+    $update_product_description = mysqli_real_escape_string($conn, $_POST['update_product_description']);
+
     $update_price = $_POST['update_price'];
     $update_brand_id = $_POST['update_brand_id'];
 

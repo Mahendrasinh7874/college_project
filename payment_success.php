@@ -115,6 +115,7 @@ $country = $_SESSION['order_country'];
 $state = $_SESSION['order_state'];
 $city = $_SESSION['order_city'];
 $pincode = $_SESSION['order_pincode'];
+$order_date = $_SESSION['order_date'];
 
 
 
@@ -155,7 +156,7 @@ if (mysqli_num_rows($result1) > 0) {
     }
     $amount = $totalPrice;
 }
-$sql = "INSERT INTO orders (u_id,first_name,last_name,email,phone,country,state,city,pincode,amount) values ('$u_id','$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount')";
+$sql = "INSERT INTO orders (u_id,first_name,last_name,email,phone,country,state,city,pincode,amount,order_date) values ('$u_id','$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount','$order_date')";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
@@ -163,6 +164,15 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $getOrder = "SELECT order_id FROM orders  WHERE u_id = $u_id  order by u_id DESC ";
 $result3 = mysqli_query($conn, $getOrder) or die(mysqli_error($conn));
 // $order_id = '';
+
+if ($result) {
+    $product_id = $pro_id; // Replace with the actual product ID
+    $product_qty = $qty; // Replace with the actual product quantity
+
+    // Update product quantity in the product table
+    $update_sql = "UPDATE product SET qty = qty - $product_qty WHERE product_id = $product_id";
+    mysqli_query($conn, $update_sql) or die(mysqli_error($conn));
+}
 
 foreach ($result3 as $row3) {
     $order_id = $row3['order_id'];
@@ -199,37 +209,9 @@ if ($inserResult) {
     </div>
 </div>
 
-<div id="loader">
-    <div class="loader-icon"></div>
-</div>
 
 <script>
     setTimeout(function() {
         window.location.href = "index.php";
     }, 2000);
-</script>
-
-
-
-<script>
-    jQuery(window).on('load', function() {
-
-        $('#loader').fadeOut('slow', function() {
-            $(this).remove();
-        });
-
-    });
-    // window.addEventListener("load", function() {
-    //     // alert('loaded');
-
-    //     // console.log('first');
-
-    //     var loader = document.getElementById("loader");
-    //     console.log(loader);
-    //     loader.style.display = "block";
-    //     setTimeout(() => {
-    //         loader.style.display = "none";
-
-    //     }, 1000);
-    // });
 </script>

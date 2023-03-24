@@ -147,7 +147,7 @@ include 'admin/config.php';
 
                     </div>
                     <div class="col-md-9">
-                        <div class="card">
+                        <div class="card" style="min-height: 450px;">
                             <div class="card-header">
                                 <div class="row">
 

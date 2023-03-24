@@ -4,6 +4,7 @@
 
 
     }
+
     .text-center {
         display: flex;
         flex-direction: column;
@@ -342,7 +343,6 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
     <h3>Wishlist</h3>
 </div>
 <main class="container  py-3">
-    <!-- <h4>Shopping Cart</h4> -->
 
 
     <div class="shopping-cart">
