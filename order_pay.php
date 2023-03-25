@@ -40,7 +40,8 @@
 include './admin/config.php';
 session_start();
 
-$apiKey = 'rzp_test_nOd8dlvNpuSZOu';
+//$apiKey = 'rzp_test_nOd8dlvNpuSZOu';
+$apiKey = 'rzp_test_ReTgU6RDMrKHDQ';
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
 $email = $_POST['email'];
