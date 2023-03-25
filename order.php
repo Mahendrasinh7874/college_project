@@ -5,12 +5,12 @@ include './common.php';
 $u_id = $_SESSION['u_id'];
 
 $sql = "select * from order_payment_mapping
-              LEFT JOIN product on product.product_id= order_payment_mapping.product_id
-              LEFT JOIN category on product.product_category_id = category.cate_id 
-              LEFT JOIN brands on brands.brand_id = product.product_brand_id 
-              where u_id={$u_id}
-              order by order_id desc
-              ";
+LEFT JOIN product on product.product_id= order_payment_mapping.product_id
+LEFT JOIN category on product.product_category_id = category.cate_id
+LEFT JOIN brands on brands.brand_id = product.product_brand_id
+where u_id={$u_id}
+order by order_id desc
+";
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
 // print_r($data);

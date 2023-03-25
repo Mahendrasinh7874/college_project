@@ -107,6 +107,29 @@ include './admin/config.php';
 // session_start();
 $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
 
+$razorpay_payment_id = $_POST['razorpay_payment_id'];
+
+$api_key = 'rzp_test_ReTgU6RDMrKHDQ';
+$api_secret = 'vqSLkql9bZq90uKfV625FEJu';
+
+$url = 'https://api.razorpay.com/v1/payments/' . $razorpay_payment_id;
+print_r($url);
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_USERPWD, $api_key . ':' . $api_secret);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+$result = curl_exec($ch);
+
+if ($result === false) {
+    echo 'Error: ' . curl_error($ch);
+} else {
+    $data = json_decode($result, true);
+    print_r($data);
+}
+
+curl_close($ch);
+
+
 $fname = $_SESSION['order_fname'];
 $lname = $_SESSION['order_lname'];
 $email = $_SESSION['order_email'];
@@ -116,9 +139,14 @@ $state = $_SESSION['order_state'];
 $city = $_SESSION['order_city'];
 $pincode = $_SESSION['order_pincode'];
 $order_date = $_SESSION['order_date'];
+$pay_status = $data['status'];
+// $order_status = $data['order_status'];
+$amount = $data['amount'];
+$currency = $data['currency'];
 
 
-
+// $_POST['']
+// print_r($_POST);
 
 $sql1 = "SELECT * FROM cart 
 LEFT JOIN product ON cart.product_id = product.product_id 
@@ -156,9 +184,14 @@ if (mysqli_num_rows($result1) > 0) {
     }
     $amount = $totalPrice;
 }
-$sql = "INSERT INTO orders (u_id,first_name,last_name,email,phone,country,state,city,pincode,amount,order_date) values ('$u_id','$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount','$order_date')";
+
+
+
+$sql = "INSERT INTO orders (u_id,first_name,last_name,email,phone,country,state,city,pincode,amount,order_date,pay_status,currency) values ('$u_id','$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount','$order_date','$pay_status','$currency')";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+
 
 
 $getOrder = "SELECT order_id FROM orders  WHERE u_id = $u_id  order by u_id DESC ";
@@ -191,6 +224,7 @@ if ($inserResult) {
 
 
 
+
 ?>
 
 
@@ -212,6 +246,6 @@ if ($inserResult) {
 
 <script>
     setTimeout(function() {
-        window.location.href = "index.php";
+        // window.location.href = "index.php";
     }, 2000);
 </script>

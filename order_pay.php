@@ -52,7 +52,7 @@ $state = $_POST['state'];
 $city = $_POST['city'];
 $pincode = $_POST['pincode'];
 
-// print_r($_POST);
+
 $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
 
 $_SESSION['order_fname'] = $_POST['fname'];
@@ -100,7 +100,7 @@ if (mysqli_num_rows($result1) > 0) {
 
 </script>
 <form action="payment_success.php" class="text-center" method="POST">
-    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="<?php echo $apiKey; ?>" data-amount="<?php echo $amount * 100; ?>" data-currency="INR" data-id="<?php echo 'OID' . rand(10, 100) . 'END'; ?>" data-buttontext="Pay With RazorPay" data-name="Fees" data-description="B.P.C.C.S" data-prefill.name="<?php echo $name ?>" data-prefill.email="<?php echo $email ?>" data-prefill.contact="<?php echo $mobile ?>" data-theme.color="#0373fc"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="<?php echo $apiKey; ?>" data-amount="<?php echo $amount * 100; ?>" data-currency="INR" data-id="<?php echo 'OID' . rand(10, 100) . 'END'; ?>" data-buttontext="Pay With RazorPay" data-name="Payment" data-description="Techno World" data-prefill.name="<?php echo $name ?>" data-prefill.email="<?php echo $email ?>" data-prefill.contact="<?php echo $mobile ?>" data-theme.color="#0373fc"></script>
     <input type="hidden" class="" custom="Hidden Element" name="hidden">
 </form>
 <style>
