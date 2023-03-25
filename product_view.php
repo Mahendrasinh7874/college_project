@@ -3,6 +3,19 @@
     input::-webkit-inner-spin-button {
         display: none;
     }
+
+    .input-group-prepend {
+        background-color: white;
+    }
+
+    .d-flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        text-align: center;
+        margin-top: 150px;
+    }
 </style>
 
 <?php
@@ -52,7 +65,7 @@ if ($result && $result->num_rows > 0) {
                 <div class="input-group-prepend">
                 <button class="input-group-text minus-btn" onclick="addCart(' . $product_id . ',' . true . ')" ' . $main  . '>-</button>
                 </div>
-                <input   value=' . $pqty . ' type="number" id=""  class=" text-center form-control get-value" aria-label="Amount (to the nearest dollar)"  min="0">
+                <input   value=' . $pqty . ' type="number" disabled id=""  class=" text-center form-control get-value" aria-label="Amount (to the nearest dollar)"  min="0">
                 <div class="input-g roup-append">
                 <button class="input-group-text minus-btn" onclick="addCart(' . $product_id . ',' . false . ')">+</button>
                 </div>
@@ -85,7 +98,7 @@ if ($result && $result->num_rows > 0) {
 } else {
 
     $_SESSION['not_found'] = 'not_found';
-    echo "<div class='text-center'><h2 class='text-center'>No Product Found</h2> </div>";
+    echo "<div class='  text-center'><img height='300' src='./css/images/no-product-found (1).jpg' /></div>";
 }
 mysqli_close($conn);
 echo $output;

@@ -44,6 +44,7 @@ session_start();
 $apiKey = 'rzp_test_ReTgU6RDMrKHDQ';
 $fname = $_POST['fname'];
 $lname = $_POST['lname'];
+$order_date = date('Y-m-d');
 $email = $_POST['email'];
 $mobile = $_POST['tel'];
 $country = $_POST['country'];
@@ -58,6 +59,7 @@ $_SESSION['order_fname'] = $_POST['fname'];
 $_SESSION['order_lname'] = $_POST['lname'];
 $_SESSION['order_email'] = $_POST['email'];
 $_SESSION['order_mobile'] = $_POST['tel'];
+$_SESSION['order_date'] = $order_date;
 $_SESSION['order_city'] = $_POST['city'];
 $_SESSION['order_country'] = $_POST['country'];
 $_SESSION['order_state'] = $_POST['state'];
@@ -91,21 +93,6 @@ if (mysqli_num_rows($result1) > 0) {
     }
     $amount = $totalPrice;
 }
-// $sql = "INSERT INTO orders (first_name,last_name,email,phone,country,state,city,pincode,amount) values ('$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount')";
-
-// $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-
-
-
-/* $sql3 = "select order_id from orders
-              where  u_id='$u_id'
-              ";
-$result3 = mysqli_query($conn, $sql3) or die(mysqli_error($conn));
-foreach ($result3 as $raw) {
-    $_SESSION['order_id'] = $raw['order_id'];
-}
-echo $_SESSION['order_id'];
- */
 ?>
 
 

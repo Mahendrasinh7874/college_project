@@ -9,6 +9,10 @@ if (isset($_SESSION["u_id"]) === ''  && empty($_SESSION["u_id"])) {
 ?>
 
 <style>
+    .checkout {
+        color: white !important;
+    }
+
     :root {
         --color-border: #eee;
         --color-label: #aaa;

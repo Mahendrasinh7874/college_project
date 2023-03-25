@@ -26,7 +26,7 @@ $row = mysqli_fetch_assoc($check_result2);
         <div class="col-md-6 _boxzoom">
 
             <div class="picZoomer  ">
-                <img class="w-100" style="height:75%;" src='./admin/uploads/<?php echo $data['image'] ?>' alt='<?php echo $data['product_title'] ?>' alt="">
+                <img class="w-75" style="height:75%;" src='./admin/uploads/<?php echo $data['image'] ?>' alt='<?php echo $data['product_title'] ?>' alt="">
                 <!-- <img class="my_img" src="https://s.fotorama.io/1.jpg" alt=""> -->
 
 
@@ -56,9 +56,7 @@ $row = mysqli_fetch_assoc($check_result2);
 
 
 
-                                <button class="btn-theme btn buy-btn" tabindex="0">
-                                    <i class="fa fa-shopping-cart"></i> Buy Now
-                                </button>
+                
 
                                 <?php
 

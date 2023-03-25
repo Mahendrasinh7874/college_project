@@ -1,8 +1,8 @@
 <?php
 session_start();
-if (isset($_SESSION["email"]) && !empty($_SESSION["email"])) {
+if (!empty($_SESSION["u_id"])) {
   echo $_SESSION["email"];
-  header("Location: admin_panel.php");
+  header("Location: index.php");
 }
 ?>
 
