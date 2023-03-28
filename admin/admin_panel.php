@@ -1,10 +1,11 @@
 <?php
 
 
-// session_start();
-// if (isset($_SESSION["admin_log"])) {
-//   header("Location: index.php");
-// }
+if (!empty($_SESSION["admin_log"])) {
+  echo $_SESSION["email"];
+  // header("Location: .php");
+  header("location:http://localhost/college_project/admin/admin_panel.php");
+}
 
 ?>
 

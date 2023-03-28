@@ -27,7 +27,7 @@ include 'jquery.php';
         echo ' <table class="table my-4">';
         echo ' <thead>
     <tr>
-        <th scope="col">#</th>
+        <th scope="col">#</th>  
         <th scope="col">Category Name</th>
         <th scope="col">Operations</th>
         

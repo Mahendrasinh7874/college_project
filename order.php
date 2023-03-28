@@ -4,16 +4,26 @@ include './common.php';
 
 $u_id = $_SESSION['u_id'];
 
-$sql = "select * from order_payment_mapping
-LEFT JOIN product on product.product_id= order_payment_mapping.product_id
-LEFT JOIN category on product.product_category_id = category.cate_id
-LEFT JOIN brands on brands.brand_id = product.product_brand_id
-where u_id={$u_id}
-order by order_id desc
-";
-$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
+$sql = "SELECT *, SUM(opm.qty) AS total_qty 
+FROM order_payment_mapping opm 
+LEFT JOIN product p ON p.product_id = opm.product_id 
+LEFT JOIN category c ON p.product_category_id = c.cate_id 
+LEFT JOIN brands b ON b.brand_id = p.product_brand_id 
+WHERE opm.u_id = {$u_id} 
+GROUP BY opm.order_id 
+ORDER BY opm.order_id DESC";
+
+$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 // print_r($data);
+// $data = mysqli_fetch_assoc($result);
+
+
+$sql2 = "select order_date from orders where u_id={$u_id}";
+$result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
+$data2 = mysqli_fetch_assoc($result2);
+
+
 
 
 ?>
@@ -322,19 +332,24 @@ $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
             if (mysqli_num_rows($result) > 0) {
 
                 while ($row = mysqli_fetch_assoc($result)) {
+
+                    $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}
+";
+                    $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+                    $data1 = mysqli_fetch_assoc($result1);
                     echo '<tr>
                     <th  style="width:10%; scope="row"> ' . $row['order_id'] . '</th>
                     <td  class="d-flex"> 
-                    <img style="width:150px;" class="mr-3" src="./admin/uploads/41qLZhKF5ZL._SY300_SX300_.png" alt="product-image"/> 
+                    <img style="width:150px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
                     <div>
                     <h5 class="product-title font-weight-bold">' . $row['product_title'] . '</h5>
                     <p class="product-description font-weight-600">' . $row["product_description"] . '</p>
                     </div>
                 </td>
-                    <td style="width:5%;"> ' . $row['qty'] . '</td>
-                    <td style="width:10%;"> ₹' . $row['price'] . '</td>
-                    <td style="width:10%;"> ' . $row['order_id'] . '</td>
-                    <td style="width:13%;"> ' . !empty($_SESSION['order_date']) . '</td>
+                    <td style="width:5%;"> ' . $data1['qty'] . '</td>
+                    <td style="width:10%;"> ₹' . $row['price']  . '</td>
+                    <td style="width:10%;"> ' . 'Pending' . '</td>
+                    // <td style="width:13%;"> ' . $data2['order_date'] . '</td>
                 </tr>';
                 }
             } else {

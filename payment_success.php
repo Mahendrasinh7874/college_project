@@ -113,7 +113,7 @@ $api_key = 'rzp_test_ReTgU6RDMrKHDQ';
 $api_secret = 'vqSLkql9bZq90uKfV625FEJu';
 
 $url = 'https://api.razorpay.com/v1/payments/' . $razorpay_payment_id;
-print_r($url);
+// print_r($url);
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_USERPWD, $api_key . ':' . $api_secret);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -124,7 +124,7 @@ if ($result === false) {
     echo 'Error: ' . curl_error($ch);
 } else {
     $data = json_decode($result, true);
-    print_r($data);
+    // print_r($data);
 }
 
 curl_close($ch);
@@ -143,6 +143,16 @@ $pay_status = $data['status'];
 // $order_status = $data['order_status'];
 $amount = $data['amount'];
 $currency = $data['currency'];
+
+$sql2 = "select order_id from orders
+              where order_date='$order_date' and email='$email';
+              ";
+$result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
+
+foreach ($result2 as $raw) {
+    $_SESSION['order_id'] = $raw['order_id'];
+}
+
 
 
 // $_POST['']
@@ -179,13 +189,13 @@ if (mysqli_num_rows($result1) > 0) {
             // print_r($qty);
         }
 
-        $qty = $_SESSION['qty'];
+
         $totalPrice += $row1['price']  * $pqty;
     }
     $amount = $totalPrice;
 }
 
-
+// print_r($pqty);
 
 $sql = "INSERT INTO orders (u_id,first_name,last_name,email,phone,country,state,city,pincode,amount,order_date,pay_status,currency) values ('$u_id','$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount','$order_date','$pay_status','$currency')";
 
@@ -200,7 +210,7 @@ $result3 = mysqli_query($conn, $getOrder) or die(mysqli_error($conn));
 
 if ($result) {
     $product_id = $pro_id; // Replace with the actual product ID
-    $product_qty = $qty; // Replace with the actual product quantity
+    $product_qty = $pqty; // Replace with the actual product quantity
 
     // Update product quantity in the product table
     $update_sql = "UPDATE product SET qty = qty - $product_qty WHERE product_id = $product_id";
@@ -210,17 +220,22 @@ if ($result) {
 foreach ($result3 as $row3) {
     $order_id = $row3['order_id'];
 }
-
-$insertOrder = "INSERT INTO order_payment_mapping (u_id,order_id,product_id,qty) values ('$u_id','$order_id','$pro_id','$qty')";
-$inserResult = mysqli_query($conn, $insertOrder) or die(mysqli_error($conn));
-unset($_SESSION['qty']);
-
-
-if ($inserResult) {
-
-    $deleteCartData = "DELETE FROM cart WHERE u_id = $u_id";
-    $delete = mysqli_query($conn, $deleteCartData) or die(mysqli_error($conn));
+//fetch cart for add product maping
+if (mysqli_num_rows($result1) > 0) {
+    foreach ($result1 as $row1) {
+        $quantity_product_cart = $row1['qty'];
+        // print_r($quantity_product_cart);
+        $pro_id = $row1['product_id'];
+        $insertOrder = "INSERT INTO order_payment_mapping (u_id,order_id,product_id,qty) values ('$u_id','$order_id','$pro_id','$pqty')";
+        $inserResult = mysqli_query($conn, $insertOrder) or die(mysqli_error($conn));
+        // unset($_SESSION['qty']);
+    }
 }
+
+
+$deleteCartData = "DELETE FROM `cart` WHERE u_id={$u_id}";
+
+$delete = mysqli_query($conn, $deleteCartData) or die(mysqli_error($conn));
 
 
 

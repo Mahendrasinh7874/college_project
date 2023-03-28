@@ -47,6 +47,12 @@
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
+                    <a href="order_view.php" class="nav-link  ">
+                        <i class="nav-icon fab fa-first-order"></i>
+                        <p>Order</p>
+                    </a>
+                </li>
+                <li class="nav-item has-treeview">
                     <a href="report.php" class="nav-link  ">
                         <i class="nav-icon fa fa-file"></i>
                         <p>Report</p>

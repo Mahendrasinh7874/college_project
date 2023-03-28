@@ -1,8 +1,9 @@
 <?php
-session_start();
+// session_start();
 if (!empty($_SESSION["u_id"])) {
   echo $_SESSION["email"];
-  header("Location: index.php");
+  // header("Location: .php");
+  header("location:http://localhost/college_project/admin/admin_panel.php");
 }
 ?>
 
