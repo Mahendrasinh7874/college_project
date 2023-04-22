@@ -3,12 +3,13 @@
 
 include 'header.php';
 include 'jquery.php';
+include './config.php';
 
 ?>
 
 <div class="wrapper wrapper-content animated fadeInRight">
 
-    <div class="row">
+    <div class="row w-50 m-auto">
         <div class="col-lg-12">
             <div class="ibox">
 
@@ -30,8 +31,8 @@ include 'jquery.php';
                         $y1 = date("Y", $month1);
                         $y2 = date("Y", $month2);
                     ?>
-                        <h4 class="header-title m-t-0 m-b-30">Sales Report Month Wise</h4>
-                        <h4 align="center" style="color:blue">Sales Report from <?php echo $m1 . "-" . $y1; ?> to <?php echo $m2 . "-" . $y2; ?></h4>
+                        <h4 class="header-title m-t-0 m-b-30 my-5">Sales Report Month Wise and Year Wise</h4>
+                        <!-- <h4 align="center" style="color:blue">Sales Report from <?php echo $m1 . "-" . $y1; ?> to <?php echo $m2 . "-" . $y2; ?></h4> -->
                         <hr />
                         <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
@@ -43,31 +44,33 @@ include 'jquery.php';
                             </thead>
                             <?php
                             $fstatus = 'Food Delivered';
-                            $ret = mysqli_query($con, "select month(OrderTime) as lmonth,year(OrderTime) as lyear,
-    sum(ItemPrice*tblorders.FoodQty) as totalitmprice from tblorders 
-    join tblorderaddresses on tblorderaddresses.Ordernumber=tblorders.OrderNumber 
-    join tblfood on tblfood.ID=tblorders.FoodId 
-    where date(tblorderaddresses.OrderTime) between '$fdate' and '$tdate' 
-    and tblorderaddresses.OrderFinalStatus='$fstatus'  group by lmonth,lyear");
+                            $sql = "SELECT COUNT(*) as total_sales
+                            FROM orders
+                            WHERE order_date >= '2023-01-01' AND order_date <= '2023-03-31'";
+                            $ret = mysqli_query($conn, $sql);
+                            // $data = mysqli_fetch_assoc($ret);
+                            // print_r($data);
                             $cnt = 1;
                             while ($row = mysqli_fetch_array($ret)) {
 
                             ?>
 
+
                                 <tr>
                                     <td><?php echo $cnt; ?></td>
-                                    <td><?php echo $row['lmonth'] . "/" . $row['lyear']; ?></td>
-                                    <td><?php echo $total = $row['totalitmprice']; ?></td>
+                                    <td><?php echo date("M Y", strtotime($fdate)) ?></td>
+                                    
+                                    <td><?php echo  $row['total_sales']; ?></td>
 
                                 </tr>
                             <?php
-                                $ftotal += $total;
+                                // $ftotal += $total;
                                 $cnt++;
                             } ?>
 
                             <tr>
                                 <td colspan="2" align="center">Total </td>
-                                <td><?php echo $ftotal; ?></td>
+                                <!-- <td><?php echo $ftotal; ?></td> -->
 
 
 
@@ -102,7 +105,7 @@ include 'jquery.php';
                                 <tr>
                                     <td><?php echo $cnt; ?></td>
                                     <td><?php echo $row['lyear']; ?></td>
-                                    <td><?php echo $total = $row['totalitmprice']; ?></td>
+                                    <td><?php echo $data['total_sales']; ?></td>
 
                                 </tr>
                             <?php

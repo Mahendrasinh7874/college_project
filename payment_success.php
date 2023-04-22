@@ -261,6 +261,6 @@ $delete = mysqli_query($conn, $deleteCartData) or die(mysqli_error($conn));
 
 <script>
     setTimeout(function() {
-        // window.location.href = "index.php";
+        window.location.href = "index.php";
     }, 2000);
 </script>

@@ -4,7 +4,6 @@ include './common.php';
 
 $u_id = $_SESSION['u_id'];
 
-
 $sql = "SELECT *, SUM(opm.qty) AS total_qty 
 FROM order_payment_mapping opm 
 LEFT JOIN product p ON p.product_id = opm.product_id 
@@ -15,8 +14,8 @@ GROUP BY opm.order_id
 ORDER BY opm.order_id DESC";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-// print_r($data);
-// $data = mysqli_fetch_assoc($result);
+$data = mysqli_fetch_assoc($result);
+print_r($data);
 
 
 $sql2 = "select order_date from orders where u_id={$u_id}";
@@ -340,7 +339,7 @@ $data2 = mysqli_fetch_assoc($result2);
                     echo '<tr>
                     <th  style="width:10%; scope="row"> ' . $row['order_id'] . '</th>
                     <td  class="d-flex"> 
-                    <img style="width:150px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
+                    <img style="width:150px;height:250px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
                     <div>
                     <h5 class="product-title font-weight-bold">' . $row['product_title'] . '</h5>
                     <p class="product-description font-weight-600">' . $row["product_description"] . '</p>

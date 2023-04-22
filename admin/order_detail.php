@@ -40,7 +40,7 @@ $order_id = $_GET['order_id'];
 
             $u_id = $_SESSION['u_id'];
 
-            $sql2 = "SELECT * from orders where u_id = 114";
+            $sql2 = "SELECT * from orders where u_id = {$u_id}";
             $result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
             $data3 = mysqli_fetch_assoc($result2);
 
@@ -127,7 +127,7 @@ $order_id = $_GET['order_id'];
                             <td><?php echo $cnt; ?></td>
                             '<td><img src='./uploads/<?php echo $product['image'] ?>' width=" 70" height="60"></td>
                             <td><?php echo $product['product_title']; ?></td>
-                            <td><?php echo $product['qty']; ?></td>
+                            <td><?php echo $data['qty']; ?></td>
 
                             <td>₹<?php echo $product['price']; ?></td>
                             <td>₹<?php echo $total = $data['qty'] * $product['price']; ?></td>
@@ -138,10 +138,10 @@ $order_id = $_GET['order_id'];
                     }
                 }
                 ?>
-                <tr>
+                <!-- <tr>
                     <th colspan="5" style="text-align:center">Grand Total </th>
                     <td>₹<?php echo $grandtotal  ?></td>
-                </tr>
+                </tr> -->
 
 
             </table>

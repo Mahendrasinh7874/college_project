@@ -48,6 +48,7 @@ $order_date = date('Y-m-d');
 $email = $_POST['email'];
 $mobile = $_POST['tel'];
 $country = $_POST['country'];
+
 $state = $_POST['state'];
 $city = $_POST['city'];
 $pincode = $_POST['pincode'];
