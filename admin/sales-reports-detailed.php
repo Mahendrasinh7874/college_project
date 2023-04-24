@@ -19,7 +19,7 @@ include './config.php';
                     <?php
                     $fdate = $_POST['fromdate'];
                     $tdate = $_POST['todate'];
-                    $rtype = $_POST['requesttype'];
+                    // $rtype = $_POST['requesttype'];
 
                     ?>
 
@@ -96,9 +96,9 @@ include './config.php';
                                 </tr>
                             </thead>
                             <?php
-                            $ret = mysqli_query($con, "select year(OrderTime) as lyear,sum(ItemPrice*tblorders.FoodQty) as totalitmprice from tblorders join tblorderaddresses on tblorderaddresses.Ordernumber=tblorders.OrderNumber join tblfood on tblfood.ID=tblorders.FoodId where year(tblorderaddresses.OrderTime) between '$fdate' and '$tdate' and tblorderaddresses.OrderFinalStatus='$fstatus' group by lyear");
+                           
                             $cnt = 1;
-                            while ($row = mysqli_fetch_array($ret)) {
+                            while ($row = mysqli_fetch_assoc($ret)) {
 
                             ?>
 

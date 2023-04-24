@@ -30,20 +30,7 @@ include 'jquery.php';
                                 <input class="form-control" type="date" id="todate" name="todate" required="true">
                             </div>
                         </div>
-                        <!-- <div class="form-group row">
-                            <label for="example-email-input" class="col-2 col-form-label">Request Type</label>
-                            <div class="col-10">
-
-                                <input type="radio" name="requesttype" value="mtwise" checked="true">Month wise
-                                <input type="radio" name="requesttype" value="yrwise">Year wise
-
-                            </div>
-                        </div> -->
-
-
-
-
-
+                    
 
 
                         <div class="form-group row">

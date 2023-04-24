@@ -118,7 +118,17 @@ include 'admin/config.php';
             <!--/.Carousel Wrapper-->
         </div>
     </div>
-    <div class="container my-5 py-4">
+    <div class="container mt-5" style="margin-top:30px;">
+        <div class="raw" id="">
+            <form class="form-inline">
+                <div class="form-group  col-md-12">
+                    <i class="fas fa-search pl-3" style="position: absolute"></i>
+                    <input id="search" class="form-control form-control-navbar pl-5" style="width:100%; " type="search" placeholder="Search...." aria-label="Search">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="container my-4 py-4">
         <div class="row">
 
             <!--Sidebar-->
@@ -152,22 +162,9 @@ include 'admin/config.php';
                                 <div class="row">
 
                                     <div class="col-md-4">
-                                        <div class="input-group">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">Sort By:</span>
-                                            </div>
-                                            <select class="form-control" id="" name="">
-                                                <option value="">Default</option>
-                                                <option value="">Name (A - Z)</option>
-                                                <option value="">Name (Z - A)</option>
-                                                <option value="">Price (Low &gt; High)</option>
-                                                <option value="">Price (High &gt; Low)</option>
-                                                <option value="">Rating (Highest)</option>
-                                                <option value="">Rating (Lowest)</option>
-                                                <option value="">Model (A - Z)</option>
-                                                <option value="">Model (Z - A)</option>
-                                            </select>
-                                        </div>
+                                        <h4>
+                                            Products
+                                        </h4>
                                     </div>
 
                                 </div>

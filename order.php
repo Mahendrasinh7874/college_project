@@ -13,6 +13,15 @@ WHERE opm.u_id = {$u_id}
 GROUP BY opm.order_id 
 ORDER BY opm.order_id";
 
+// $sql = "select * from order_payment_mapping
+// LEFT JOIN product on product.product_id= order_payment_mapping.product_id
+// LEFT JOIN category on product.product_category_id = category.cate_id
+// LEFT JOIN brands on brands.brand_id = product.product_brand_id
+
+// order by order_id desc
+// ";
+
+
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $data = mysqli_fetch_assoc($result);
 // print_r($data);
@@ -313,32 +322,33 @@ $data2 = mysqli_fetch_assoc($result2);
 <div class="container my-5 pb-5">
     <h1 class="">My Orders</h1>
 
-    <table class="table table-bordered my-4">
+    <?php
+    if (mysqli_num_rows($result) > 0) {
+        echo '<table class="table table-bordered my-4">';
+        echo '<thead>';
+        echo '<tr>
+    <th scope="col">Order ID</th>
 
-        <thead>
-            <tr>
-                <th scope="col">Order ID</th>
+    <th scope="col">Product details</th>
+    <th scope="col">Qty</th>
+    <th scope="col">Product Price</th>
+    <th scope="col">Status</th>
+    <th scope="col">Order Date</th>
+</tr>
+</thead>';
+        echo '<tbody>';
 
-                <th scope="col">Product details</th>
-                <th scope="col">Qty</th>
-                <th scope="col">Product Price</th>
-                <th scope="col">Status</th>
-                <th scope="col">Order Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php
-            if (mysqli_num_rows($result) > 0) {
 
-                while ($row = mysqli_fetch_assoc($result)) {
-                    print_r($row);
-                    $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}";
-                    $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
-                    $data1 = mysqli_fetch_assoc($result1);
-                    echo '<tr>
+
+        while ($row = mysqli_fetch_assoc($result)) {
+
+            $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}";
+            $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+            $data1 = mysqli_fetch_assoc($result1);
+            echo '<tr>
                     <th  style="width:10%; scope="row"> ' . $row['order_id'] . '</th>
                     <td  class="d-flex"> 
-                    <img style="width:150px;height:250px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
+                    <img style="width:300px;height:250px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
                     <div>
                     <h5 class="product-title font-weight-bold">' . $row['product_title'] . '</h5>
                     <p class="product-description font-weight-600">' . $row["product_description"] . '</p>
@@ -347,17 +357,22 @@ $data2 = mysqli_fetch_assoc($result2);
                     <td style="width:5%;"> ' . $data1['qty'] . '</td>
                     <td style="width:10%;"> ₹' . $row['price']  . '</td>
                     <td style="width:10%;"> ' . 'Pending' . '</td>
-                    // <td style="width:13%;"> ' . $data2['order_date'] . '</td>
+                     <td style="width:13%;"> ' . $data2['order_date'] . '</td>
                 </tr>';
-                }
-            } else {
-                echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
-            }
-            ?>
+        }
+    } else {
+        // echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
+        echo ' <table class=" bordered text-center table my-4">';
+        echo '<tbody>';
+        echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
+        echo '</tbody>';
+        echo "</table>";
+    }
+    ?>
 
 
 
-        </tbody>
+    </tbody>
     </table>
 
 

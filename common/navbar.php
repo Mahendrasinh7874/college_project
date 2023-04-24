@@ -261,22 +261,13 @@ foreach ($check_result2 as $row1) {
           <li class="nav-item">
             <a style="text-transform:uppercase;" class="nav-link mx-2" href="../../college_project/">Home</a>
           </li>
-          <li class="nav-item">
-            <a style="text-transform:uppercase;" class="nav-link mx-2" href="../../college_project/">About Us</a>
-          </li>
+         
           <!-- <li class="nav-item">
                 <a style="text-transform:uppercase;" class="nav-link" href="#"> Contact Us</a>
               </li> -->
         </ul>
-        <div class="m-auto">
-          <div class="input-group ">
-            <input type="search" id="search" class="form-control" style="border-right:none !important;width:400px;height:45px;" placeholder="Search here..." aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <div class="input-group-append ">
-              <button type="button " style="background-color:white;" class="input-group-text" id="basic-addon2"><i class="fa fa-search"></i></button>
-            </div>
-          </div>
-        </div>
-        <form class="form-inline my-2 my-lg-0">
+        
+        <form class="form-inline my-2 my-lg-0 ml-auto">
           <?php
           if (!empty($_SESSION['u_id'])) {
             echo ' <a href="wishlist_view.php" id="wishlist"  style="text-transform:uppercase; cursor:pointer;" class="p1 fa-stack  has-badge" data-count="' . $wishlist_num_rows . '" >
@@ -379,10 +370,31 @@ foreach ($check_result2 as $row1) {
 
     const changeCountValue = (qty) => {
       $("#cart-count").attr('data-count', qty);
+    }
 
 
+    function showResult(str) {
+
+      
+      if (str.length == 0) {
+        document.getElementById("livesearch").innerHTML = "";
+        document.getElementById("livesearch").style.border = "0px";
+        return;
+      }
+      var xmlhttp = new XMLHttpRequest();
+      xmlhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("livesearch").innerHTML = this.responseText;
+          document.getElementById("livesearch").style.border = "1px solid #A5ACB2";
+        }
+      }
+      xmlhttp.open("GET", "livesearch.php?q=" + str, true);
+      xmlhttp.send();
     }
   </script>
+
+
+
 </body>
 
 </html>

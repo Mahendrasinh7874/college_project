@@ -253,7 +253,7 @@ $delete = mysqli_query($conn, $deleteCartData) or die(mysqli_error($conn));
         </div>
         <p class="text-success text-center h4">Payment Successfully </p>
         <div class="col-md-12 text-center mt-4">
-            <a href="layout.php"><input type="submit" class="btn btn-success" value="View Orders"></a>
+            <a href="order.php"><input type="submit" class="btn btn-success" value="View Orders"></a>
         </div>
     </div>
 </div>
