@@ -138,11 +138,11 @@ $country = $_SESSION['order_country'];
 $state = $_SESSION['order_state'];
 $city = $_SESSION['order_city'];
 $pincode = $_SESSION['order_pincode'];
-$order_date = $_SESSION['order_date'];
+$order_date = date('Y-m-d H:i:s');
 $pay_status = $data['status'];
-// $order_status = $data['order_status'];
 $amount = $data['amount'];
 $currency = $data['currency'];
+
 
 $sql2 = "select order_id from orders
               where order_date='$order_date' and email='$email';

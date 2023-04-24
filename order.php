@@ -11,11 +11,11 @@ LEFT JOIN category c ON p.product_category_id = c.cate_id
 LEFT JOIN brands b ON b.brand_id = p.product_brand_id 
 WHERE opm.u_id = {$u_id} 
 GROUP BY opm.order_id 
-ORDER BY opm.order_id DESC";
+ORDER BY opm.order_id";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 $data = mysqli_fetch_assoc($result);
-print_r($data);
+// print_r($data);
 
 
 $sql2 = "select order_date from orders where u_id={$u_id}";
@@ -331,9 +331,8 @@ $data2 = mysqli_fetch_assoc($result2);
             if (mysqli_num_rows($result) > 0) {
 
                 while ($row = mysqli_fetch_assoc($result)) {
-
-                    $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}
-";
+                    print_r($row);
+                    $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}";
                     $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
                     $data1 = mysqli_fetch_assoc($result1);
                     echo '<tr>
