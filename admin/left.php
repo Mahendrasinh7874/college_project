@@ -1,3 +1,10 @@
+
+<?php 
+$current_url = "http://".$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+
+$page = basename($current_url);
+
+?>
 <aside class="main-sidebar sidebar-dark-info elevation-4">
     <!-- Brand Logo -->
     <div class="mb-4" style=" border-bottom: 1px solid #4b545c !important;">
@@ -16,44 +23,44 @@
                 <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview menu-open ">
-                    <a href="admin_panel.php" class="nav-link  active">
+                    <a href="admin_panel.php"  class="nav-link   <?= $page == 'admin_panel.php' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-tachometer-alt"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
 
                 <li class="nav-item has-treeview">
-                    <a href="user.php" class="nav-link  ">
+                    <a href="user.php" class="nav-link  <?= $page == 'user.php' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-users"></i>
                         <p>Users</p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="products_index.php" class="nav-link  ">
+                    <a href="products_index.php" class="nav-link  <?= $page == 'products_index.php' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-shopping-cart"></i>
                         <p>Products</p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="category_index.php" class="nav-link  ">
+                    <a href="category_index.php" class="nav-link  <?= $page == 'category_index.php' ? 'active' : '' ?>">
                         <i class="nav-icon fas fa-tag"></i>
                         <p>Category</p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="brand_index.php" class="nav-link  ">
+                    <a href="brand_index.php" class="nav-link  <?= $page == 'brand_index.php' ? 'active' : '' ?>">
                         <i class="nav-icon fab fa-apple"></i>
                         <p>Brand</p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="order_view.php" class="nav-link  ">
+                    <a href="order_view.php" class="nav-link  <?= $page == 'order_view.php' ? 'active' : '' ?>">
                         <i class="nav-icon fab fa-first-order"></i>
                         <p>Order</p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
-                    <a href="report.php" class="nav-link  ">
+                    <a href="report.php" class="nav-link  <?= $page == 'report.php' ? 'active' : '' ?>">
                         <i class="nav-icon fa fa-file"></i>
                         <p>Report</p>
                     </a>
