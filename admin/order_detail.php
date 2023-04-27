@@ -6,8 +6,8 @@ include 'config.php';
 // $sql2 = "select order_date from orders";
 // $result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
 // $data2 = mysqli_fetch_assoc($result2);
-// $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
-
+$u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
+echo $u_id;
 
 /* $sql1 = "select qty from order_payment_mapping";
 $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
@@ -18,37 +18,46 @@ $order_id = $_GET['order_id'];
 ?>
 
 <div class=" mr-3 mt-3" style="width: 82%; height: 500px; margin: auto">
-    <div class="row ml-2 mt-2 mr-2  ">
-        <div class="col-md-6 ">
-            <h2>Order Detail</h2>
-            <?php
+  <div class="row ml-2 mt-2 mr-2  ">
+    <div class="col-md-4 ">
+      <h2>Order Detail</h2>
+      <?php
 
-            // $order_id = $GET['order_id'];
-            $sql = "select * from orders WHERE orders.order_id = 23 order by order_id desc";
+      // $order_id = $GET['order_id'];
+      $sql = "select * from orders WHERE orders.order_id = $order_id order by order_id desc";
 
-            $result = mysqli_query($conn, $sql);
-            $data3 = mysqli_fetch_assoc($result);
-            // print_r($result);
-            $count = 0;
-            //$dataa = mysqli_fetch_assoc($result);
-                echo $u_id;
+      $result = mysqli_query($conn, $sql);
+      $data3 = mysqli_fetch_assoc($result);
+      $count = 0;
+      //$dataa = mysqli_fetch_assoc($result);
+      // echo $u_id;
 
-            $sql1 = "SELECT *, SUM(opm.qty) AS total_qty 
-           FROM order_payment_mapping opm 
-           LEFT JOIN product p ON p.product_id = opm.product_id 
-           LEFT JOIN category c ON p.product_category_id = c.cate_id 
-           LEFT JOIN brands b ON b.brand_id = p.product_brand_id 
-           WHERE opm.u_id = $u_id
-           GROUP BY opm.order_id 
-           ORDER BY opm.order_id";
+      //   $sql1 = "SELECT *, SUM(opm.qty) AS total_qty 
+      //  FROM order_payment_mapping opm 
+      //  LEFT JOIN product p ON p.product_id = opm.product_id 
+      //  LEFT JOIN category c ON p.product_category_id = c.cate_id 
+      //  LEFT JOIN brands b ON b.brand_id = p.product_brand_id 
+      //  LEFT JOIN orders o ON o.order_id = opm.order_id 
+      //  WHERE opm.order_id = orders.order_id
+      //  GROUP BY opm.order_id 
+      //  ORDER BY opm.order_id";
 
-            $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
-            $data1 = mysqli_fetch_assoc($result1);
-            print_r($data1);
+      $sql1 = "SELECT *, SUM(opm.qty) AS total_qty 
+          FROM order_payment_mapping opm 
+          LEFT JOIN product p ON p.product_id = opm.product_id 
+          LEFT JOIN category c ON p.product_category_id = c.cate_id 
+          LEFT JOIN brands b ON b.brand_id = p.product_brand_id 
+          LEFT JOIN orders o ON o.order_id = opm.order_id
+          WHERE opm.order_id = $order_id
+          GROUP BY opm.order_id 
+          ORDER BY opm.order_id";
 
-            if (mysqli_num_rows($result) > 0) {
+      $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+      // print_r($data1);
 
-                echo "<table border='1' class='table table-bordered mg-b-0 my-5'>
+      if (mysqli_num_rows($result1) > 0) {
+
+        echo "<table border='1' class='table table-bordered mg-b-0 my-5'>
             <tr align='center'>
            <td colspan='2' style='font-size:20px;color:blue'>
             User Details</td></tr>
@@ -90,23 +99,23 @@ $order_id = $_GET['order_id'];
                <td> Pending</td>
                </tr>
                </table>";
-            }
+      }
 
 
-            ?>
+      ?>
 
-            </tr>
+      </tr>
 
-            </tbody>
-            </table>
+      </tbody>
+      </table>
 
-        </div>
-        <div class="col-6" style="margin-top:2%">
-            <?php
-            if (mysqli_num_rows($result1) > 0) {
-                echo '<table class="table table-bordered my-4">';
-                echo '<thead>';
-                echo '<tr>
+    </div>
+    <div class="col-8" style="margin-top:2%">
+      <?php
+      if (mysqli_num_rows($result1) > 0) {
+        echo '<table class="table table-bordered my-4">';
+        echo '<thead>';
+        echo '<tr>
     <th scope="col">Order ID</th>
 
     <th scope="col">Product details</th>
@@ -116,19 +125,21 @@ $order_id = $_GET['order_id'];
     <th scope="col">Order Date</th>
 </tr>
 </thead>';
-                echo '<tbody>';
+        echo '<tbody>';
 
 
 
-                while ($row = mysqli_fetch_array($result1)) {
+        while ($row = mysqli_fetch_array($result1)) {
+          // print_r($row);
 
-                    // $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}";
-                    // $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
-                    // $data1 = mysqli_fetch_assoc($result1);
-                    echo '<tr>
+
+          // $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}";
+          // $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+          // $data1 = mysqli_fetch_assoc($result1);
+          echo '<tr>
                     <th  style="width:10%; scope="row"> ' . $row['order_id'] . '</th>
                     <td  class="d-flex"> 
-                    <img style="width:300px;height:150px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
+                    <img style="width:300px;height:150px;" class="mr-3" src="./uploads/' . $row['image'] . '" alt="product-image"/> 
                     <div>
                     <h5 class="product-title font-weight-bold">' . $row['product_title'] . '</h5>
                     <p class="product-description text-ellipsis--2 font-weight-600">' . $row["product_description"] . '</p>
@@ -137,34 +148,34 @@ $order_id = $_GET['order_id'];
                     <td style="width:5%;"> ' . $row['qty'] . '</td>
                     <td style="width:10%;"> ₹' . $row['price']  . '</td>
                     <td style="width:10%;"> ' . 'Pending' . '</td>
-                     <td style="width:13%;"> ' . $row['order_date'] . '</td>
+                     <td style="width:13%;"> ' . date('Y-m-d', strtotime($row['order_date']))  . '</td>
                 </tr>';
-                }
-            } else {
-                // echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
-                echo ' <table class=" bordered text-center  table my-4">';
-                echo '<tbody>';
-                echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
-                echo '</tbody>';
-                echo "</table>";
-            }
-            ?>
+        }
+      } else {
+        // echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
+        echo ' <table class=" bordered text-center  table my-4">';
+        echo '<tbody>';
+        echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
+        echo '</tbody>';
+        echo "</table>";
+      }
+      ?>
 
 
-        </div>
     </div>
+  </div>
 </div>
 
 
 <script>
-    const confirmDelete = () => {
-        console.log("delete");
-        if (confirm("Are you sure you want to delete this Catrgory?")) {
-            return true;
-        } else {
-            return false;
-        }
+  const confirmDelete = () => {
+    console.log("delete");
+    if (confirm("Are you sure you want to delete this Catrgory?")) {
+      return true;
+    } else {
+      return false;
     }
+  }
 </script>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -176,7 +187,7 @@ $order_id = $_GET['order_id'];
 <!-- <script src="plugins/jquery-ui/jquery-ui.min.js"></script> -->
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
-    $.widget.bridge("uibutton", $.ui.button);
+  $.widget.bridge("uibutton", $.ui.button);
 </script>
 <!-- Bootstrap 4 -->
 <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>

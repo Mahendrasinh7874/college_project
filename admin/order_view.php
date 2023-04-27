@@ -14,6 +14,11 @@ $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
 $data = mysqli_fetch_assoc($result1);
 
 
+// $sql3 = "select * from orders ";
+
+// $result3 = mysqli_query($conn, $sql3) or die(mysqli_error($conn));
+// $data3 = mysqli_fetch_assoc($result1);
+
 ?>
 
 <div class=" mr-3 mt-3" style="width: 82%; height: 500px; margin: auto">
@@ -25,14 +30,14 @@ $data = mysqli_fetch_assoc($result1);
 
         $sql = "select * from order_payment_mapping
 LEFT JOIN product on product.product_id= order_payment_mapping.product_id
+LEFT JOIN orders on orders.order_id= order_payment_mapping.order_id
 LEFT JOIN category on product.product_category_id = category.cate_id
 LEFT JOIN brands on brands.brand_id = product.product_brand_id
-
-order by order_id desc
+group by order_payment_mapping.order_id
+order by order_payment_mapping.order_id desc
 ";
 
         $result = mysqli_query($conn, $sql);
-        // print_r($result);
 
         $count = 0;
 
@@ -42,24 +47,31 @@ order by order_id desc
             echo ' <table class="table my-4">';
             echo ' <thead>
             <tr>
-                <th scope="col">No</th>  
-                <th scope="col">Order Date</th>
+            <th scope="col">No</th>   
+            <th scope="col">User Name</th>  
+            <th scope="col">Product Name</th>  
+            <th scope="col">Price</th>  
+                <th scope="col">Ordered At</th>
                 <th scope="col">Action</th>
                 
                 </tr>
                 </thead>';
-                // <th scope="col">Product Name</th>
-                // <th scope="col"> Qty</th>
-                // <th scope="col">Price</th>
+            // <th scope="col">Product Name</th>
+            // <th scope="col"> Qty</th>
+            // <th scope="col">Price</th>
             echo '<tbody>';
             while ($row = mysqli_fetch_assoc($result)) {
+                // print_r($row);
                 $count++;
                 echo ' <tr>';
                 echo "<td>" . $count . "</td>";
-                // echo "<td>" . $row['product_title'] . "</td>";
                 // echo "<td>" . $data['qty'] . "</td>";
                 // echo "<td>₹" . $row['price'] * $data['qty']  . "</td>";
-                echo "<td>" . $data2['order_date'] . "</td>";
+                echo "<td style='text-transform: capitalize;'>" . $row['first_name'] .   " " .  $row['last_name'] . "</td>";
+                // echo "<td>" . $row['last_name'] . "</td>";
+                echo "<td>" . $row['product_title'] . "</td>";
+                echo "<td>₹ " . $row['price'] . "</td>";
+                echo "<td>" . $row['order_date'] . "</td>";
                 echo "<td><a  href='order_detail.php?order_id=" . $row['order_id'] . "' >View Details</a></td>";
                 echo "</tr>";
             }
@@ -69,7 +81,7 @@ order by order_id desc
             echo ' <table class=" bordered text-center table my-4">';
             echo '<tbody>';
             echo ' <tr >';
-            echo "<td class='my-5'><h2 class='my-5'>Not Found</h2></td>";
+            echo "<td class='my-5'><h2 class='my-5'>No Orders Found</h2></td>";
             echo '</tbody>';
             echo "</table>";
         }

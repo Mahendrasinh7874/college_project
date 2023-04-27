@@ -12,9 +12,7 @@ include 'jquery.php';
                 <input type="submit" value="Add Category" class="btn btn-info">
             </a>
         </div>
-        <div class="col-md-4">
-            <input id="search" style="height: 40px; " placeholder="Search..." class="form-control rounded" type="search">
-        </div>
+       
     </div>
     <?php
     $sql = "SELECT * FROM category";

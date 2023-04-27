@@ -27,7 +27,7 @@ $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
 
 
 
-$sql = "SELECT product.*, category.category_name FROM product JOIN category ON product.product_category_id = category.cate_id";
+$sql = "SELECT product.*, category.category_name FROM product JOIN category ON product.product_category_id = category.cate_id ORDER BY product.product_id DESC";
 if (isset($_POST['category'])) {
     $product_category_id = $_POST['category'];
     $sql .= " where category.category_name = '{$product_category_id}'";

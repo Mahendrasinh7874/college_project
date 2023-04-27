@@ -8,12 +8,10 @@ FROM order_payment_mapping opm
 LEFT JOIN product p ON p.product_id = opm.product_id 
 LEFT JOIN category c ON p.product_category_id = c.cate_id 
 LEFT JOIN brands b ON b.brand_id = p.product_brand_id 
+LEFT JOIN orders o ON o.order_id = opm.order_id 
 WHERE opm.u_id = $u_id
 GROUP BY opm.order_id 
 ORDER BY opm.order_id";
-
-
-
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
@@ -345,7 +343,7 @@ $data2 = mysqli_fetch_assoc($result2);
             echo '<tr>
                     <th  style="width:10%; scope="row"> ' . $row['order_id'] . '</th>
                     <td  class="d-flex"> 
-                    <img style="width:300px;height:150px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
+                    <img style="width:150px;height:150px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
                     <div>
                     <h5 class="product-title font-weight-bold">' . $row['product_title'] . '</h5>
                     <p class="product-description text-ellipsis--2 font-weight-600">' . $row["product_description"] . '</p>
@@ -354,7 +352,7 @@ $data2 = mysqli_fetch_assoc($result2);
                     <td style="width:5%;"> ' . $data1['qty'] . '</td>
                     <td style="width:10%;"> ₹' . $row['price']  . '</td>
                     <td style="width:10%;"> ' . 'Pending' . '</td>
-                     <td style="width:13%;"> ' . $data2['order_date'] . '</td>
+                     <td style="width:13%;"> ' . $row['order_date'] . '</td>
                 </tr>';
         }
     } else {

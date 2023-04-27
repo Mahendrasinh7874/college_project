@@ -118,7 +118,7 @@ if (empty($_SESSION["email"])) {
 
               ?> </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: 0px; right: inherit;">
-              <a class="dropdown-item" href="#">Change Password</a>
+              <!-- <a class="dropdown-item" href="#">Change Password</a> -->
               <a class="dropdown-item" href="logout.php">Logout</a>
             </div>
           </div>

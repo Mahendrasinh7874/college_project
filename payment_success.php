@@ -138,10 +138,15 @@ $country = $_SESSION['order_country'];
 $state = $_SESSION['order_state'];
 $city = $_SESSION['order_city'];
 $pincode = $_SESSION['order_pincode'];
-$order_date = date('Y-m-d H:i:s');
+// $order_date = date('Y-m-d H:i:s');
+$timezone = new DateTimeZone('Asia/Kolkata');
+$date = new DateTime('now', $timezone);
+$order_date = $date->format('Y-m-d H:i:s');
 $pay_status = $data['status'];
+$id = $data['id'];
 $amount = $data['amount'];
 $currency = $data['currency'];
+
 
 
 $sql2 = "select order_id from orders
@@ -197,7 +202,7 @@ if (mysqli_num_rows($result1) > 0) {
 
 // print_r($pqty);
 
-$sql = "INSERT INTO orders (u_id,first_name,last_name,email,phone,country,state,city,pincode,amount,order_date,pay_status,currency) values ('$u_id','$fname','$lname','$email','$mobile','$country','$state','$city','$pincode','$amount','$order_date','$pay_status','$currency')";
+$sql = "INSERT INTO orders (u_id,first_name,last_name,email,phone,trasaction_id,country,state,city,pincode,amount,order_date,pay_status,currency) values ('$u_id','$fname','$lname','$email','$mobile','$id','$country','$state','$city','$pincode','$amount','$order_date','$pay_status','$currency')";
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 

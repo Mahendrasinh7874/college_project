@@ -1,6 +1,6 @@
 <?php
-// session_start();
-if (!empty($_SESSION["u_id"])) {
+session_start();
+if (isset($_SESSION["admin_username"])) {
   echo $_SESSION["email"];
   // header("Location: .php");
   header("location:http://localhost/college_project/admin/admin_panel.php");

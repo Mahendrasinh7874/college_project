@@ -1,13 +1,3 @@
-<?php
-
-session_start();
-if (!isset($_SESSION["email"])) {
-    // echo $_SESSION["email"];
-    header("Location: index.php");
-}
-?>
-
-
 
 
 <!DOCTYPE html>
@@ -38,6 +28,14 @@ if (!isset($_SESSION["email"])) {
     <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css" />
     <!-- summernote -->
     <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Baloo+2&family=Hubballi&family=Martel+Sans:wght@300&family=Nunito:wght@200&family=Roboto:ital,wght@1,100;1,500&display=swap');
+
+        body {
+            font-family: 'Roboto', sans-serif !important;
+
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -63,14 +61,13 @@ if (!isset($_SESSION["email"])) {
                         // echo !empty($_SESSION["admin_username"]);
                         if (isset($_SESSION["admin_username"])) {
                             echo $_SESSION["admin_username"];
-
-                        }else{
+                        } else {
                             echo "Mahendra Zala";
                         }
 
                         ?> </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: 0px; right: inherit;">
-                        <a class="dropdown-item" href="#">Change Password</a>
+                        <!-- <a class="dropdown-item" href="#">Change Password</a> -->
                         <a class="dropdown-item" href="logout.php">Logout</a>
                     </div>
                 </div>
