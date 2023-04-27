@@ -9,9 +9,10 @@ include 'config.php';
 // $u_id = !empty($_SESSION['u_id']) ? $_SESSION['u_id'] : '0';
 
 
-$sql1 = "select qty from order_payment_mapping";
+/* $sql1 = "select qty from order_payment_mapping";
 $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
-$data = mysqli_fetch_assoc($result1);
+$data = mysqli_fetch_assoc($result1); */
+
 $order_id = $_GET['order_id'];
 
 ?>
@@ -23,31 +24,31 @@ $order_id = $_GET['order_id'];
             <?php
 
             // $order_id = $GET['order_id'];
-            $sql = "select * from order_payment_mapping
-            LEFT JOIN product on product.product_id= order_payment_mapping.product_id
-            LEFT JOIN category on product.product_category_id = category.cate_id
-            LEFT JOIN brands on brands.brand_id = product.product_brand_id
-            WHERE order_payment_mapping.order_id = {$order_id}
-            order by order_id desc
-            ";
-
+            $sql = "select * from orders WHERE orders.order_id = 23 order by order_id desc";
 
             $result = mysqli_query($conn, $sql);
+            $data3 = mysqli_fetch_assoc($result);
             // print_r($result);
             $count = 0;
-            // $dataa = mysqli_fetch_assoc($result);
+            //$dataa = mysqli_fetch_assoc($result);
+                echo $u_id;
 
+            $sql1 = "SELECT *, SUM(opm.qty) AS total_qty 
+           FROM order_payment_mapping opm 
+           LEFT JOIN product p ON p.product_id = opm.product_id 
+           LEFT JOIN category c ON p.product_category_id = c.cate_id 
+           LEFT JOIN brands b ON b.brand_id = p.product_brand_id 
+           WHERE opm.u_id = $u_id
+           GROUP BY opm.order_id 
+           ORDER BY opm.order_id";
 
-            $u_id = $_SESSION['u_id'];
-
-            $sql2 = "SELECT * from orders where u_id = {$u_id}";
-            $result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
-            $data3 = mysqli_fetch_assoc($result2);
-
-            // print_r($data3);
+            $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+            $data1 = mysqli_fetch_assoc($result1);
+            print_r($data1);
 
             if (mysqli_num_rows($result) > 0) {
-                echo " <table border='1' class='table table-bordered mg-b-0 my-5'>
+
+                echo "<table border='1' class='table table-bordered mg-b-0 my-5'>
             <tr align='center'>
            <td colspan='2' style='font-size:20px;color:blue'>
             User Details</td></tr>
@@ -102,49 +103,52 @@ $order_id = $_GET['order_id'];
         </div>
         <div class="col-6" style="margin-top:2%">
             <?php
+            if (mysqli_num_rows($result1) > 0) {
+                echo '<table class="table table-bordered my-4">';
+                echo '<thead>';
+                echo '<tr>
+    <th scope="col">Order ID</th>
 
-            $cnt = 1; ?>
-            <table border="1" class="table table-bordered mg-b-0">
-                <tr align="center">
-                    <td colspan="6" style="font-size:20px;color:blue">
-                        Order Details</td>
-                </tr>
+    <th scope="col">Product details</th>
+    <th scope="col">Qty</th>
+    <th scope="col">Product Price</th>
+    <th scope="col">Status</th>
+    <th scope="col">Order Date</th>
+</tr>
+</thead>';
+                echo '<tbody>';
 
-                <tr>
-                    <th>#</th>
-                    <th>Product </th>
-                    <th>Product Name</th>
-                    <th>Qty</th>
-                    <th>Price/Unit</th>
-                    <th>Total</th>
-                </tr>
-                <?php
-                if (mysqli_num_rows($result) > 0) {
-                    while ($product = mysqli_fetch_array($result)) {
 
-                ?>
-                        <tr>
-                            <td><?php echo $cnt; ?></td>
-                            '<td><img src='./uploads/<?php echo $product['image'] ?>' width=" 70" height="60"></td>
-                            <td><?php echo $product['product_title']; ?></td>
-                            <td><?php echo $data['qty']; ?></td>
 
-                            <td>₹<?php echo $product['price']; ?></td>
-                            <td>₹<?php echo $total = $data['qty'] * $product['price']; ?></td>
-                        </tr>
-                <?php
-                        $grandtotal = $product['price'];
-                        $grandtotal += $total;
-                    }
+                while ($row = mysqli_fetch_array($result1)) {
+
+                    // $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}";
+                    // $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
+                    // $data1 = mysqli_fetch_assoc($result1);
+                    echo '<tr>
+                    <th  style="width:10%; scope="row"> ' . $row['order_id'] . '</th>
+                    <td  class="d-flex"> 
+                    <img style="width:300px;height:150px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
+                    <div>
+                    <h5 class="product-title font-weight-bold">' . $row['product_title'] . '</h5>
+                    <p class="product-description text-ellipsis--2 font-weight-600">' . $row["product_description"] . '</p>
+                    </div>
+                </td>
+                    <td style="width:5%;"> ' . $row['qty'] . '</td>
+                    <td style="width:10%;"> ₹' . $row['price']  . '</td>
+                    <td style="width:10%;"> ' . 'Pending' . '</td>
+                     <td style="width:13%;"> ' . $row['order_date'] . '</td>
+                </tr>';
                 }
-                ?>
-                <!-- <tr>
-                    <th colspan="5" style="text-align:center">Grand Total </th>
-                    <td>₹<?php echo $grandtotal  ?></td>
-                </tr> -->
-
-
-            </table>
+            } else {
+                // echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
+                echo ' <table class=" bordered text-center  table my-4">';
+                echo '<tbody>';
+                echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
+                echo '</tbody>';
+                echo "</table>";
+            }
+            ?>
 
 
         </div>

@@ -3,37 +3,24 @@ include './common.php';
 
 
 $u_id = $_SESSION['u_id'];
-
 $sql = "SELECT *, SUM(opm.qty) AS total_qty 
 FROM order_payment_mapping opm 
 LEFT JOIN product p ON p.product_id = opm.product_id 
 LEFT JOIN category c ON p.product_category_id = c.cate_id 
 LEFT JOIN brands b ON b.brand_id = p.product_brand_id 
-WHERE opm.u_id = {$u_id} 
+WHERE opm.u_id = $u_id
 GROUP BY opm.order_id 
 ORDER BY opm.order_id";
 
-// $sql = "select * from order_payment_mapping
-// LEFT JOIN product on product.product_id= order_payment_mapping.product_id
-// LEFT JOIN category on product.product_category_id = category.cate_id
-// LEFT JOIN brands on brands.brand_id = product.product_brand_id
 
-// order by order_id desc
-// ";
 
 
 $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
-$data = mysqli_fetch_assoc($result);
-// print_r($data);
 
 
 $sql2 = "select order_date from orders where u_id={$u_id}";
 $result2 = mysqli_query($conn, $sql2) or die(mysqli_error($conn));
 $data2 = mysqli_fetch_assoc($result2);
-
-
-
-
 ?>
 
 
@@ -314,12 +301,22 @@ $data2 = mysqli_fetch_assoc($result2);
         }
     }
 
+
+    .text-ellipsis--2 {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box !important;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical;
+        white-space: normal;
+    }
+
     .table {
         border-collapse: collapse;
     }
 </style>
 
-<div class="container my-5 pb-5">
+<div class="container-fluid px-5 my-5 pb-5" style="width:75%">
     <h1 class="">My Orders</h1>
 
     <?php
@@ -340,7 +337,7 @@ $data2 = mysqli_fetch_assoc($result2);
 
 
 
-        while ($row = mysqli_fetch_assoc($result)) {
+        while ($row = mysqli_fetch_array($result)) {
 
             $sql1 = "select qty from order_payment_mapping WHERE u_id={$u_id} AND product_id={$row['product_id']} AND order_id={$row['order_id']}";
             $result1 = mysqli_query($conn, $sql1) or die(mysqli_error($conn));
@@ -348,10 +345,10 @@ $data2 = mysqli_fetch_assoc($result2);
             echo '<tr>
                     <th  style="width:10%; scope="row"> ' . $row['order_id'] . '</th>
                     <td  class="d-flex"> 
-                    <img style="width:300px;height:250px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
+                    <img style="width:300px;height:150px;" class="mr-3" src="./admin/uploads/' . $row['image'] . '" alt="product-image"/> 
                     <div>
                     <h5 class="product-title font-weight-bold">' . $row['product_title'] . '</h5>
-                    <p class="product-description font-weight-600">' . $row["product_description"] . '</p>
+                    <p class="product-description text-ellipsis--2 font-weight-600">' . $row["product_description"] . '</p>
                     </div>
                 </td>
                     <td style="width:5%;"> ' . $data1['qty'] . '</td>
@@ -362,7 +359,7 @@ $data2 = mysqli_fetch_assoc($result2);
         }
     } else {
         // echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
-        echo ' <table class=" bordered text-center table my-4">';
+        echo ' <table class=" bordered text-center  table my-4">';
         echo '<tbody>';
         echo '<tr><td colspan="5" class="text-center"><h1 class="py-5">No orders found</h1></td></tr>';
         echo '</tbody>';

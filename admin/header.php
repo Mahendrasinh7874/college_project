@@ -60,7 +60,13 @@ if (!isset($_SESSION["email"])) {
                     <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <?php
 
-                        echo $_SESSION["admin_username"];
+                        // echo !empty($_SESSION["admin_username"]);
+                        if (isset($_SESSION["admin_username"])) {
+                            echo $_SESSION["admin_username"];
+
+                        }else{
+                            echo "Mahendra Zala";
+                        }
 
                         ?> </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" style="left: 0px; right: inherit;">
@@ -124,7 +130,7 @@ if (!isset($_SESSION["email"])) {
     <script src="dist/js/adminlte.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="dist/js/demo.js"></script>
-    
+
     <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
     <script src="dist/js/pages/dashboard.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
